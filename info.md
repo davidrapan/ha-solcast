@@ -1,5 +1,10 @@
 ### Changes
 
+v3.0.27
+- changed unit for peak measurement #86 tbanks Ivesvdf
+- some other minor text changes for logs
+- changed service call thanks 696GrocuttT
+
 v3.0.26
 - testing fix for issue 83
 

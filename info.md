@@ -4,9 +4,10 @@ v3.0.27
 - changed unit for peak measurement #86 tbanks Ivesvdf
 - some other minor text changes for logs
 - changed service call thanks 696GrocuttT
+- including fix for issue #83
 
 v3.0.26
-- testing fix for issue 83
+- testing fix for issue #83
 
 v3.0.25
 - removed PR for 3.0.24 - caused errors in the forecast graph

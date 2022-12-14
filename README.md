@@ -11,10 +11,16 @@ Modified from the great works of
 * cjtapper/solcast-py
 * home-assistant-libs/forecast_solar
 
+## Solcast Changes:
+Solcast now seem to offer new account creators signing up only 10 api calls per day (used to be 50). Seems the old account users still have 50 api calls
+
+The integration now allows users that now only get 10 calls to disable the auto api polling where thye can then create their own automations to call the update solcast service when they want
+
 ## Solcast Requirements:
 Sign up for an API key (https://solcast.com/)
 
-Solcast may take up to 24hrs to apply the 50 API counter from the default 10.. give it time to work:)
+^Solcast may take up to 24hrs to apply the 50 API counter from the default 10.. give it time to work:)
+-this seems to not be the case anymore for new account creators that sign up
 
 Create Rooftop entities on the Solcast website with all the data about your solar panel setup.
 Copy the API Key for use with this integration.

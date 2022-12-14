@@ -1,5 +1,12 @@
 ### Changes
 
+v3.0.28
+- changed Peak Time Today/Tomorrow from datetime to time
+- changed back the unit for peak measurement to Wh as the sensor is telling the peak/max hours generated forecast for the hour
+- added new configuration option for the integration to disable auto polling. Users can then setup their own automation to poll for data when they like (mostly due to the fact that Solcast have changed the API allowance for new accounts to just 10 per day)
+- API counter sensor now shows total used instead of allowance remaining as some have 10 others 50. It will 'Exceeded API Allowance' if you have none left
+
+
 v3.0.27
 - changed unit for peak measurement #86 tbanks Ivesvdf
 - some other minor text changes for logs

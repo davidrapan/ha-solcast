@@ -1,5 +1,10 @@
 ### Changes
 
+v3.0.30
+- merged in some work by @696GrocuttT PR into this release
+- fixed code to do with using up all allowed api counts
+- this release will most likely stuff up the current API counter, but after the UTC counter reset all will be right in the world of api counting again
+
 v3.0.29
 - changed Peak Time Today/Tomorrow sensor from datetime to time
 - changed back the unit for peak measurement to Wh as the sensor is telling the peak/max hours generated forecast for the hour

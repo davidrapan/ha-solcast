@@ -34,8 +34,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         await solcast.load_saved_data()
         
         coordinator = SolcastUpdateCoordinator(hass, solcast)
-        autopoll = entry.options[CONST_DISABLEAUTOPOLL]
-        await coordinator.setup(autopoll)
+        autopolldisabled = entry.options[CONST_DISABLEAUTOPOLL]
+        await coordinator.setup(autopolldisabled)
 
         await coordinator.async_config_entry_first_refresh()
         #await _async_migrate_unique_ids(hass, entry, coordinator)

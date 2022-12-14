@@ -1,4 +1,4 @@
-# Solcast Solar 
+# Solcast Solar
 
 Home Assistant(https://www.home-assistant.io/) Component
 

@@ -1,5 +1,9 @@
 ### Changes
 
+v3.0.31
+- refactored HA setup function call requirements
+- refactored some other code with typos to spell words correctly.. no biggie
+
 v3.0.30
 - merged in some work by @696GrocuttT PR into this release
 - fixed code to do with using up all allowed api counts

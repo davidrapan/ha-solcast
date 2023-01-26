@@ -1,6 +1,6 @@
 ### Changes
 
-v3.0.31
+v3.0.32
 - refactored HA setup function call requirements
 - refactored some other code with typos to spell words correctly.. no biggie
 

@@ -6,12 +6,9 @@ Home Assistant(https://www.home-assistant.io/) Component
 
 This custom component integrates the Solcast API into Home Assistant.
 
-Modified from the great works of
-* dannerph/homeassistant-solcast
-* cjtapper/solcast-py
-* home-assistant-libs/forecast_solar
 
-## Solcast Changes:
+
+## Solcast Changes in 2023:
 Solcast now seem to offer new account creators signing up only 10 api calls per day (used to be 50). Seems the old account users still have 50 api calls
 
 The integration now allows users that now only get 10 calls to disable the auto api polling where thye can then create their own automations to call the update solcast service when they want
@@ -31,6 +28,24 @@ If you have more than one Solcast account because you have more than 2 rooftop s
 
 ![img6](https://user-images.githubusercontent.com/1471841/174471090-4a9f84dd-3327-4db7-a7c0-14d68a150d27.png)
 
+## Basic HA Automation to manual config Solcast API data:
+Create a new HA automation and setup your prefered triggers to manually poll for new data
+```alias: Solcast_update
+description: New API call Solcast
+trigger:
+  - platform: time_pattern
+    minutes: "0"
+    seconds: "0"
+condition:
+  - condition: sun
+    before: sunset
+    after: sunrise
+action:
+  - service: solcast_solar.update_forecasts
+    data: {}
+mode: single
+```
+
 ### Set up HA Energy Dashboard settings
 Go to the HA>Settings>Dashboards>Energy 
 Click the edit the Solar Production item you have created. 
@@ -48,3 +63,8 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 
 ### HA Solcast Integration Sensors
 ![img31](https://user-images.githubusercontent.com/1471841/174471633-4aa0bb1d-009e-4d33-9c41-f0b6489cb995.png)
+
+Modified from the great works of
+* dannerph/homeassistant-solcast
+* cjtapper/solcast-py
+* home-assistant-libs/forecast_solar

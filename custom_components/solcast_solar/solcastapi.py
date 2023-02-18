@@ -250,16 +250,28 @@ class SolcastApi:
         except Exception:
             return {}
 
-    def get_forecast_tomorrow(self) -> dict[str, Any]:
+    # def get_forecast_tomorrow(self) -> dict[str, Any]:
+    #     """Return Solcast Forecasts data for tomorrow"""
+    #     try:
+    #         da = dt.now().replace(minute=0, second=0, microsecond=0).date() + timedelta(days=1)
+    #         g = [d for d in self._data["forecasts"]         if d['period_start'].date() == da]
+    #         h = [d for d in self._data["detailedForecasts"] if d['period_start'].date() == da]
+    #         return {"forecast":         g,
+    #                 "detailedForecast": h}
+    #     except Exception:
+    #         return {}
+        
+    def get_forecast_future_day(self, futureday = 1) -> dict[str, Any]:
         """Return Solcast Forecasts data for tomorrow"""
         try:
-            da = dt.now().replace(minute=0, second=0, microsecond=0).date() + timedelta(days=1)
+            da = dt.now().replace(minute=0, second=0, microsecond=0).date() + timedelta(days=futureday)
             g = [d for d in self._data["forecasts"]         if d['period_start'].date() == da]
             h = [d for d in self._data["detailedForecasts"] if d['period_start'].date() == da]
             return {"forecast":         g,
                     "detailedForecast": h}
         except Exception:
             return {}
+    
 
     def get_forecast_this_hour(self) -> int:
         try:
@@ -312,10 +324,19 @@ class SolcastApi:
         except Exception:
             return None
 
-    def get_total_kwh_forecast_tomorrow(self) -> float:
+    # def get_total_kwh_forecast_tomorrow(self) -> float:
+    #     """Return total kwh total for rooftop site tomorrow"""
+    #     try:
+    #         da = dt.now().replace(minute=0, second=0, microsecond=0).date() + timedelta(days=1)
+    #         g = [d for d in self._data["forecasts"] if d['period_start'].date() == da]
+    #         return round(sum(z['pv_estimate'] for z in g if z),2)
+    #     except Exception:
+    #         return 0
+        
+    def get_total_kwh_forecast_furture_for_day(self, dayincrement = 1) -> float:
         """Return total kwh total for rooftop site tomorrow"""
         try:
-            da = dt.now().replace(minute=0, second=0, microsecond=0).date() + timedelta(days=1)
+            da = dt.now().replace(minute=0, second=0, microsecond=0).date() + timedelta(days=dayincrement)
             g = [d for d in self._data["forecasts"] if d['period_start'].date() == da]
             return round(sum(z['pv_estimate'] for z in g if z),2)
         except Exception:

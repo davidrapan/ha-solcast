@@ -54,8 +54,16 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             #await solcast.force_api_poll(True)
             await coordinator.service_event_update()
 
+        async def handle_service_clear_solcast_data(call):
+            """Handle service call"""
+            _LOGGER.debug("Deleting the old solcast.json file to clear old solcast data")
+            await coordinator.service_event_delete_old_solcast_json_file()
+
         hass.services.async_register(
             DOMAIN, "update_forecasts", handle_service_update_forecast
+        )
+        hass.services.async_register(
+            DOMAIN, "clear_all_solcast_data", handle_service_clear_solcast_data
         )
 
         #hass.bus.async_listen("solcast_update_all_forecasts", coordinator.service_event_update)

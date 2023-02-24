@@ -1,5 +1,12 @@
 ### Changes
 
+v3.0.34
+- added service to clear old solcast.json file to have a clean start
+- return empty energy graph data if there is an error generating info
+
+v3.0.33
+- added sensors for forecast days 3,4,5,6,7
+
 v3.0.32
 - refactored HA setup function call requirements
 - refactored some other code with typos to spell words correctly.. no biggie

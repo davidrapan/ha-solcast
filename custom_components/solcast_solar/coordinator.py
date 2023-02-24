@@ -161,6 +161,10 @@ class SolcastUpdateCoordinator(DataUpdateCoordinator):
         #    for update_callback in self._listeners:
         #        update_callback()
 
+    async def service_event_delete_old_solcast_json_file(self, *args):
+        _LOGGER.debug("Solcast - Event called to delete the solcast.json file")
+        await self.solcast.delete_solcast_file()
+
     def get_energy_tab_data(self):
         return self.solcast.get_energy_data()
 

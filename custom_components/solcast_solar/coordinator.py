@@ -48,7 +48,7 @@ class SolcastUpdateCoordinator(DataUpdateCoordinator):
 
     async def _async_update_data(self):
         """Update data via library."""
-        async with async_timeout.timeout(30):
+        async with async_timeout.timeout(60):
             try:
                 await self.update_forecast()
             except Exception as error:

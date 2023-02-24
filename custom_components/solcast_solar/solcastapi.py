@@ -78,7 +78,7 @@ class SolcastApi:
                 #params = {"format": "json", "api_key": self.options.api_key}
                 params = {"format": "json", "api_key": spl.strip()}
                 _LOGGER.debug(f"SOLCAST: trying to connect to - {self.options.host}/rooftop_sites?format=json&api_key={spl.strip()}")
-                async with async_timeout.timeout(10):
+                async with async_timeout.timeout(60):
                     apiCacheFileName = "sites.json"
                     if self.apiCacheEnabled and file_exists(apiCacheFileName):
                         status = 404
@@ -578,7 +578,7 @@ class SolcastApi:
             url=f"{self.options.host}/rooftop_sites/{site}/{path}"
             _LOGGER.debug(f"SOLCAST: fetch_data code url - {url}")
 
-            async with async_timeout.timeout(20):
+            async with async_timeout.timeout(60):
                 apiCacheFileName = path + "_" + site + ".json"
                 if self.apiCacheEnabled and file_exists(apiCacheFileName):
                     status = 404

@@ -1,6 +1,9 @@
 ### Changes
 
-v3.0.34
+v3.0.35 - PRE RELEASE
+- extended the internet connection timeout to 60s
+
+v3.0.34 - PRE RELEASE
 - added service to clear old solcast.json file to have a clean start
 - return empty energy graph data if there is an error generating info
 

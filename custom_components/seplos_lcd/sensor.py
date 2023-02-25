@@ -147,7 +147,7 @@ async def async_setup_entry(
 
     k = SensorEntityDescription(
             key="temp5",
-            name="BMS Temperature ",
+            name="Ambient Temperature ",
             icon="mdi:thermometer",
             entity_category=EntityCategory.DIAGNOSTIC,
         )
@@ -156,7 +156,7 @@ async def async_setup_entry(
 
     k = SensorEntityDescription(
             key="temp6",
-            name="Total Number of Cells",
+            name="BMS Temperature",
             icon="mdi:thermometer",
             entity_category=EntityCategory.DIAGNOSTIC,
         )

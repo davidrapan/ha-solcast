@@ -9,8 +9,8 @@ from homeassistant.helpers.device_registry import async_get as device_registry
 
 from .const import DOMAIN, CONST_USB_ADDRESS
 from .coordinator import SeplosUpdateCoordinator
-#from .seplosapi import ConnectionOptions, SeplosApi
-from .seplosapi import SeplosApitest
+from .seplosapi import ConnectionOptions, SeplosApi
+
 
 PLATFORMS = ["sensor"]
 
@@ -24,15 +24,14 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
         _LOGGER.debug("Seplos starting")
 
-        # options = ConnectionOptions(
-        #     entry.options[CONST_USB_ADDRESS]
-        # )
+        options = ConnectionOptions(
+            entry.options[CONST_USB_ADDRESS]
+        )
 
         _LOGGER.debug("Seplos starting 1")
 
-        #seplos = SeplosApi(options)
+        seplos = SeplosApi(options)
         #await seplos.sites_data()
-        seplos = SeplosApitest()
         _LOGGER.debug("Seplos starting 2")
         
         coordinator = SeplosUpdateCoordinator(hass, seplos)

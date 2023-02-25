@@ -116,8 +116,8 @@ async def async_setup_entry(
 
     for cell in range(1, coordinator.seplos._cellcount):
         k = SensorEntityDescription(
-            key="cell" + cell,
-            name="Cell " + cell,
+            key=f"cell{cell}",
+            name=f"Cell {cell}",
             icon="mdi:battery-outline",
             native_unit_of_measurement=ELECTRIC_POTENTIAL_VOLT,
         )
@@ -126,8 +126,8 @@ async def async_setup_entry(
 
     for warns in range(1, 6):
         k = SensorEntityDescription(
-            key="warn" + warns,
-            name="Warning " + warns,
+            key=f"warn{warns}",
+            name=f"Warning {warns}",
             icon="mdi:car-brake-alert",
             entity_category=EntityCategory.DIAGNOSTIC,
         )
@@ -136,8 +136,8 @@ async def async_setup_entry(
 
     for celltemps in range(1, 4):
         k = SensorEntityDescription(
-            key="temp" + celltemps,
-            name="Cell Temp Sensor " + celltemps,
+            key=f"temp{celltemps}",
+            name=f"Cell Temp Sensor {celltemps}",
             icon="mdi:thermometer",
             native_unit_of_measurement=TEMP_CELSIUS,
             entity_category=EntityCategory.DIAGNOSTIC,

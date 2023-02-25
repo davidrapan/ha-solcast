@@ -14,6 +14,7 @@ from homeassistant.helpers.update_coordinator import (DataUpdateCoordinator, Upd
 from .const import DOMAIN
 from .seplosapi import SeplosApi
 
+
 _LOGGER = logging.getLogger(__name__)
 
 
@@ -37,8 +38,9 @@ class SeplosUpdateCoordinator(DataUpdateCoordinator):
         try:
             await self.update_seplos_data()
         except Exception as error:
-            raise UpdateFailed(error) from error
+            _LOGGER.debug("SEPLOS: _async_update_data error!")
         return self.seplos._data
+
 
 #await get_instance(self._hass).async_add_executor_job(self.gethistory)
     
@@ -54,7 +56,7 @@ class SeplosUpdateCoordinator(DataUpdateCoordinator):
             self.async_update_listeners()
 
         except Exception:
-            _LOGGER.error("update_forecast: %s", traceback.format_exc())
+            _LOGGER.error("update_seplos_data: %s", traceback.format_exc())
 
 
 
@@ -91,12 +93,15 @@ class SeplosUpdateCoordinator(DataUpdateCoordinator):
         #     return self.seplos.get_api_used_count()
         # elif key == "lastupdated":
         #     return self.seplos.get_last_updated_datetime()
-
-        if not key == "":
-            return self.seplos._data[key]
-        
-        #just in case
-        return None
+        try:
+            if not key == "":
+                return self.seplos._data[key]
+            
+            #just in case
+            return None
+        except Exception:
+            _LOGGER.error("get_sensor_value: %s", traceback.format_exc())
+            return None
 
     # def get_sensor_extra_attributes(self, key=""):
     #     if key == "total_kwh_forecast_today":

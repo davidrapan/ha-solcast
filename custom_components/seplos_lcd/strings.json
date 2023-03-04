@@ -1,0 +1,24 @@
+{
+    "config": {
+        "step": {
+        "user": {
+            "description": "Fill in the data of your Seplos USB Connection.",
+            "data": {
+                "const_usb_address": "USB dev Address",
+                "name": "[%key:common::config_flow::data::name%]"
+                }
+            }
+        }
+    },
+    "options": {
+        "step": {
+        "init": {
+            "description": "Fill in the data of your Seplos USB Connection.",
+            "data": {
+                "const_usb_address": "USB dev Address",
+                "name": "[%key:common::config_flow::data::name%]"
+                }
+            }
+        }
+    }
+}

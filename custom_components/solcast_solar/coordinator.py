@@ -1,4 +1,4 @@
-"""The Airzone integration."""
+"""The Solcast Solar integration."""
 from __future__ import annotations
 
 import logging
@@ -24,9 +24,8 @@ from .solcastapi import SolcastApi
 
 _LOGGER = logging.getLogger(__name__)
 
-
 class SolcastUpdateCoordinator(DataUpdateCoordinator):
-    """Class to manage fetching data from the Airzone device."""
+    """Class to manage fetching data from Solcast Solar API."""
 
     def __init__(self, hass: HomeAssistant, solcast: SolcastApi) -> None:
         """Initialize."""

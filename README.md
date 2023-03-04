@@ -30,6 +30,7 @@ If you have more than one Solcast account because you have more than 2 rooftop s
 
 ## Basic HA Automation to manual config Solcast API data:
 Create a new HA automation and setup your prefered triggers to manually poll for new data
+This is an example.. create your own to your own needs
 ```alias: Solcast_update
 description: New API call Solcast
 trigger:

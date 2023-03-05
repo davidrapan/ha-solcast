@@ -129,7 +129,8 @@ class SolcastUpdateCoordinator(DataUpdateCoordinator):
                         _LOGGER.debug("SOLCAST: between sun rise/set code test un forcast_update")
                         if self.solcast._sites:
                             #if we have sites to even poll
-                            if _hournow % 3 == 0: 
+                            #if _hournow % 3 == 0: 
+                            if _hournow == 12: 
                                 _LOGGER.debug("SOLCAST: calling the update data code to include past data")
                                 await self.solcast.force_api_poll(True) #also do the actual past values
                             else:

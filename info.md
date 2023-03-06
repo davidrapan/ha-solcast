@@ -1,5 +1,8 @@
 ### Changes
 
+v3.0.37
+- make sure the hourly sensors update when auto polling is disabled
+
 v3.0.36
 - includes all pre release items
 - actual past accurate data is now set to only poll the API at midday and last hour of the day (so only twice a day)

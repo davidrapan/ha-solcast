@@ -1,5 +1,8 @@
 ### Changes
 
+v3.0.38
+- error with v3.0.37 fix for updating sensors
+
 v3.0.37
 - make sure the hourly sensors update when auto polling is disabled
 

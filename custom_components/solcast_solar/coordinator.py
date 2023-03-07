@@ -101,7 +101,7 @@ class SolcastUpdateCoordinator(DataUpdateCoordinator):
             _LOGGER.error("Solcast - setup_auto_fetch: %s", traceback.format_exc())
 
 
-    async def update_integration_listeners(self):
+    async def update_integration_listeners(self,*args):
         try:
             _LOGGER.debug("SOLCAST: updating listerners")
             self.async_update_listeners()

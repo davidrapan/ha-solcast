@@ -1,7 +1,8 @@
 ### Changes
 
 v3.0.40
-- someone left some unused code in 3.0.39 causing problems 
+- someone left some unused code in 3.0.39 causing problems
+ 
 v3.0.39
 - removed version info
 

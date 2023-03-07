@@ -159,7 +159,7 @@ async def async_setup_entry(
                 native_unit_of_measurement=ENERGY_KILO_WATT_HOUR,
                 entity_category=EntityCategory.CONFIG,
             )
-        sen = RooftopSensor(coordinator, k,entry, _VERSION)
+        sen = RooftopSensor(coordinator, k,entry)
         entities.append(sen)
     
     async_add_entities(entities)

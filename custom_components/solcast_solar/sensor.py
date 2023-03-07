@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 from typing import Final
-from homeassistant import loader
+
 
 from homeassistant.components.sensor import (SensorDeviceClass, SensorEntity,
                                              SensorEntityDescription)
@@ -143,19 +143,11 @@ async def async_setup_entry(
 ) -> None:
     """Set up the Solcast sensor."""
 
-    _VERSION = ""
-    try:
-        integration = await loader.async_get_integration(hass, DOMAIN)
-        _VERSION = integration.version
-        _LOGGER.debug(f"Solcast Integration version number: {_VERSION}")
-    except loader.IntegrationNotFound:
-        _LOGGER.debug("Solcast Integration not found to get version number")
-
     coordinator: SolcastUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]
     entities = []
 
     for sensor_types in SENSORS:
-        sen = SolcastSensor(coordinator, SENSORS[sensor_types],entry, _VERSION)
+        sen = SolcastSensor(coordinator, SENSORS[sensor_types],entry)
         entities.append(sen)
 
     for site in coordinator.solcast._sites:
@@ -181,7 +173,6 @@ class SolcastSensor(CoordinatorEntity, SensorEntity):
         coordinator: SolcastUpdateCoordinator,
         entity_description: SensorEntityDescription,
         entry: ConfigEntry,
-        version: str,
     ) -> None:
         """Initialize the sensor."""
         super().__init__(coordinator)
@@ -204,7 +195,7 @@ class SolcastSensor(CoordinatorEntity, SensorEntity):
             ATTR_MANUFACTURER: "Oziee",
             ATTR_MODEL: "Solcast PV Forecast",
             ATTR_ENTRY_TYPE: DeviceEntryType.SERVICE,
-            "sw_version": version,
+            #"sw_version": version,
             "configuration_url": "https://toolkit.solcast.com.au/live-forecast",
             #"configuration_url": f"https://toolkit.solcast.com.au/rooftop-sites/{entry.options[CONF_RESOURCE_ID]}/detail",
             #"hw_version": entry.options[CONF_RESOURCE_ID],
@@ -266,7 +257,6 @@ class RooftopSensor(CoordinatorEntity, SensorEntity):
         coordinator: SolcastUpdateCoordinator,
         entity_description: SensorEntityDescription,
         entry: ConfigEntry,
-        version: str,
     ) -> None:
         """Initialize the sensor."""
         super().__init__(coordinator)
@@ -289,7 +279,7 @@ class RooftopSensor(CoordinatorEntity, SensorEntity):
             ATTR_MANUFACTURER: "Oziee",
             ATTR_MODEL: "Solcast PV Forecast",
             ATTR_ENTRY_TYPE: DeviceEntryType.SERVICE,
-            "sw_version": version,
+            #"sw_version": version,
             "configuration_url": "https://toolkit.solcast.com.au/live-forecast",
             #"configuration_url": f"https://toolkit.solcast.com.au/rooftop-sites/{entry.options[CONF_RESOURCE_ID]}/detail",
             #"hw_version": entry.options[CONF_RESOURCE_ID],

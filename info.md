@@ -1,5 +1,8 @@
 ### Changes
 
+v3.0.39
+- removed version info
+
 v3.0.38
 - error with v3.0.37 fix for updating sensors
 

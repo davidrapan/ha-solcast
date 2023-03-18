@@ -1,5 +1,8 @@
 ### Changes
 
+v3.0.42
+- fixed using the service to update forecasts from calling twice
+
 v3.0.41
 - recoded logging. Re-worded. More debug vs info vs error logging.
 - API usage counter was not recorded when reset to zero at UTC midnight

@@ -52,7 +52,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             _LOGGER.info(f"SOLCAST - Service call: {SERVICE_UPDATE}")
             await coordinator.service_event_update()
 
-        async def handle_service_update_forecast(call):
+        async def handle_service_update_forecast_actuals(call):
             """Handle service call"""
             _LOGGER.info(f"SOLCAST - Service call: {SERVICE_ACTUALS_UPDATE}")
             await coordinator.service_event_update_actuals()
@@ -67,7 +67,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         )
 
         hass.services.async_register(
-            DOMAIN, SERVICE_ACTUALS_UPDATE, handle_service_update_forecast
+            DOMAIN, SERVICE_ACTUALS_UPDATE, handle_service_update_forecast_actuals
         )
         
         hass.services.async_register(

@@ -6,7 +6,6 @@ from homeassistant import loader
 import logging
 from typing import Final
 
-
 from homeassistant.components.sensor import (SensorDeviceClass, SensorEntity,
                                              SensorEntityDescription)
 from homeassistant.config_entries import ConfigEntry
@@ -149,8 +148,9 @@ async def async_setup_entry(
         integration = await loader.async_get_integration(hass, DOMAIN)
         _VERSION = str(integration.version)
         _LOGGER.debug(f"Solcast Integration version number: {_VERSION}")
+        #_LOGGER.error(f"Solcast Integration path: {integration.file_path}")
     except loader.IntegrationNotFound:
-        _LOGGER.debug("Solcast Integration not found to get version number")
+        _VERSION = ""
 
     if _VERSION is None:
         _VERSION = ""

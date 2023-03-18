@@ -1,8 +1,14 @@
 ### Changes
 
+v3.0.41
+- recoded logging. Re-worded. More debug vs info vs error logging.
+- API usage counter was not recorded when reset to zero at UTC midnight
+- added a new service where you can call to update the Solcast Actuals data for the forecasts
+- added the version info to the intergation UI
+
 v3.0.40
 - someone left some unused code in 3.0.39 causing problems
- 
+
 v3.0.39
 - removed version info
 

@@ -29,7 +29,7 @@ async def async_get_solar_forecast(hass: HomeAssistant, config_entry_id: str):
         d = {"wh_hours": e}
         #d['wh_hours'].update(e)
     except Exception as e:
-        _LOGGER.warn(e)
+        _LOGGER.warn(f"SOLCAST - async_get_solar_forecast {e}")
         k={}
         d = {"wh_hours": k}
         

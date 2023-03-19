@@ -58,6 +58,8 @@ class SolcastUpdateCoordinator(DataUpdateCoordinator):
                 await self.update_forecast()
             except Exception as error:
                 raise UpdateFailed(error) from error
+            
+            self.solcast._data.update({"past_forecasts":self._previousenergy})
             return self.solcast._data
 
     async def reset_api_counter(self, *args):

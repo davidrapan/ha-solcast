@@ -1,5 +1,9 @@
 ### Changes
 
+v3.0.43
+- pre release not for use!!
+- do not install :) just for testing
+
 v3.0.42
 - fixed using the service to update forecasts from calling twice
 

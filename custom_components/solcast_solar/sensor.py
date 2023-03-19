@@ -1,7 +1,6 @@
 """Support for Solcast PV forecast sensors."""
 
 from __future__ import annotations
-from homeassistant import loader
 
 import logging
 from typing import Final
@@ -11,15 +10,14 @@ from homeassistant.components.sensor import (SensorDeviceClass, SensorEntity,
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (ATTR_IDENTIFIERS, ATTR_MANUFACTURER,
                                  ATTR_MODEL, ATTR_NAME, ENERGY_KILO_WATT_HOUR,
-                                 ENERGY_WATT_HOUR, POWER_WATT)
+                                 ENERGY_WATT_HOUR)
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.device_registry import DeviceEntryType
 from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from . import DOMAIN
-from .const import ATTR_ENTRY_TYPE
+from .const import DOMAIN, ATTR_ENTRY_TYPE
 from .coordinator import SolcastUpdateCoordinator
 
 _LOGGER = logging.getLogger(__name__)
@@ -143,23 +141,11 @@ async def async_setup_entry(
 ) -> None:
     """Set up the Solcast sensor."""
 
-    _VERSION = ""
-    try:
-        integration = await loader.async_get_integration(hass, DOMAIN)
-        _VERSION = str(integration.version)
-        _LOGGER.debug(f"Solcast Integration version number: {_VERSION}")
-        #_LOGGER.error(f"Solcast Integration path: {integration.file_path}")
-    except loader.IntegrationNotFound:
-        _VERSION = ""
-
-    if _VERSION is None:
-        _VERSION = ""
-
     coordinator: SolcastUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]
     entities = []
 
     for sensor_types in SENSORS:
-        sen = SolcastSensor(coordinator, SENSORS[sensor_types],entry, _VERSION)
+        sen = SolcastSensor(coordinator, SENSORS[sensor_types],entry, coordinator._version)
         entities.append(sen)
 
     for site in coordinator.solcast._sites:
@@ -171,8 +157,19 @@ async def async_setup_entry(
                 native_unit_of_measurement=ENERGY_KILO_WATT_HOUR,
                 entity_category=EntityCategory.CONFIG,
             )
-        sen = RooftopSensor(coordinator, k,entry, _VERSION)
+        sen = RooftopSensor(coordinator, k,entry, coordinator._version)
         entities.append(sen)
+
+    k = SensorEntityDescription(
+            key="solcast_has_update",
+            name="Integration Update",
+            icon="mdi:update",
+            #device_class=SensorDeviceClass.ENERGY,
+            #native_unit_of_measurement=ENERGY_KILO_WATT_HOUR,
+            entity_category=EntityCategory.CONFIG,
+        )
+    # sen = SolcastUpdate(coordinator, k,entry, coordinator._version)
+    # entities.append(sen)
     
     async_add_entities(entities)
 
@@ -259,8 +256,6 @@ class SolcastSensor(CoordinatorEntity, SensorEntity):
         """Handle updated data from the coordinator."""
         self._sensor_data = self.coordinator.get_sensor_value(self.entity_description.key)
         self.async_write_ha_state()
-
-
 class RooftopSensor(CoordinatorEntity, SensorEntity):
     """Representation of a Seplos Sensor device."""
 

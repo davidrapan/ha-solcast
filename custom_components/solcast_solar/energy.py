@@ -1,13 +1,13 @@
 """Energy platform."""
 from __future__ import annotations
+
+import logging
 from collections import OrderedDict
 
 from homeassistant.core import HomeAssistant
 
 from . import SolcastUpdateCoordinator
 from .const import DOMAIN
-
-import logging
 
 _LOGGER = logging.getLogger(__name__)
 

@@ -3,17 +3,19 @@
 import logging
 import traceback
 
+from homeassistant import loader
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import CONF_API_KEY
+from homeassistant.const import CONF_API_KEY, Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import aiohttp_client
 from homeassistant.helpers.device_registry import async_get as device_registry
 
-from .const import DOMAIN, SOLCAST_URL, CONST_DISABLEAUTOPOLL, SERVICE_UPDATE, SERVICE_CLEAR_DATA, SERVICE_ACTUALS_UPDATE
+from .const import (CONST_DISABLEAUTOPOLL, DOMAIN, SERVICE_ACTUALS_UPDATE,
+                    SERVICE_CLEAR_DATA, SERVICE_UPDATE, SOLCAST_URL)
 from .coordinator import SolcastUpdateCoordinator
 from .solcastapi import ConnectionOptions, SolcastApi
 
-PLATFORMS = ["sensor"]
+PLATFORMS = [Platform.SENSOR]
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -43,6 +45,20 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         entry.async_on_unload(entry.add_update_listener(async_update_options))
 
         hass.data.setdefault(DOMAIN, {})[entry.entry_id] = coordinator
+
+        _VERSION = ""
+        try:
+            integration = await loader.async_get_integration(hass, DOMAIN)
+            _VERSION = str(integration.version)
+            _LOGGER.debug(f"Solcast Integration version number: {_VERSION}")
+            #_LOGGER.error(f"Solcast Integration path: {integration.file_path}")
+        except loader.IntegrationNotFound:
+            _VERSION = ""
+
+        if _VERSION is None:
+            _VERSION = ""
+
+        coordinator._version = _VERSION
 
         #hass.config_entries.async_setup_platforms(entry, PLATFORMS)
         await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)

@@ -1,5 +1,11 @@
 ### Changes
 
+v3.0.44
+- pre release
+- better diagnotic data
+- just for testing
+- wont hurt anything if you do install it
+
 v3.0.43
 - pre release not for use!!
 - do not install :) just for testing

@@ -1,21 +1,21 @@
 """Solcast API."""
 from __future__ import annotations
 
-import json
+import asyncio
 import copy
+import json
 import logging
+import os
 import traceback
 from dataclasses import dataclass
 from datetime import datetime as dt
 from datetime import timedelta, timezone
 from operator import itemgetter
 from os.path import exists as file_exists
-import os
 from typing import Any, cast
 
-from aiohttp import ClientConnectionError, ClientSession
-import asyncio
 import async_timeout
+from aiohttp import ClientConnectionError, ClientSession
 from aiohttp.client_reqrep import ClientResponse
 from isodate import parse_datetime
 
@@ -183,7 +183,6 @@ class SolcastApi:
     def get_last_updated_datetime(self) -> dt:
         """Return date time with the data was last updated"""
         try:
-            _LOGGER.debug(f"SOLCAST - Last time the API data was updated: {dt.fromisoformat(self._data['last_updated'])}")
             return dt.fromisoformat(self._data["last_updated"])
         except Exception:
             _LOGGER.debug(f"SOLCAST - get_last_update_datetime try failed so returning year 2000")

@@ -3,16 +3,15 @@ from __future__ import annotations
 
 import logging
 import traceback
+from contextlib import suppress
 from datetime import timedelta
 
 import async_timeout
 import homeassistant.util.dt as dt_util
 from homeassistant.components.recorder import get_instance, history
-from contextlib import suppress
-from homeassistant.exceptions import HomeAssistantError
-
-from homeassistant.const import SUN_EVENT_SUNSET, MAJOR_VERSION, MINOR_VERSION
+from homeassistant.const import MAJOR_VERSION, MINOR_VERSION, SUN_EVENT_SUNSET
 from homeassistant.core import HomeAssistant
+from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.event import async_track_utc_time_change
 from homeassistant.helpers.sun import (get_astral_location,
                                        get_location_astral_event_next)
@@ -31,11 +30,13 @@ class SolcastUpdateCoordinator(DataUpdateCoordinator):
         """Initialize."""
         self.solcast = solcast
         self._hass = hass
+        #self.config_entry
         self._auto_fetch_tracker = None
         self._starthour = 6
         self._finishhour = 19
         self._previousenergy = None
         self._autopollingdisabled = autopolling
+        self._version = ""
 
         self._v = f"{MAJOR_VERSION}.{MINOR_VERSION}"
 
@@ -58,8 +59,6 @@ class SolcastUpdateCoordinator(DataUpdateCoordinator):
                 await self.update_forecast()
             except Exception as error:
                 raise UpdateFailed(error) from error
-            
-            self.solcast._data.update({"past_forecasts":self._previousenergy})
             return self.solcast._data
 
     async def reset_api_counter(self, *args):

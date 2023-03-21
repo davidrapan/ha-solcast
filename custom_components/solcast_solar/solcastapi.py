@@ -648,18 +648,18 @@ class SolcastApi:
             lastv = -1
             lastk = -1
             for v in self._data["forecasts"]:
-                d = v['period_start'].isoformat()
+                d = v['period_start'].astimezone().isoformat() #.isoformat()
                 if v['pv_estimate'] == 0.0:
                     if lastv > 0.0:
-                        wh_hours[d] = v['pv_estimate'] * 1000
+                        wh_hours[d] = round(v['pv_estimate'] * 1000,0)
                     lastk = d
                     lastv = v['pv_estimate']
                 else:
                     if lastv == 0.0:
                         #add the last one
-                        wh_hours[lastk] = lastv * 1000
+                        wh_hours[lastk] = round(lastv * 1000,0)
 
-                    wh_hours[d] = v['pv_estimate'] * 1000
+                    wh_hours[d] = round(v['pv_estimate'] * 1000,0)
                     
                     lastk = d
                     lastv = v['pv_estimate']

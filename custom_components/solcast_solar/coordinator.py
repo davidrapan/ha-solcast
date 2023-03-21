@@ -245,11 +245,12 @@ class SolcastUpdateCoordinator(DataUpdateCoordinator):
         try:
             start_date = dt_util.now().astimezone().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=7)
             end_date = dt_util.now().astimezone().replace(hour=23,minute=59,second=59,microsecond=0) - timedelta(days=1)
+            _LOGGER.debug(f"SOLCAST - gethistory: from- {start_date} to- {end_date}")
 
             lower_entity_id = "sensor.solcast_forecast_this_hour"
             history_list = history.state_changes_during_period(
                 self._hass,
-                dt_util.as_utc(start_date),
+                start_time=dt_util.as_utc(start_date),
                 end_time=dt_util.as_utc(end_date),
                 entity_id=lower_entity_id,
                 no_attributes=True,
@@ -261,7 +262,7 @@ class SolcastUpdateCoordinator(DataUpdateCoordinator):
                 # filter out all None, NaN and "unknown" states
                 # only keep real values
                 with suppress(ValueError):
-                    d[state.last_updated.replace(minute=0,second=0,microsecond=0).isoformat()] = float(state.state)
+                    d[state.last_updated.replace(minute=0,second=0,microsecond=0).astimezone().isoformat()] = float(state.state)
 
             _LOGGER.debug(f"SOLCAST - gethistory got {len(d)} items")
             self._previousenergy = d

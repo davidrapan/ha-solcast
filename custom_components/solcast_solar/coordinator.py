@@ -268,6 +268,3 @@ class SolcastUpdateCoordinator(DataUpdateCoordinator):
             self._previousenergy = d
         except Exception:
             _LOGGER.error("SOLCAST - gethistory: %s", traceback.format_exc())
-        
-
-

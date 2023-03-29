@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: I have a question or need support
+    url: https://github.com/oziee/ha-solcast-solar/discussions
+    about: Check the discussions section to see if anyone has asked it before.
+  - name: Feature Request
+    url: https://github.com/oziee/ha-solcast-solar/discussions
+    about: Please use the discussions section for making feature requests.

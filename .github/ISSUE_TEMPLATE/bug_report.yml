@@ -5,6 +5,9 @@ body:
     attributes:
       value: |
         This issue form is for reporting bugs only!
+        
+        ## Do not just write 'it does not work, vX.X.X, HA, X.X.X'
+        ### If not enough information is supplied I may just ignore or close the issue 
 
         If you have a feature or enhancement request, please use the [discussion forums][fr] section.
 
@@ -56,9 +59,12 @@ body:
         It generally allows pinpointing defects and thus resolving issues faster.
 
   - type: textarea
+    id: loginfo
+    validations:
+      required: true
     attributes:
-      label: Anything in the logs that might be useful for us?
-      description: For example, error message, or stack traces.
+      label: Logs debug/info/error output
+      description: Debug info, error message, or stack traces.
       render: txt
   - type: textarea
     attributes:

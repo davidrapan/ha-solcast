@@ -1,5 +1,8 @@
 ### Changes
 
+v3.0.46
+- possile Maria DB problem - possible fix
+
 v3.0.45
 - pre release
 - currently being tested 

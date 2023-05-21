@@ -82,7 +82,7 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 
 ### Sensors
 
-![sensors|50%](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/sensors.png)
+![sensors|50](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/sensors.png)
 
 | Name | Type | Attributes | Default | Description |
 | ------------------------------ | ----------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 

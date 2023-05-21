@@ -47,6 +47,8 @@ In Home Assistant / Settings / Devices & Services click the `Add Integration`.
 
 If you have more than one Solcast account because you have more than 2 rooftop setups, enter both account API keys seperated by a comma `xxxxxxxx-xxxxx-xxxx,yyyyyyyy-yyyyy-yyyy`
 
+*This is you `API Key` not your rooftop id created in Solcast. You can find your API key here [api key](https://toolkit.solcast.com.au/account)
+
 ![img1](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png)
 
 ## Basic HA Automation to manual poll Solcast API data:

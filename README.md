@@ -32,8 +32,10 @@ or click on:
 
 #### Manualy
 
-1. Download the [latest release zip file](https://github.com/oziee/ha-solcast-solar/releases) and save it in your `configuration/www` folder.
+1. Download the [latest release zip file](https://github.com/oziee/ha-solcast-solar/releases).
 1. Unzip and copy the `solcast_solar` directory to your Home Assistant `config/custom_components` directory
+
+*Restart HA to load the new integration*
 
 
 In Home Assistant / Settings / Devices & Services click the `Add Integration`.

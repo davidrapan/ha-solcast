@@ -82,7 +82,7 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 
 ### Sensors
 
-![sensors|50](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/sensors.png)
+<img src="https://github.com/oziee/ha-solcast-solar/raw/v3/.github/SCREENSHOTS/sensors.png" alt="sensors" style="max-width: 200px;">
 
 | Name | Type | Attributes | Default | Description |
 | ------------------------------ | ----------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
@@ -103,7 +103,7 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 
 ### Configuration
 
-![img1](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/conf.png)
+<img src="https://github.com/oziee/ha-solcast-solar/raw/v3/.github/SCREENSHOTS/conf.png" alt="sensors" style="max-width: 200px;">
 
 | Name | Type | Attributes | Default | Description |
 | ------------------------------ | ----------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
@@ -111,7 +111,7 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 
 ### Diagnostic
 
-![img1](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/diag.png)
+<img src="https://github.com/oziee/ha-solcast-solar/raw/v3/.github/SCREENSHOTS/diag.png" alt="sensors" style="max-width: 200px;">
 
 | Name | Type | Attributes | Default | Description |
 | ------------------------------ | ----------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 

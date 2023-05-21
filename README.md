@@ -2,16 +2,16 @@
 
 Home Assistant(https://www.home-assistant.io/) Component
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
-
-This custom component integrates the Solcast API into Home Assistant.
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
 
 
+This custom component integrates the Solcast Hobby PV Forecast API into Home Assistant.
 
-## Solcast Changes in 2023:
-Solcast now seem to offer new account creators signing up only 10 api calls per day (used to be 50). Seems the old account users still have 50 api calls
 
-The integration now allows users that now only get 10 calls to disable the auto api polling where thye can then create their own automations to call the update solcast service when they want
+## Solcast have altered their API limits for new account creators:
+Solcast now only offer new account creators 10 api calls per day (used to be 50). Old account users still have 50 api calls
+
+The integration allows users to disable the auto api polling. Users can create their own automations to call the update solcast service to poll for new data to adjust for the max 10 api poll limit.
 
 ## Solcast Requirements:
 Sign up for an API key (https://solcast.com/)
@@ -19,16 +19,35 @@ Sign up for an API key (https://solcast.com/)
 ^Solcast may take up to 24hrs to apply the 50 API counter from the default 10.. give it time to work:)
 -this seems to not be the case anymore for new account creators that sign up
 
-Create Rooftop entities on the Solcast website with all the data about your solar panel setup.
 Copy the API Key for use with this integration.
+
+## Install
+
+#### via HACS
+
+Easy install by default on HACS. More info [here](https://hacs.xyz/).
+
+or click on:
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=oziee&repository=ha-solcast-solar&category=plugin)
+
+#### Manualy
+
+1. Download the [latest release zip file](https://github.com/oziee/ha-solcast-solar/releases) and save it in your `configuration/www` folder.
+1. Unzip and copy the `solcast_solar` directory to your Home Assistant `config/custom_components` directory
+
+
+In Home Assistant / Settings / Devices & Services click the `Add Integration`.
+    1. Search and add `Solcast PV Forecast`.
+    1. Enter you `Solcast API Key`.
+    1. Choose to either use the auto polling for data (not great if your stuck with only the new 10 poll limit), or disable and create your own automation to call the service `solcast_solar.update_forecasts` or `solcast_solar.update_actual_forecasts` when you like it to call.
+
 ## Basic Installation/Configuration Instructions:
-Add a new HA Integration selecting 'Solcast PV Solar'
 
-If you have more than one Solcast account because you have more than 2 rooftop setups, enter both account API keys seperated by a comma
+If you have more than one Solcast account because you have more than 2 rooftop setups, enter both account API keys seperated by a comma `xxxxxxxx-xxxxx-xxxx,yyyyyyyy-yyyyy-yyyy`
 
-![img6](https://user-images.githubusercontent.com/1471841/174471090-4a9f84dd-3327-4db7-a7c0-14d68a150d27.png)
+![img1](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png)
 
-## Basic HA Automation to manual config Solcast API data:
+## Basic HA Automation to manual poll Solcast API data:
 Create a new HA automation and setup your prefered triggers to manually poll for new data
 This is an example.. create your own to your own needs
 ```alias: Solcast_update
@@ -60,10 +79,47 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 ## HA Views:
 ### HA Energy Tab
 ![img1](https://user-images.githubusercontent.com/1471841/135556872-ff5b51ac-699e-4ea5-869c-f9b0d0c5b815.png)
-![img2](https://user-images.githubusercontent.com/1471841/135556549-1cdd1621-9351-43d2-85d1-cb335f0b77ba.png)
 
 ### HA Solcast Integration Sensors
 ![img31](https://user-images.githubusercontent.com/1471841/174471633-4aa0bb1d-009e-4d33-9c41-f0b6489cb995.png)
+
+### Sensors
+
+![img1](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/sensors.png)
+
+| Name | Type | Attributes | Default | Description |
+| -------------- | ----------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
+| `Today` | number | Y | `kWh` | Total forecast solar production for today |
+| `Tomorrow` | number | Y | `kWh` | Total forecast solar production for today |
+| `D3` | number | Y | `kWh` | Total forecast solar production for day + 1 (tomorrow) |
+| `D4` | number | Y | `kWh` | Total forecast solar production for day + 2 (day 3) |
+| `D5` | number | Y | `kWh` | Total forecast solar production for day + 3 (day 4) |
+| `D6` | number | Y | `kWh`| Total forecast solar production for day + 4 (day 5) |
+| `D7` | number | Y | `kWh` | Total forecast solar production for day + 5 (day 6) |
+| `This Hour` | number | N | `Wh` | Forecasted solar production current hour |
+| `Next Hour` | number | N | `Wh` | Forecasted solar production next hour |
+| `Remaining Today` | number | N | `kWh` | Predicted remaining solar production today |
+| `Peak Forecast Today` | number | N | `Wh` | Highest predicted production within an hour period today |
+| `Peak Time Today` | date/time | N |  | Hour of max forecasted production of solar today |
+| `Peak Forecast Tomorrow` | number | N | `Wh` | Highest predicted production within an hour period tomorrow |
+| `Peak Time Tomorrow` | date/time | N |  | Hour of max forecasted production of solar tomorrow |
+
+### Configuration
+
+![img1](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/conf.png)
+
+| Name | Type | Attributes | Default | Description |
+| -------------- | ----------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
+| `Rooftop name` | number | Y | `kWh` | Total forecast for today for this rootop item created in Solcast |
+
+### Diagnostic
+
+![img1](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/diag.png)
+
+| Name | Type | Attributes | Default | Description |
+| -------------- | ----------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
+| `API Last Polled` | date/time | N |  | Date/time when the API data was polled |
+| `API used` | number | N | `integer` | Total times the API has been called today (API counter resets to zero at midnight UTC) |
 
 Modified from the great works of
 * dannerph/homeassistant-solcast

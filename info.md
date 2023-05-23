@@ -1,5 +1,9 @@
 ### Changes
 
+v3.0.47
+- added attribute weekday name for sensor forecasts, today, tomorrow, D3..7
+  can read the names via the template {{ state_attr('sensor.solcast_forecast_today', 'dayname') }}
+
 v3.0.46
 - possile Maria DB problem - possible fix
 

@@ -2,7 +2,16 @@
 
 v3.0.47
 - added attribute weekday name for sensor forecasts, today, tomorrow, D3..7
-  can read the names via the template {{ state_attr('sensor.solcast_forecast_today', 'dayname') }}
+  can read the names via the template 
+{{ state_attr('sensor.solcast_forecast_today', 'dayname') }}
+{{ state_attr('sensor.solcast_forecast_today', 'dayname') }}
+{{ state_attr('sensor.solcast_forecast_tomorrow', 'dayname') }}
+{{ state_attr('sensor.solcast_forecast_D3', 'dayname') }}
+{{ state_attr('sensor.solcast_forecast_D4', 'dayname') }}
+{{ state_attr('sensor.solcast_forecast_D5', 'dayname') }}
+{{ state_attr('sensor.solcast_forecast_D6', 'dayname') }}
+{{ state_attr('sensor.solcast_forecast_D7', 'dayname') }}
+
 
 v3.0.46
 - possile Maria DB problem - possible fix

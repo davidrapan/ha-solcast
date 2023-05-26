@@ -91,12 +91,12 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 | Name | Type | Attributes | Default | Description |
 | ------------------------------ | ----------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
 | `Today` | number | Y | `kWh` | Total forecast solar production for today |
-| `Tomorrow` | number | Y | `kWh` | Total forecast solar production for today |
-| `D3` | number | Y | `kWh` | Total forecast solar production for day + 1 (tomorrow) |
-| `D4` | number | Y | `kWh` | Total forecast solar production for day + 2 (day 3) |
-| `D5` | number | Y | `kWh` | Total forecast solar production for day + 3 (day 4) |
-| `D6` | number | Y | `kWh`| Total forecast solar production for day + 4 (day 5) |
-| `D7` | number | Y | `kWh` | Total forecast solar production for day + 5 (day 6) |
+| `Tomorrow` | number | Y | `kWh` | Total forecast solar production for day + 1 (tomorrow) |
+| `D3` | number | Y | `kWh` | Total forecast solar production for day + 2 (day 3) |
+| `D4` | number | Y | `kWh` | Total forecast solar production for day + 3 (day 4) |
+| `D5` | number | Y | `kWh` | Total forecast solar production for day + 4 (day 5) |
+| `D6` | number | Y | `kWh`| Total forecast solar production for day + 5 (day 6) |
+| `D7` | number | Y | `kWh` | Total forecast solar production for day + 6 (day 7) |
 | `This Hour` | number | N | `Wh` | Forecasted solar production current hour |
 | `Next Hour` | number | N | `Wh` | Forecasted solar production next hour |
 | `Remaining Today` | number | N | `kWh` | Predicted remaining solar production today |

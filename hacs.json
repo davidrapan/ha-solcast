@@ -1,9 +1,6 @@
 {
     "name": "Solcast PV Solar",
     "render_readme": false,
-    "domains": [
-        "sensor"
-    ],
     "homeassistant": "2022.11",
     "iot_class": "cloud_poll"
 }

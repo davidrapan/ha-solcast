@@ -14,10 +14,10 @@ The integration allows users to disable the auto api polling. Users can create t
 ## Solcast Requirements:
 Sign up for an API key (https://solcast.com/)
 
-^Solcast may take up to 24hrs to apply the 50 API counter from the default 10.. give it time to work:)
--this seems to not be the case anymore for new account creators that sign up
+!! Solcast may take up to 24hrs to apply the 50 API counter from the default 10.. give it time to work:)
+* this seems to not be the case anymore for new account creators that sign up
 
-Copy the API Key for use with this integration.
+Copy the API Key for use with this integration (See [Configuration](#Configuration) below).
 
 ## Installation
 
@@ -91,7 +91,7 @@ mode: single
 Go to the `HA>Settings>Dashboards>Energy`
 Click the edit the Solar Production item you have created. 
 
-*_If you do not have a solar sensor in your system then this integration will not work. The graph, and adding the forecast integration rely on there being a sensor setup to be added here_
+!! _If you do not have a solar sensor in your system then this integration will not work. The graph, and adding the forecast integration rely on there being a sensor setup to be added here_
 
 [<img src="https://user-images.githubusercontent.com/1471841/149643349-d776f1ad-530c-46aa-91dc-8b9e7c7f3123.png" width="200">](https://user-images.githubusercontent.com/1471841/149643349-d776f1ad-530c-46aa-91dc-8b9e7c7f3123.png)
 
@@ -137,7 +137,7 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 
 | Name | Type | Attributes | Default | Description |
 | ------------------------------ | ----------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
-| `Rooftop name` | number | Y | `kWh` | Total forecast for today for this rootop item created in Solcast |
+| `Rooftop name` | number | Y | `kWh` | Total forecast for rooftop today (attributes contain the full solcast data) |
 
 ### Diagnostic
 

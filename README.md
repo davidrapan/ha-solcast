@@ -37,15 +37,15 @@ or click on:
 
 *Restart HA to load the new integration*
 
+</details>
+
+## Configuration
+
 
 In Home Assistant / Settings / Devices & Services click the `Add Integration`.
 1. Search and add `Solcast PV Forecast`.
 1. Enter you `Solcast API Key`.
 1. Choose to either use the auto polling for data (not great if your stuck with only the new 10 poll limit), or disable and create your own automation to call the service `solcast_solar.update_forecasts` or `solcast_solar.update_actual_forecasts` when you like it to call.
-
-</details>
-
-## Configuration
 
 If you have more than one Solcast account because you have more than 2 rooftop setups, enter both account API keys seperated by a comma `xxxxxxxx-xxxxx-xxxx,yyyyyyyy-yyyyy-yyyy`
 

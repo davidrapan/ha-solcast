@@ -111,6 +111,8 @@ class SolcastApi:
                         f"SOLCAST - sites_data http status Error {status} - Gathering rooftop sites data."
                     )
                     raise Exception(f"SOLCAST - HTTP sites_data error: Solcast Error gathering rooftop sites data.")
+        except json.decoder.JSONDecodeError:
+            _LOGGER.error("SOLCAST - sites_data Error.. The data returned by solcast is not formatted correctly, Solcast could be having site issues")
         except ConnectionRefusedError as err:
             _LOGGER.error("SOLCAST - sites_data Error.. %s",err)
         except ClientConnectionError as e:
@@ -139,6 +141,8 @@ class SolcastApi:
                     await self.http_data(True)
             else:
                 _LOGGER.debug(f"SOLCAST - load_saved_data site count is zero! ")
+        except json.decoder.JSONDecodeError:
+            _LOGGER.error("SOLCAST - load_saved_data error: The cached data is corrupt")
         except Exception as e:
             _LOGGER.error("SOLCAST - load_saved_data error: %s", traceback.format_exc())
 

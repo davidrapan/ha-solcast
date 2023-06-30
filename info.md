@@ -1,5 +1,8 @@
 ### Changes
 
+v3.0.55
+- added extra error catching
+
 v3.0.47
 - added attribute weekday name for sensor forecasts, today, tomorrow, D3..7
   can read the names via the template 

@@ -8,7 +8,7 @@ This custom component integrates the Solcast Hobby PV Forecast API into Home Ass
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
 
 ```
-:warning: Solcast have altered their API limits for new account creators
+⚠️ Solcast have altered their API limits for new account creators
 
 Solcast now only offer new account creators 10 api calls per day (used to be 50). 
 Old account users still have 50 api calls
@@ -71,8 +71,8 @@ You probably **do not** want to do this! Use the HACS method above unless you kn
 ## Services
 There are 3 services for this integration
 
-| | |
-| ------------------------------ | ----------- |
+| Service | Action |
+| --- | --- |
 | `solcast_solar.update_forecasts` | Updates the forecast data |
 | `solcast_solar.update_actual_forecasts` | Updates the past more accurate data |
 | `solcast_solar.clear_all_solcast_data` | Deletes the `solcast.json` cached file |

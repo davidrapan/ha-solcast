@@ -62,6 +62,7 @@ If you have more than one Solcast account because you have more than 2 rooftop s
 Create a new HA automation and setup your prefered triggers to manually poll for new data
 This is an example.. create your own to your own needs
 
+
 ```yaml
 alias: Solcast_update
 description: New API call Solcast
@@ -83,28 +84,30 @@ mode: single
 
 <details>
 <summary><h3>Set up HA Energy Dashboard settings</summary></h3>
-Go to the HA>Settings>Dashboards>Energy 
+Go to the `HA>Settings>Dashboards>Energy`
 Click the edit the Solar Production item you have created. 
 
-![img4](https://user-images.githubusercontent.com/1471841/149643349-d776f1ad-530c-46aa-91dc-8b9e7c7f3123.png)
+[<img src="https://user-images.githubusercontent.com/1471841/149643349-d776f1ad-530c-46aa-91dc-8b9e7c7f3123.png" width="200">](https://user-images.githubusercontent.com/1471841/149643349-d776f1ad-530c-46aa-91dc-8b9e7c7f3123.png)
+
 
 Click the Forecast option button and select the Solcast Solar option.. Click SAVE.. HA will do all the rest for you
 
-![img5](https://user-images.githubusercontent.com/1471841/174471543-0833b141-0c97-4b90-a058-cf986e89bbce.png)
+[<img src="https://user-images.githubusercontent.com/1471841/174471543-0833b141-0c97-4b90-a058-cf986e89bbce.png" width="200">](https://user-images.githubusercontent.com/1471841/174471543-0833b141-0c97-4b90-a058-cf986e89bbce.png)
 
 </details>
 
 ## HA Views:
 <details>
 <summary><h3>HA Energy Tab</summary></h3>
-![img1](https://user-images.githubusercontent.com/1471841/135556872-ff5b51ac-699e-4ea5-869c-f9b0d0c5b815.png)
+
+[<img src="https://user-images.githubusercontent.com/1471841/135556872-ff5b51ac-699e-4ea5-869c-f9b0d0c5b815.png" width="200"](https://user-images.githubusercontent.com/1471841/135556872-ff5b51ac-699e-4ea5-869c-f9b0d0c5b815.png)
 
 </details>
 
 <details>
 <summary><h3>Sensors</summary></h3>
 
-<img src="https://github.com/oziee/ha-solcast-solar/raw/v3/.github/SCREENSHOTS/sensors.png" alt="sensors" style="width: 200px;">
+[<img src="https://github.com/oziee/ha-solcast-solar/raw/v3/.github/SCREENSHOTS/sensors.png" width="200">](https://github.com/oziee/ha-solcast-solar/raw/v3/.github/SCREENSHOTS/sensors.png)
 
 | Name | Type | Attributes | Default | Description |
 | ------------------------------ | ----------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 

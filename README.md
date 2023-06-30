@@ -69,7 +69,7 @@ You probably **do not** want to do this! Use the HACS method above unless you kn
 [<img src="https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png" width="200">](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png)
 
 ## Services
-There are 3 services for this integration
+There are 3 services for this integration that you can use in automations ([Configuration](#configuration))
 
 | Service | Action |
 | --- | --- |

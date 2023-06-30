@@ -55,7 +55,7 @@ If you have more than one Solcast account because you have more than 2 rooftop s
 
 *This is you `API Key` not your rooftop id created in Solcast. You can find your API key here [api key](https://toolkit.solcast.com.au/account)
 
-![img1](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png)
+[<img src="https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png" width="200">](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png)
 
 <details>
 <summary><h3>Basic HA Automation to manual poll Solcast API data</summary></h3>
@@ -141,6 +141,8 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 
 </details>
 
+
+<summary><h3>Credits</summary></h3>
 Modified from the great works of
 * dannerph/homeassistant-solcast
 * cjtapper/solcast-py

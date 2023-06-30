@@ -73,8 +73,8 @@ There are 3 services for this integration that you can use in automations ([Conf
 
 | Service | Action |
 | --- | --- |
-| `solcast_solar.update_forecasts` | Updates the forecast data |
-| `solcast_solar.update_actual_forecasts` | Updates the past more accurate data |
+| `solcast_solar.update_forecasts` | Updates the future forecast data only |
+| `solcast_solar.update_actual_forecasts` | Updates the past more accurate data only |
 | `solcast_solar.clear_all_solcast_data` | Deletes the `solcast.json` cached file |
 
 <details>

@@ -9,13 +9,12 @@ This custom component integrates the Solcast Hobby PV Forecast API into Home Ass
 ## Solcast have altered their API limits for new account creators:
 Solcast now only offer new account creators 10 api calls per day (used to be 50). Old account users still have 50 api calls
 
-The integration allows users to disable the auto api polling. Users can create their own automations to call the update solcast service to poll for new data to adjust for the max 10 api poll limit.
+The integration allows users to disable the auto api polling to create their own automations to call the update solcast service to poll for new data to allow for the max 10 api poll limit.
 
 ## Solcast Requirements:
 Sign up for an API key (https://solcast.com/)
 
-!! Solcast may take up to 24hrs to apply the 50 API counter from the default 10.. give it time to work:)
-* this seems to not be the case anymore for new account creators that sign up
+!! Solcast may take up to 24hrs to create the account
 
 Copy the API Key for use with this integration (See [Configuration](#Configuration) below).
 

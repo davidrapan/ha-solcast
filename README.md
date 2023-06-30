@@ -68,8 +68,13 @@ You probably **do not** want to do this! Use the HACS method above unless you kn
 
 [<img src="https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png" width="200">](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png)
 
-<details>
+## Services
+There are 3 services for this integration
+* `solcast_solar.update_forecasts`
+* `solcast_solar.update_actual_forecasts`
+* `solcast_solar.clear_all_solcast_data`
 
+<details>
 <summary><h3>Basic HA Automation to manual poll Solcast API data</summary></h3>
 Create a new HA automation and setup your prefered triggers to manually poll for new data
 This is an example.. create your own to your own needs

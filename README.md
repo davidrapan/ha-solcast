@@ -20,7 +20,7 @@ to call the update solcast service to poll for new data to allow for the max 10 
 ## Solcast Requirements:
 Sign up for an API key (https://solcast.com/)
 
-!! Solcast may take up to 24hrs to create the account
+> Solcast may take up to 24hrs to create the account
 
 Copy the API Key for use with this integration (See [Configuration](#Configuration) below).
 

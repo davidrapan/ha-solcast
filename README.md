@@ -19,17 +19,15 @@ Sign up for an API key (https://solcast.com/)
 
 Copy the API Key for use with this integration.
 
-## Install
+## Installation
 
-<details>
-<summary><h3>via HACS</summary></h3>
+### HACS *(recommended)*
 
 Easy install by default on HACS. More info [here](https://hacs.xyz/).
 
 or click on:
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=oziee&repository=ha-solcast-solar&category=plugin)
 
-</details>
 
 <details>
 <summary><h3>Manualy</summary></h3>
@@ -47,7 +45,7 @@ In Home Assistant / Settings / Devices & Services click the `Add Integration`.
 
 </details>
 
-## Basic Installation/Configuration Instructions:
+## Configuration
 
 If you have more than one Solcast account because you have more than 2 rooftop setups, enter both account API keys seperated by a comma `xxxxxxxx-xxxxx-xxxx,yyyyyyyy-yyyyy-yyyy`
 

@@ -6,6 +6,7 @@ Home Assistant(https://www.home-assistant.io/) Component
 
 
 This custom component integrates the Solcast Hobby PV Forecast API into Home Assistant.
+[<img src="https://user-images.githubusercontent.com/1471841/135556872-ff5b51ac-699e-4ea5-869c-f9b0d0c5b815.png" width="200">]
 
 
 ## Solcast have altered their API limits for new account creators:
@@ -81,7 +82,6 @@ mode: single
 ```
 
 </details>
-
 <details>
 <summary><h3>Set up HA Energy Dashboard settings</summary></h3>
 Go to the `HA>Settings>Dashboards>Energy`
@@ -95,6 +95,7 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 [<img src="https://user-images.githubusercontent.com/1471841/174471543-0833b141-0c97-4b90-a058-cf986e89bbce.png" width="200">](https://user-images.githubusercontent.com/1471841/174471543-0833b141-0c97-4b90-a058-cf986e89bbce.png)
 
 </details>
+
 ## HA Views:
 <details>
 <summary><h3>HA Energy Tab</summary></h3>

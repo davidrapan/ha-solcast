@@ -1,4 +1,4 @@
-# Solcast Solar
+# HomeAssistnat Solcast PV Solar Forecast Integration
 
 Home Assistant(https://www.home-assistant.io/) Component
 
@@ -93,8 +93,10 @@ mode: single
 </details>
 <details>
 <summary><h3>Set up HA Energy Dashboard settings</summary></h3>
+
 Go to the `HA>Settings>Dashboards>Energy`
 Click the edit the Solar Production item you have created. 
+
 
 > **Note**
 > _If you do not have a solar sensor in your system then this integration will not work. The graph, and adding the forecast integration rely on there being a sensor setup to be added here_

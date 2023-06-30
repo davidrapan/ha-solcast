@@ -96,7 +96,8 @@ mode: single
 Go to the `HA>Settings>Dashboards>Energy`
 Click the edit the Solar Production item you have created. 
 
-!! _If you do not have a solar sensor in your system then this integration will not work. The graph, and adding the forecast integration rely on there being a sensor setup to be added here_
+> **Note**
+> _If you do not have a solar sensor in your system then this integration will not work. The graph, and adding the forecast integration rely on there being a sensor setup to be added here_
 
 [<img src="https://user-images.githubusercontent.com/1471841/149643349-d776f1ad-530c-46aa-91dc-8b9e7c7f3123.png" width="200">](https://user-images.githubusercontent.com/1471841/149643349-d776f1ad-530c-46aa-91dc-8b9e7c7f3123.png)
 

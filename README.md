@@ -61,6 +61,7 @@ If you have more than one Solcast account because you have more than 2 rooftop s
 <summary><h3>Basic HA Automation to manual poll Solcast API data</summary></h3>
 Create a new HA automation and setup your prefered triggers to manually poll for new data
 This is an example.. create your own to your own needs
+
 ```yaml
 alias: Solcast_update
 description: New API call Solcast
@@ -77,6 +78,7 @@ action:
     data: {}
 mode: single
 ```
+
 </details>
 
 <details>

@@ -148,6 +148,7 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 
 
 <summary><h3>Credits</summary></h3>
+
 Modified from the great works of
 * dannerph/homeassistant-solcast
 * cjtapper/solcast-py

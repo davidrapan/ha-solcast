@@ -23,14 +23,18 @@ Copy the API Key for use with this integration.
 
 ## Install
 
-#### via HACS
+<details>
+<summary><h3>via HACS</summary></h3>
 
 Easy install by default on HACS. More info [here](https://hacs.xyz/).
 
 or click on:
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=oziee&repository=ha-solcast-solar&category=plugin)
 
-#### Manualy
+</details>
+
+<details>
+<summary><h3>Manualy</summary></h3>
 
 1. Download the [latest release zip file](https://github.com/oziee/ha-solcast-solar/releases).
 1. Unzip and copy the `solcast_solar` directory to your Home Assistant `config/custom_components` directory
@@ -43,6 +47,8 @@ In Home Assistant / Settings / Devices & Services click the `Add Integration`.
 1. Enter you `Solcast API Key`.
 1. Choose to either use the auto polling for data (not great if your stuck with only the new 10 poll limit), or disable and create your own automation to call the service `solcast_solar.update_forecasts` or `solcast_solar.update_actual_forecasts` when you like it to call.
 
+</details>
+
 ## Basic Installation/Configuration Instructions:
 
 If you have more than one Solcast account because you have more than 2 rooftop setups, enter both account API keys seperated by a comma `xxxxxxxx-xxxxx-xxxx,yyyyyyyy-yyyyy-yyyy`
@@ -51,10 +57,12 @@ If you have more than one Solcast account because you have more than 2 rooftop s
 
 ![img1](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png)
 
-## Basic HA Automation to manual poll Solcast API data:
+<details>
+<summary><h3>Basic HA Automation to manual poll Solcast API data</summary></h3>
 Create a new HA automation and setup your prefered triggers to manually poll for new data
 This is an example.. create your own to your own needs
-```alias: Solcast_update
+```yaml
+alias: Solcast_update
 description: New API call Solcast
 trigger:
   - platform: time_pattern
@@ -69,8 +77,10 @@ action:
     data: {}
 mode: single
 ```
+</details>
 
-### Set up HA Energy Dashboard settings
+<details>
+<summary><h3>Set up HA Energy Dashboard settings</summary></h3>
 Go to the HA>Settings>Dashboards>Energy 
 Click the edit the Solar Production item you have created. 
 
@@ -80,11 +90,17 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 
 ![img5](https://user-images.githubusercontent.com/1471841/174471543-0833b141-0c97-4b90-a058-cf986e89bbce.png)
 
+</details>
+
 ## HA Views:
-### HA Energy Tab
+<details>
+<summary><h3>HA Energy Tab</summary></h3>
 ![img1](https://user-images.githubusercontent.com/1471841/135556872-ff5b51ac-699e-4ea5-869c-f9b0d0c5b815.png)
 
-### Sensors
+</details>
+
+<details>
+<summary><h3>Sensors</summary></h3>
 
 <img src="https://github.com/oziee/ha-solcast-solar/raw/v3/.github/SCREENSHOTS/sensors.png" alt="sensors" style="width: 200px;">
 
@@ -123,7 +139,7 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 | `API used` | number | N | `integer` | Total times the API has been called today (API counter resets to zero at midnight UTC) |
 
 
-
+</details>
 
 Modified from the great works of
 * dannerph/homeassistant-solcast

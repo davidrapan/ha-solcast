@@ -1,6 +1,6 @@
 # HA Solcast PV Solar Forecast Integration
 
-Home Assistant(https://www.home-assistant.io/) Component
+Home Assistant(https://www.home-assistant.io) Integration Component
 
 This custom component integrates the Solcast Hobby PV Forecast API into Home Assistant.
 [<img src="https://user-images.githubusercontent.com/1471841/135556872-ff5b51ac-699e-4ea5-869c-f9b0d0c5b815.png" width="200">]
@@ -8,7 +8,7 @@ This custom component integrates the Solcast Hobby PV Forecast API into Home Ass
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
 
 ```
-⚠ **Solcast have altered their API limits for new account creators** 
+⚠ Solcast have altered their API limits for new account creators
 
 Solcast now only offer new account creators 10 api calls per day (used to be 50). 
 Old account users still have 50 api calls
@@ -30,8 +30,10 @@ Copy the API Key for use with this integration (See [Configuration](#Configurati
 
 Easy install by default on HACS. More info [here](https://hacs.xyz/).
 
+<!--
 or click on:
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=oziee&repository=ha-solcast-solar&category=plugin)
+-->
 
 
 <details>

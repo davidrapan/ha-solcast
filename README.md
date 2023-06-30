@@ -71,6 +71,7 @@ You probably **do not** want to do this! Use the HACS method above unless you kn
 ## Services
 There are 3 services for this integration
 
+| | |
 | ------------------------------ | ----------- |
 | `solcast_solar.update_forecasts` | Updates the forecast data |
 | `solcast_solar.update_actual_forecasts` | Updates the past more accurate data |

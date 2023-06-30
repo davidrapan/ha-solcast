@@ -8,7 +8,7 @@ This custom component integrates the Solcast Hobby PV Forecast API into Home Ass
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
 
 ```
-⚠️ **Solcast have altered their API limits for new account creators**
+⚠️ Solcast have altered their API limits for new account creators
 
 Solcast now only offer new account creators 10 api calls per day (used to be 50). 
 Old account users still have 50 api calls

@@ -1,4 +1,4 @@
-# HomeAssistnat Solcast PV Solar Forecast Integration
+# HA Solcast PV Solar Forecast Integration
 
 Home Assistant(https://www.home-assistant.io/) Component
 

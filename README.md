@@ -32,28 +32,37 @@ or click on:
 <details>
 <summary><h3>Manualy</summary></h3>
 
-1. Download the [latest release zip file](https://github.com/oziee/ha-solcast-solar/releases).
-1. Unzip and copy the `solcast_solar` directory to your Home Assistant `config/custom_components` directory
+You probably **do not** want to do this! Use the HACS method above unless you know what you are doing and have a good reason as to why you are installing manually
 
-*Restart HA to load the new integration*
+1. Using the tool of choice open the directory (folder) for your HA configuration (where you find `configuration.yaml`)
+1. If you do not have a `custom_components` directory there, you need to create it
+1. In the `custom_components` directory create a new folder called `solcast_solar`
+1. Download _all_ the files from the `custom_components/solcast_solar/` directory in this repository
+1. Place the files you downloaded in the new directory you created
+1. *Restart HA to load the new integration*
+1. See [Configuration](#configuration) below
 
 </details>
 
 ## Configuration
 
+1. [Click Here](https://my.home-assistant.io/redirect/config_flow_start/?domain=solcast_solar) to directly add a `Solcast Solar` integration **or**<br/>
+ a. In Home Assistant, go to Settings -> [Integrations](https://my.home-assistant.io/redirect/integrations/)<br/>
+ b. Click `+ Add Integrations` and select `Solcast PV Forecast`<br/>
+1. Enter you `Solcast API Key`
+1. Choose to enable auto polling or not (enable if you only have like 10 API call limit, requires you to create your own automation to call the service `solcast_solar.update_forecasts` or `solcast_solar.update_actual_forecasts` when you like it to call)
+1. Click `Submit`
 
-In Home Assistant / Settings / Devices & Services click the `Add Integration`.
-1. Search and add `Solcast PV Forecast`.
-1. Enter you `Solcast API Key`.
-1. Choose to either use the auto polling for data (not great if your stuck with only the new 10 poll limit), or disable and create your own automation to call the service `solcast_solar.update_forecasts` or `solcast_solar.update_actual_forecasts` when you like it to call.
+* Options can be changed for existing `Solcast PV Forecast` integration in Home Assistant Integrations by selecting `Configure` (cog wheel)
 
-If you have more than one Solcast account because you have more than 2 rooftop setups, enter both account API keys seperated by a comma `xxxxxxxx-xxxxx-xxxx,yyyyyyyy-yyyyy-yyyy`
+* If you have more than one Solcast account because you have more than 2 rooftop setups, enter both account API keys seperated by a comma `xxxxxxxx-xxxxx-xxxx,yyyyyyyy-yyyyy-yyyy`
 
 *This is you `API Key` not your rooftop id created in Solcast. You can find your API key here [api key](https://toolkit.solcast.com.au/account)
 
 [<img src="https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png" width="200">](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png)
 
 <details>
+
 <summary><h3>Basic HA Automation to manual poll Solcast API data</summary></h3>
 Create a new HA automation and setup your prefered triggers to manually poll for new data
 This is an example.. create your own to your own needs
@@ -63,16 +72,16 @@ This is an example.. create your own to your own needs
 alias: Solcast_update
 description: New API call Solcast
 trigger:
-  - platform: time_pattern
-    minutes: "0"
-    seconds: "0"
+ - platform: time_pattern
+   minutes: "0"
+   seconds: "0"
 condition:
-  - condition: sun
-    before: sunset
-    after: sunrise
+ - condition: sun
+   before: sunset
+   after: sunrise
 action:
-  - service: solcast_solar.update_forecasts
-    data: {}
+ - service: solcast_solar.update_forecasts
+   data: {}
 mode: single
 ```
 

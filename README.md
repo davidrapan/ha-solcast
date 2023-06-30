@@ -70,9 +70,10 @@ You probably **do not** want to do this! Use the HACS method above unless you kn
 
 ## Services
 There are 3 services for this integration
-* `solcast_solar.update_forecasts`
-* `solcast_solar.update_actual_forecasts`
-* `solcast_solar.clear_all_solcast_data`
+| ------------------------------ | ----------- |
+|`solcast_solar.update_forecasts`||
+|`solcast_solar.update_actual_forecasts`||
+|`solcast_solar.clear_all_solcast_data`||
 
 <details>
 <summary><h3>Basic HA Automation to manual poll Solcast API data</summary></h3>

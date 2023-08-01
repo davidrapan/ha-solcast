@@ -1,7 +1,18 @@
 ### Changes
 
+v3.1.0
+- no more auto polling.. its now up to every one to create an automation to poll for data when you want. This is due to so many users now only have 10 api calls a day
+- striped out saving UTC time changing and keeping solcast data as it is so timezone data can be changed when needed
+- history items went missing due to the sensor renamed
+- removed update actuals service.. actuals data from solcast is no longer polled or used
+- lots of the logging messages have been updated to be debug,info,warning or errors
+- some sensors may no longer have extra attribute values or attribute values may have been renamed or have changed to the data storaged within
+- grather in depth diagnotic data to share when needed to help debug any issues
+
+
 v3.0.55
 - added extra error catching
+- sensors unique id is now the key and not the name part
 
 v3.0.47
 - added attribute weekday name for sensor forecasts, today, tomorrow, D3..7

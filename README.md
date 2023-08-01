@@ -57,8 +57,9 @@ You probably **do not** want to do this! Use the HACS method above unless you kn
  a. In Home Assistant, go to Settings -> [Integrations](https://my.home-assistant.io/redirect/integrations/)<br/>
  b. Click `+ Add Integrations` and select `Solcast PV Forecast`<br/>
 1. Enter you `Solcast API Key`
-1. Choose to enable auto polling or not (enable if you only have like 10 API call limit, requires you to create your own automation to call the service `solcast_solar.update_forecasts` or `solcast_solar.update_actual_forecasts` when you like it to call)
 1. Click `Submit`
+
+* Create your own [automation](#Services) to call the service `solcast_solar.update_forecasts` when you like it to call
 
 * Options can be changed for existing `Solcast PV Forecast` integration in Home Assistant Integrations by selecting `Configure` (cog wheel)
 
@@ -69,16 +70,14 @@ You probably **do not** want to do this! Use the HACS method above unless you kn
 [<img src="https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png" width="200">](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png)
 
 ## Services
-There are 3 services for this integration that you can use in automations ([Configuration](#configuration))
+There are 2 services for this integration that you can use in automations ([Configuration](#configuration))
 
 | Service | Action |
 | --- | --- |
 | `solcast_solar.update_forecasts` | Updates the future forecast data only |
-| `solcast_solar.update_actual_forecasts` | Updates the past more accurate data only |
 | `solcast_solar.clear_all_solcast_data` | Deletes the `solcast.json` cached file |
 
-<details>
-<summary><h3>Basic HA Automation to manual poll Solcast API data</summary></h3>
+### Basic HA Automation to manual poll Solcast API data
 Create a new HA automation and setup your prefered triggers to manually poll for new data
 This is an example.. create your own to your own needs
 
@@ -88,8 +87,7 @@ alias: Solcast_update
 description: New API call Solcast
 trigger:
  - platform: time_pattern
-   minutes: "0"
-   seconds: "0"
+   hours: /4
 condition:
  - condition: sun
    before: sunset
@@ -100,7 +98,7 @@ action:
 mode: single
 ```
 
-</details>
+
 <details>
 <summary><h3>Set up HA Energy Dashboard settings</summary></h3>
 

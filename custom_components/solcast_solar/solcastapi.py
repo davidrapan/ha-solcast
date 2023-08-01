@@ -65,7 +65,6 @@ class SolcastApi:
         self.options = options
         self.apiCacheEnabled = apiCacheEnabled
         self._sites = []
-        #self._data = dict({'forecasts':[], 'energy': {}, 'api_used':0, 'last_updated': dt.now(timezone.utc).replace(year=2000,month=1,day=1).isoformat()})
         self._data = dict({'siteinfo':{}, 'api_used':0, 'last_updated': dt.now(timezone.utc).replace(year=2000,month=1,day=1).isoformat()})
         self._api_used = 0
         self._filename = options.file_path
@@ -135,12 +134,13 @@ class SolcastApi:
                 if file_exists(self._filename):
                     with open(self._filename) as data_file:
                         jsonData = json.load(data_file, cls=JSONDecoder)
+                        if "api_used" in jsonData:
+                                self._api_used = jsonData["api_used"]
                         _LOGGER.debug(f"SOLCAST - load_saved_data file exists.. file type is {type(jsonData)}")
                         if jsonData.get("version", 1) == _JSON_VERSION:
                             loadedData = True
                             self._data = jsonData
-                            if "api_used" in self._data:
-                                self._api_used = self._data["api_used"]
+                            
                             #any site changes that need to be removed
                             for s in jsonData['siteinfo']:
                                 if not any(d.get('resource_id', '') == s for d in self._sites):
@@ -267,38 +267,16 @@ class SolcastApi:
         """Return Solcast Forecasts data for today"""
         try:
             da = dt.now(self._tz).replace(minute=0, second=0, microsecond=0).date()
-            # g = [d for d in self._data["forecasts"]         if d['period_start'].date() == da]
-            # h = [d for d in self._data["detailedForecasts"] if d['period_start'].date() == da]
-            # return {"forecast":         g,
-            #         "detailedForecast": h,
-            #         "dayname":da.strftime("%A")}
-            # g = [d for d in self._data["forecasts"]         if d['period_start'].date() == da]
             h = [d for d in self._tzdataconverted if d['period_start'].date() == da]
             return {"forecast":         h,
                     "dayname":da.strftime("%A")}
         except Exception:
             return {}
-
-    # def get_forecast_tomorrow(self) -> dict[str, Any]:
-    #     """Return Solcast Forecasts data for tomorrow"""
-    #     try:
-    #         da = dt.now().replace(minute=0, second=0, microsecond=0).date() + timedelta(days=1)
-    #         g = [d for d in self._data["forecasts"]         if d['period_start'].date() == da]
-    #         h = [d for d in self._data["detailedForecasts"] if d['period_start'].date() == da]
-    #         return {"forecast":         g,
-    #                 "detailedForecast": h}
-    #     except Exception:
-    #         return {}
         
     def get_forecast_future_day(self, futureday = 1) -> dict[str, Any]:
         """Return Solcast Forecasts data for tomorrow"""
         try:
             da = dt.now(self._tz).replace(minute=0, second=0, microsecond=0).date() + timedelta(days=futureday)
-            # g = [d for d in self._data["forecasts"]         if d['period_start'].date() == da]
-            # h = [d for d in self._data["detailedForecasts"] if d['period_start'].date() == da]
-            # return {"forecast":         g,
-            #         "detailedForecast": h,
-            #         "dayname":da.strftime("%A")}
             h = [d for d in self._tzdataconverted if d['period_start'].date() == da]
             return {"forecast":         h,
                     "dayname":da.strftime("%A")}
@@ -309,9 +287,7 @@ class SolcastApi:
     def get_forecast_this_hour(self) -> int:
         try:
             da = dt.now(self._tz).replace(minute=0, second=0, microsecond=0)
-            _LOGGER.debug(da)
             g = [d for d in self._tzdataconverted if d['period_start'] == da]   
-            _LOGGER.debug(g)
             return int(g[0]['pv_estimate'] * 1000)
         except Exception:
             return 0
@@ -358,15 +334,6 @@ class SolcastApi:
             return None
         except Exception:
             return None
-
-    # def get_total_kwh_forecast_tomorrow(self) -> float:
-    #     """Return total kwh total for rooftop site tomorrow"""
-    #     try:
-    #         da = dt.now().replace(minute=0, second=0, microsecond=0).date() + timedelta(days=1)
-    #         g = [d for d in self._data["forecasts"] if d['period_start'].date() == da]
-    #         return round(sum(z['pv_estimate'] for z in g if z),2)
-    #     except Exception:
-    #         return 0
         
     def get_total_kwh_forecast_furture_for_day(self, dayincrement = 1) -> float:
         """Return total kwh total for rooftop site tomorrow"""
@@ -463,12 +430,7 @@ class SolcastApi:
                                                         "pv_estimate10": x["pv_estimate10"],
                                                         "pv_estimate90": x["pv_estimate90"]})
                 
-                # xx = {"period_start": zz,"pv_estimate": x["pv_estimate"],
-                #                         "pv_estimate10": x["pv_estimate10"],
-                #                         "pv_estimate90": x["pv_estimate90"]}
-                # self._tzdataconverted.append(xx)
-            
-            #self._data["forecasts"] = _forecasts
+
             self._dataenergy = {"wh_hours": self.makeenergydict()}
             
             with open(self._filename, 'w') as f:
@@ -507,21 +469,7 @@ class SolcastApi:
                     return
 
                 
-
-                # _data2 = sorted(_data2, key=itemgetter("period_start"))
-                # _s.update({site['resource_id']:{'forecasts': _data2}})
-                
-                # if dopast:
-                #     # There can be some overlap between the estimated actuals and the forecast, so only add
-                #     # a forcast sample if we don't already have that data point.
-                #     actualsTimestamps = list(map(lambda x: x["period_start"], _data))
-                #     _data.extend(filter(lambda x: x["period_start"] not in actualsTimestamps, _data2))
-                # else:
-                #_LOGGER.debug("not doing past data so fill ion the blanks")
-                
-                
-                
-                _forecasts = [] #self._data['siteinfo'][site['resource_id']]['forecasts']
+                _forecasts = [] 
                 try:
                     _forecasts = self._data['siteinfo'][site['resource_id']]['forecasts']
                 except:
@@ -529,16 +477,9 @@ class SolcastApi:
             
                 for x in af["forecasts"]:
                     #loop each rooftop site and its forecasts
-                    # z = parse_datetime(x['period_end']) - timedelta(minutes=30)
-                    # zz = parse_datetime(x['period_end']).astimezone(self._tz) - timedelta(minutes=30)
                     
-                    # if zz.date() < lastday and zz.date() > yesterday:
                     itm = next((item for item in _forecasts if item["period_end"] == x['period_end']), None)
                     if itm:
-                        # _LOGGER.debug("updating itm")
-                        # itm["pv_estimate"] = round(itm["pv_estimate"] + x["pv_estimate"]*0.5, 4)
-                        # itm["pv_estimate10"] = round(itm["pv_estimate10"] + x["pv_estimate10"]*0.5, 4)
-                        # itm["pv_estimate90"] = round(itm["pv_estimate90"] + x["pv_estimate90"]*0.5, 4)
                         itm["pv_estimate"] = round(x["pv_estimate"], 4)
                         itm["pv_estimate10"] = round(x["pv_estimate10"], 4)
                         itm["pv_estimate90"] = round(x["pv_estimate90"], 4)
@@ -557,15 +498,9 @@ class SolcastApi:
                 
            
                 _forecasts = sorted(_forecasts, key=itemgetter("period_end"))
-                #_s.update({site['resource_id']:{'forecasts': copy.deepcopy(_forecasts)}})
-                self._data['siteinfo'].update({site['resource_id']:{'forecasts': copy.deepcopy(_forecasts)}})
-                #self._data['siteinfo'][site['resource_id']]['forecasts'] = _forecasts
-
                 
-            
-            
-            
-            
+                self._data['siteinfo'].update({site['resource_id']:{'forecasts': copy.deepcopy(_forecasts)}})
+
 
             self._data["last_updated"] = dt.now(timezone.utc).replace(second=0 ,microsecond=0).isoformat()
             self._data['api_used'] = self._api_used

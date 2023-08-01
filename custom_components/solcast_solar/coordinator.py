@@ -78,7 +78,6 @@ class SolcastUpdateCoordinator(DataUpdateCoordinator):
 
     async def update_integration_listeners(self,*args):
         try:
-            _LOGGER.debug("SOLCAST - updating sensors")
             self.async_update_listeners()
         except Exception:
             _LOGGER.error("SOLCAST - update_integration_listeners: %s", traceback.format_exc())

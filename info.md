@@ -7,7 +7,7 @@ v3.1.0
 - removed update actuals service.. actuals data from solcast is no longer polled or used
 - lots of the logging messages have been updated to be debug,info,warning or errors
 - some sensors may no longer have extra attribute values or attribute values may have been renamed or have changed to the data storaged within
-- grather in depth diagnotic data to share when needed to help debug any issues
+- greater in depth diagnostic data to share when needed to help debug any issues
 
 
 v3.0.55

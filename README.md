@@ -59,7 +59,7 @@ You probably **do not** want to do this! Use the HACS method above unless you kn
 1. Enter you `Solcast API Key`
 1. Click `Submit`
 
-* Create your own [automation](#Services) to call the service `solcast_solar.update_forecasts` when you like it to call
+* Create your own [automation](#services) to call the service `solcast_solar.update_forecasts` when you like it to call
 
 * Options can be changed for existing `Solcast PV Forecast` integration in Home Assistant Integrations by selecting `Configure` (cog wheel)
 

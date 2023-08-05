@@ -1,5 +1,11 @@
 ### Changes
 
+v3.1.1
+- service call to get forecast data with response
+- prevent the large attribute data from being stored in the database to save space
+- peak time foreacast is now a date+time and not just a time value
+- forecast attributes are in 30min slots
+
 v3.1.0
 - no more auto polling.. its now up to every one to create an automation to poll for data when you want. This is due to so many users now only have 10 api calls a day
 - striped out saving UTC time changing and keeping solcast data as it is so timezone data can be changed when needed

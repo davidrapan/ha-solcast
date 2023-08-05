@@ -92,6 +92,14 @@ class SolcastUpdateCoordinator(DataUpdateCoordinator):
         _LOGGER.info("SOLCAST - Event called to delete the solcast.json file. The data will poll the Solcast API refresh")
         await self.solcast.delete_solcast_file()
 
+    async def service_get_forecasts(self, *args) -> str:
+        _LOGGER.info("SOLCAST - Event called to get list of forecasts")
+        d = await self.solcast.get_forecast_list()
+        # _LOGGER.info(d)
+        # _LOGGER.info(f"{type(d)}")
+        # _LOGGER.info(f"{d}")
+        return d
+        
     def get_energy_tab_data(self):
         return self.solcast.get_energy_data()
 

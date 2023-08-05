@@ -174,6 +174,14 @@ class SolcastApi:
                 await self.load_saved_data()
         except Exception:
             _LOGGER.error(f"SOLCAST - service event to delete old solcast.json file failed")
+            
+    async def get_forecast_list(self, *args):
+        _LOGGER.debug(f"SOLCAST - service event to get forecasts list")
+        try:
+            #return json.dumps(self._dataenergy, indent = 4) 
+            return self._dataforecasts
+        except Exception:
+            _LOGGER.error(f"SOLCAST - service event to get list of forecasts failed")
 
     def get_api_used_count(self):
         """Return API polling count for this UTC 24hr period"""
@@ -250,7 +258,7 @@ class SolcastApi:
     def get_remaining_today(self):
         """Return Remaining Forecasts data for today"""
         try:
-            da = dt.now(self._tz).replace(minute=0, second=0, microsecond=0)
+            da = dt.now(self._tz).replace(second=0, microsecond=0)
             h = da.hour
             da = da.date()
             g = [d for d in self._tzdataconverted if d['period_start'].date() == da]
@@ -266,7 +274,7 @@ class SolcastApi:
     def get_forecast_today(self) -> dict[str, Any]:
         """Return Solcast Forecasts data for today"""
         try:
-            da = dt.now(self._tz).replace(minute=0, second=0, microsecond=0).date()
+            da = dt.now(self._tz).replace(second=0, microsecond=0).date()
             h = [d for d in self._tzdataconverted if d['period_start'].date() == da]
             return {"forecast":         h,
                     "dayname":da.strftime("%A")}
@@ -276,7 +284,7 @@ class SolcastApi:
     def get_forecast_future_day(self, futureday = 1) -> dict[str, Any]:
         """Return Solcast Forecasts data for tomorrow"""
         try:
-            da = dt.now(self._tz).replace(minute=0, second=0, microsecond=0).date() + timedelta(days=futureday)
+            da = dt.now(self._tz).replace(second=0, microsecond=0).date() + timedelta(days=futureday)
             h = [d for d in self._tzdataconverted if d['period_start'].date() == da]
             return {"forecast":         h,
                     "dayname":da.strftime("%A")}
@@ -286,16 +294,17 @@ class SolcastApi:
 
     def get_forecast_this_hour(self) -> int:
         try:
-            da = dt.now(self._tz).replace(minute=0, second=0, microsecond=0)
-            g = [d for d in self._tzdataconverted if d['period_start'] == da]   
+            da = dt.now(self._tz).replace(second=0, microsecond=0)
+            g = [d for d in self._tzdataconverted if d['period_start'].day == da.day and d['period_start'].hour == da.hour]   
             return int(g[0]['pv_estimate'] * 1000)
         except Exception:
             return 0
 
     def get_forecast_next_hour(self) -> int:
         try:
-            da = dt.now(self._tz).replace(minute=0, second=0, microsecond=0) + timedelta(hours=1)
-            g = [d for d in self._tzdataconverted if d['period_start'] == da]   
+            da = dt.now(self._tz).replace(second=0, microsecond=0) + timedelta(hours=1)
+            #g = [d for d in self._tzdataconverted if d['period_start'] == da]   
+            g = [d for d in self._tzdataconverted if d['period_start'].day == da.day and d['period_start'].hour == da.hour]  
             return int(g[0]['pv_estimate'] * 1000)
         except Exception:
             return 0
@@ -303,7 +312,7 @@ class SolcastApi:
     def get_total_kwh_forecast_today(self) -> float:
         """Return total kwh total for rooftop site today"""
         try:
-            da = dt.now(self._tz).replace(minute=0, second=0, microsecond=0).date()
+            da = dt.now(self._tz).replace(second=0, microsecond=0).date()
             g = [d for d in self._tzdataconverted if d['period_start'].date() == da]
             return round(sum(z['pv_estimate'] for z in g if z),2)
         except Exception:
@@ -312,7 +321,7 @@ class SolcastApi:
     def get_peak_w_today(self) -> int:
         """Return hour of max kw for rooftop site today"""
         try:
-            da = dt.now(self._tz).replace(minute=0, second=0, microsecond=0).date()
+            da = dt.now(self._tz).replace(second=0, microsecond=0).date()
             g = [d for d in self._tzdataconverted if d['period_start'].date() == da]
             m = max(z['pv_estimate'] for z in g if z) 
             return int(m * 1000)
@@ -322,14 +331,14 @@ class SolcastApi:
     def get_peak_w_time_today(self) -> dt:
         """Return hour of max kw for rooftop site today"""
         try:
-            da = dt.now(self._tz).replace(minute=0, second=0, microsecond=0).date()
+            da = dt.now(self._tz).replace(second=0, microsecond=0).date()
             g = [d for d in self._tzdataconverted if d['period_start'].date() == da]
             m = max(z['pv_estimate'] for z in g if z) 
 
             for v in g:
                 if v['pv_estimate'] == m:
                     va = v['period_start']
-                    return va.time()
+                    return va
                     #return p.isoformat()
             return None
         except Exception:
@@ -338,7 +347,7 @@ class SolcastApi:
     def get_total_kwh_forecast_furture_for_day(self, dayincrement = 1) -> float:
         """Return total kwh total for rooftop site tomorrow"""
         try:
-            da = dt.now(self._tz).replace(minute=0, second=0, microsecond=0).date() + timedelta(days=dayincrement)
+            da = dt.now(self._tz).replace(second=0, microsecond=0).date() + timedelta(days=dayincrement)
             g = [d for d in self._tzdataconverted if d['period_start'].date() == da]
             return round(sum(z['pv_estimate'] for z in g if z),2)
         except Exception:
@@ -347,7 +356,7 @@ class SolcastApi:
     def get_peak_w_tomorrow(self) -> int:
         """Return hour of max kw for rooftop site tomorrow"""
         try:
-            da = dt.now(self._tz).replace(minute=0, second=0, microsecond=0).date() + timedelta(days=1)
+            da = dt.now(self._tz).replace(second=0, microsecond=0).date() + timedelta(days=1)
             g = [d for d in self._tzdataconverted if d['period_start'].date() == da]
             m = max(z['pv_estimate'] for z in g if z) 
             return int(m * 1000)
@@ -357,14 +366,14 @@ class SolcastApi:
     def get_peak_w_time_tomorrow(self) -> dt:
         """Return hour of max kw for rooftop site tomorrow"""
         try:
-            da = dt.now(self._tz).replace(minute=0, second=0, microsecond=0).date() + timedelta(days=1)
+            da = dt.now(self._tz).replace(second=0, microsecond=0).date() + timedelta(days=1)
             g = [d for d in self._tzdataconverted if d['period_start'].date() == da]
             m = max(z['pv_estimate'] for z in g if z) 
 
             for v in g:
                 if v['pv_estimate'] == m:
                     va = v['period_start']
-                    return va.time()
+                    return va
                     #  return p.isoformat() ??
             return None
         except Exception:
@@ -419,14 +428,18 @@ class SolcastApi:
             self._dataforecasts = _forecasts 
                     
             for x in _forecasts:
-                zz = x['period_start'].astimezone(self._tz).replace(minute=0)
-                itm = next((item for item in self._tzdataconverted if item["period_start"] == zz), None)
-                if itm:
-                    itm["pv_estimate"] = round(itm["pv_estimate"] + x["pv_estimate"], 4)
-                    itm["pv_estimate10"] = round(itm["pv_estimate10"] + x["pv_estimate10"], 4)
-                    itm["pv_estimate90"] = round(itm["pv_estimate90"] + x["pv_estimate90"], 4)
-                else:    
-                    self._tzdataconverted.append({"period_start": zz,"pv_estimate": x["pv_estimate"],
+                #zz = x['period_start'].astimezone(self._tz).replace(minute=0)
+                zz = x['period_start'].astimezone(self._tz)
+                # itm = next((item for item in self._tzdataconverted if item["period_start"] == zz), None)
+                # if itm:
+                #     itm["pv_estimate"] = round(itm["pv_estimate"] + x["pv_estimate"], 4)
+                #     itm["pv_estimate10"] = round(itm["pv_estimate10"] + x["pv_estimate10"], 4)
+                #     itm["pv_estimate90"] = round(itm["pv_estimate90"] + x["pv_estimate90"], 4)
+                # else:    
+                #     self._tzdataconverted.append({"period_start": zz,"pv_estimate": x["pv_estimate"],
+                #                                         "pv_estimate10": x["pv_estimate10"],
+                #                                         "pv_estimate90": x["pv_estimate90"]})
+                self._tzdataconverted.append({"period_start": zz,"pv_estimate": x["pv_estimate"],
                                                         "pv_estimate10": x["pv_estimate10"],
                                                         "pv_estimate90": x["pv_estimate90"]})
                 

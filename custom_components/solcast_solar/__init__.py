@@ -89,8 +89,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             """Handle service call"""
             _LOGGER.info(f"SOLCAST - Service call: get-forecasts")
             d = await coordinator.service_get_forecasts()
-            # _LOGGER.info(f"{type(d)}")
-            # _LOGGER.info(f"{d}")
             return {
                 "data": [
                     d

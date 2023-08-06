@@ -73,6 +73,7 @@ class SolcastApi:
         self._tzdataconverted = []
         self._dataenergy = {}
         self._dataforecasts = []
+        self._detailedForecasts = []
 
     async def sites_data(self):
         """Request data via the Solcast API."""
@@ -285,7 +286,7 @@ class SolcastApi:
         """Return Solcast Forecasts data for tomorrow"""
         try:
             da = dt.now(self._tz).replace(second=0, microsecond=0).date() + timedelta(days=futureday)
-            h = [d for d in self._tzdataconverted if d['period_start'].date() == da]
+            h = [d for d in self._detailedForecasts if d['period_start'].date() == da]
             return {"forecast":         h,
                     "dayname":da.strftime("%A")}
         except Exception:
@@ -393,6 +394,7 @@ class SolcastApi:
             yesterday = dt.now(self._tz).date() + timedelta(days=-1)
             lastday = dt.now(self._tz).date() + timedelta(days=7)
             self._tzdataconverted = []
+            self._detailedForecasts = []
             
             _forecasts = []
         
@@ -428,18 +430,27 @@ class SolcastApi:
             self._dataforecasts = _forecasts 
                     
             for x in _forecasts:
+                zz = x['period_start'].astimezone(self._tz).replace(minute=0)
+                itm = next((item for item in self._tzdataconverted if item["period_start"] == zz), None)
+                if itm:
+                    itm["pv_estimate"] = round(itm["pv_estimate"] + x["pv_estimate"], 4)
+                    itm["pv_estimate10"] = round(itm["pv_estimate10"] + x["pv_estimate10"], 4)
+                    itm["pv_estimate90"] = round(itm["pv_estimate90"] + x["pv_estimate90"], 4)
+                else:    
+                    self._tzdataconverted.append({"period_start": zz,"pv_estimate": x["pv_estimate"],
+                                                        "pv_estimate10": x["pv_estimate10"],
+                                                        "pv_estimate90": x["pv_estimate90"]})
+                
+            for x in _forecasts:
                 #zz = x['period_start'].astimezone(self._tz).replace(minute=0)
                 zz = x['period_start'].astimezone(self._tz)
-                # itm = next((item for item in self._tzdataconverted if item["period_start"] == zz), None)
-                # if itm:
-                #     itm["pv_estimate"] = round(itm["pv_estimate"] + x["pv_estimate"], 4)
-                #     itm["pv_estimate10"] = round(itm["pv_estimate10"] + x["pv_estimate10"], 4)
-                #     itm["pv_estimate90"] = round(itm["pv_estimate90"] + x["pv_estimate90"], 4)
-                # else:    
-                #     self._tzdataconverted.append({"period_start": zz,"pv_estimate": x["pv_estimate"],
-                #                                         "pv_estimate10": x["pv_estimate10"],
-                #                                         "pv_estimate90": x["pv_estimate90"]})
-                self._tzdataconverted.append({"period_start": zz,"pv_estimate": x["pv_estimate"],
+                itm = next((item for item in self._detailedForecasts if item["period_start"] == zz), None)
+                if itm:
+                    itm["pv_estimate"] = round(itm["pv_estimate"] + x["pv_estimate"], 4)
+                    itm["pv_estimate10"] = round(itm["pv_estimate10"] + x["pv_estimate10"], 4)
+                    itm["pv_estimate90"] = round(itm["pv_estimate90"] + x["pv_estimate90"], 4)
+                else:    
+                    self._detailedForecasts.append({"period_start": zz,"pv_estimate": x["pv_estimate"],
                                                         "pv_estimate10": x["pv_estimate10"],
                                                         "pv_estimate90": x["pv_estimate90"]})
                 

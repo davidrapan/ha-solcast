@@ -1,5 +1,8 @@
 ### Changes
 
+v3.1.2
+- fixes the `this/next hour` sensors values
+
 v3.1.1
 - service call to get forecast data with response
 - prevent the large attribute data from being stored in the database to save space

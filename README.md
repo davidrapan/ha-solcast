@@ -98,6 +98,25 @@ action:
 mode: single
 ```
 
+or
+
+```yaml
+alias: Solcast update
+description: ""
+trigger:
+  - platform: time
+    at: "4:00:00"
+  - platform: time
+    at: "10:00:00"
+  - platform: time
+    at: "16:00:00"
+condition: []
+action:
+  - service: solcast_solar.update_forecasts
+    data: {}
+mode: single
+```
+
 
 <details>
 <summary><h3>Set up HA Energy Dashboard settings</summary></h3>

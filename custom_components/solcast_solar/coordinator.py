@@ -139,7 +139,7 @@ class SolcastUpdateCoordinator(DataUpdateCoordinator):
 
     def get_sensor_extra_attributes(self, key=""):
         if key == "total_kwh_forecast_today":
-            return self.solcast.get_forecast_today()
+            return self.solcast.get_forecast_future_day(0)
         elif key == "total_kwh_forecast_tomorrow":
             return self.solcast.get_forecast_future_day(1)
         elif key == "total_kwh_forecast_d3":

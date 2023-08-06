@@ -271,27 +271,16 @@ class SolcastApi:
             return round(tot,2)
         except Exception:
             return 0
-    
-    def get_forecast_today(self) -> dict[str, Any]:
-        """Return Solcast Forecasts data for today"""
-        try:
-            da = dt.now(self._tz).replace(second=0, microsecond=0).date()
-            h = [d for d in self._tzdataconverted if d['period_start'].date() == da]
-            return {"forecast":         h,
-                    "dayname":da.strftime("%A")}
-        except Exception:
-            return {}
         
     def get_forecast_future_day(self, futureday = 1) -> dict[str, Any]:
         """Return Solcast Forecasts data for tomorrow"""
         try:
             da = dt.now(self._tz).replace(second=0, microsecond=0).date() + timedelta(days=futureday)
             h = [d for d in self._detailedForecasts if d['period_start'].date() == da]
-            return {"forecast":         h,
+            return {"detailedForecast":         h,
                     "dayname":da.strftime("%A")}
         except Exception:
             return {}
-    
 
     def get_forecast_this_hour(self) -> int:
         try:

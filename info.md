@@ -1,5 +1,8 @@
 ### Changes
 
+v3.1.3
+- renamed the attributes key in the daily forecasts attribute from Forecast to detailedForecast
+
 v3.1.2
 - fixes the `this/next hour` sensors values
 

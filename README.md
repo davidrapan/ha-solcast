@@ -168,7 +168,7 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 
 | Name | Type | Attributes | Default | Description |
 | ------------------------------ | ----------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
-| `Rooftop name` | number | Y | `kWh` | Total forecast for rooftop today (attributes contain the full solcast data) |
+| `Rooftop name` | number | Y | `kWh` | Total forecast for rooftop today (attributes contain the solcast rooftop setup) |
 
 ### Diagnostic
 

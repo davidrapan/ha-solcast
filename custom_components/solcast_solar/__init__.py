@@ -40,6 +40,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
         solcast = SolcastApi(aiohttp_client.async_get_clientsession(hass), options)
         await solcast.sites_data()
+        await solcast.sites_usage()
         await solcast.load_saved_data()
         
         coordinator = SolcastUpdateCoordinator(hass, solcast) 

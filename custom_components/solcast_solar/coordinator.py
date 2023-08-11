@@ -46,12 +46,12 @@ class SolcastUpdateCoordinator(DataUpdateCoordinator):
         """Update data via library."""
         return self.solcast._data
 
-    async def reset_api_counter(self, *args):
-        try:
-            _LOGGER.debug("SOLCAST - resetting api counter")
-            await self.solcast.reset_api_counter()
-        except Exception as error:
-            _LOGGER.error("SOLCAST - Error resetting API counter")
+    # async def reset_api_counter(self, *args):
+    #     try:
+    #         _LOGGER.debug("SOLCAST - resetting api counter")
+    #         await self.solcast.reset_api_counter()
+    #     except Exception as error:
+    #         _LOGGER.error("SOLCAST - Error resetting API counter")
             
     async def reset_past_data(self, *args):
         try:
@@ -70,7 +70,7 @@ class SolcastUpdateCoordinator(DataUpdateCoordinator):
             self._previousenergy = d
 
         try:
-            async_track_utc_time_change(self._hass, self.reset_api_counter, hour=0, minute=0, second=0, local=False)
+            #async_track_utc_time_change(self._hass, self.reset_api_counter, hour=0, minute=0, second=0, local=False)
             async_track_utc_time_change(self._hass, self.reset_past_data, hour=0, minute=0, second=30, local=True)
             async_track_utc_time_change(self._hass, self.update_integration_listeners, minute=0, second=15, local=True)
         except Exception as error:
@@ -131,6 +131,8 @@ class SolcastUpdateCoordinator(DataUpdateCoordinator):
             return self.solcast.get_remaining_today()
         elif key == "api_counter":
             return self.solcast.get_api_used_count()
+        elif key == "api_limit":
+            return self.solcast.get_api_limit()
         elif key == "lastupdated":
             return self.solcast.get_last_updated_datetime()
 

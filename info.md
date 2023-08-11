@@ -1,5 +1,8 @@
 ### Changes
 
+v3.1.4
+- added solcast lookup for exact API counter and limit tracker (thanks @rany2)
+
 v3.1.3
 - renamed the attributes key in the daily forecasts attribute from Forecast to detailedForecast
 

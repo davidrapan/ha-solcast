@@ -67,10 +67,10 @@ class SolcastApi:
         self._sites = []
         self._data = dict({'siteinfo':{}, 'last_updated': dt.now(timezone.utc).replace(year=2000,month=1,day=1).isoformat()})
         self._api_used = 0
-        self._api_limit = 10
+        self._api_limit = 0
         self._filename = options.file_path
         self._tz = options.tz
-        self._apiallusedup = False
+        #self._apiallusedup = False
         self._tzdataconverted = []
         self._dataenergy = {}
         self._dataforecasts = []

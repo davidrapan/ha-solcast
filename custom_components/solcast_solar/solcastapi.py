@@ -571,7 +571,7 @@ class SolcastApi:
 
             self._data["last_updated"] = dt.now(timezone.utc).replace(second=0 ,microsecond=0).isoformat()
             #self._data['api_used'] = self._api_used
-            self.sites_usage()
+            await self.sites_usage()
             self._data['version'] = _JSON_VERSION
 
             await self.buildforcastdata()

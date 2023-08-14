@@ -1,5 +1,8 @@
 ### Changes
 
+v3.1.5
+- bug in calling the API count thanks @rezeero25
+
 v3.1.4
 - added solcast lookup for exact API counter and limit tracker (thanks @rany2)
 - new sensor to display API limit for account

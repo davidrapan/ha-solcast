@@ -475,22 +475,22 @@ class SolcastApi:
             
             self._dataforecasts = _forecasts 
                     
-            # for x in _forecasts:
-            #     zz = x['period_start'].astimezone(self._tz).replace(minute=0)
-            #     itm = next((item for item in self._tzdataconverted if item["period_start"] == zz), None)
-            #     if itm:
-            #         itm["pv_estimate"] = round(itm["pv_estimate"] + x["pv_estimate"], 4)
-            #         itm["pv_estimate10"] = round(itm["pv_estimate10"] + x["pv_estimate10"], 4)
-            #         itm["pv_estimate90"] = round(itm["pv_estimate90"] + x["pv_estimate90"], 4)
-            #     else:    
-            #         self._tzdataconverted.append({"period_start": zz,"pv_estimate": x["pv_estimate"],
-            #                                             "pv_estimate10": x["pv_estimate10"],
-            #                                             "pv_estimate90": x["pv_estimate90"]})
             for x in _forecasts:
-                zz = x['period_start'].astimezone(self._tz)
-                self._tzdataconverted.append({"period_start": zz,"pv_estimate": x["pv_estimate"],
+                zz = x['period_start'].astimezone(self._tz).replace(minute=0, second=0 ,microsecond=0)
+                itm = next((item for item in self._tzdataconverted if item["period_start"] == zz), None)
+                if itm:
+                    itm["pv_estimate"] = itm["pv_estimate"] + x["pv_estimate"]
+                    itm["pv_estimate10"] = itm["pv_estimate10"] + x["pv_estimate10"]
+                    itm["pv_estimate90"] = itm["pv_estimate90"] + x["pv_estimate90"]
+                else:    
+                    self._tzdataconverted.append({"period_start": zz,"pv_estimate": x["pv_estimate"],
                                                         "pv_estimate10": x["pv_estimate10"],
                                                         "pv_estimate90": x["pv_estimate90"]})
+            # for x in _forecasts:
+            #     zz = x['period_start'].astimezone(self._tz)
+            #     self._tzdataconverted.append({"period_start": zz,"pv_estimate": x["pv_estimate"],
+            #                                             "pv_estimate10": x["pv_estimate10"],
+            #                                             "pv_estimate90": x["pv_estimate90"]})
                 
             # for x in _forecasts:
             #     #zz = x['period_start'].astimezone(self._tz).replace(minute=0)

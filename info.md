@@ -1,5 +1,9 @@
 ### Changes
 
+v3.1.6
+- diagnostics data updated with api info
+- hopefully daily forecasts attributes are correct (and not half)
+
 v3.1.5
 - bug in calling the API count thanks @rezeero25
 

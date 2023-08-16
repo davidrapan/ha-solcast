@@ -58,7 +58,7 @@ class SolcastApi:
         self,
         aiohttp_session: ClientSession,
         options: ConnectionOptions,
-        apiCacheEnabled: bool = True
+        apiCacheEnabled: bool = False
     ):
         """Device init."""
         self.aiohttp_session = aiohttp_session

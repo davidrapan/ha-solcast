@@ -28,7 +28,12 @@ Copy the API Key for use with this integration (See [Configuration](#Configurati
 
 ### HACS *(recommended)*
 
-Easy install by default on HACS. More info [here](https://hacs.xyz/).
+Using HACS. More info [here](https://hacs.xyz/)
+Follow the link [here](https://hacs.xyz/docs/faq/custom_repositories/)
+Use the custom repo link `https://github.com/oziee/ha-solcast-solar`
+Select the category type integration
+Then once it's there (still in HACS) click the INSTALL button
+Then go to the HA Devices and Services and add a new Solcast Integration
 
 <!--
 or click on:
@@ -70,12 +75,13 @@ You probably **do not** want to do this! Use the HACS method above unless you kn
 [<img src="https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png" width="200">](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png)
 
 ## Services
-There are 2 services for this integration that you can use in automations ([Configuration](#configuration))
+There are 3 services for this integration that you can use in automations ([Configuration](#configuration))
 
 | Service | Action |
 | --- | --- |
 | `solcast_solar.update_forecasts` | Updates the future forecast data only |
 | `solcast_solar.clear_all_solcast_data` | Deletes the `solcast.json` cached file |
+| `solcast_solar.get_forecasts` | returns a list of forecast data in the service (under futher development still) |
 
 ### Basic HA Automation to manual poll Solcast API data
 Create a new HA automation and setup your prefered triggers to manually poll for new data

@@ -1,41 +1,22 @@
 ### Changes
 
-v3.1.6
-- diagnostics data updated with api info
-- hopefully daily forecasts attributes are correct (and not half)
-
-v3.1.5
-- bug in calling the API count thanks @rezeero25
-
-v3.1.4
-- added solcast lookup for exact API counter and limit tracker (thanks @rany2)
-- new sensor to display API limit for account
-
-v3.1.3
-- renamed the attributes key in the daily forecasts attribute from Forecast to detailedForecast
-
-v3.1.2
-- fixes the `this/next hour` sensors values
-
-v3.1.1
-- service call to get forecast data with response
-- prevent the large attribute data from being stored in the database to save space
-- peak time foreacast is now a date+time and not just a time value
-- forecast attributes are in 30min slots
-
-v3.1.0
+v4.0.1
+- rebased from 3.0.55
+- keeps the last 730 days (2 years) of forecast data
+- some sensors have have had their device_class and native_unit_of_measurement updated to a correct type
+- API polling count is read directly from Solcast and is no longer calcuated
 - no more auto polling.. its now up to every one to create an automation to poll for data when you want. This is due to so many users now only have 10 api calls a day
 - striped out saving UTC time changing and keeping solcast data as it is so timezone data can be changed when needed
-- history items went missing due to the sensor renamed
-- removed update actuals service.. actuals data from solcast is no longer polled or used
+- history items went missing due to the sensor renamed. no longer using the HA history and instead just dtoring the data in the solcast.json file
+- removed update actuals service.. actuals data from solcast is no longer polled (it is used on the first install to get past data so the integration works and i dont get issue reports because solcast do not give full day data, only data from when you call)
 - lots of the logging messages have been updated to be debug,info,warning or errors
-- some sensors may no longer have extra attribute values or attribute values may have been renamed or have changed to the data storaged within
+- some sensors **COULD** possibly no longer have extra attribute values or attribute values may have been renamed or have changed to the data storaged within
 - greater in depth diagnostic data to share when needed to help debug any issues
+- some of @rany2 work has been now integrated
 
-
-v3.0.55
-- added extra error catching
-- sensors unique id is now the key and not the name part
+# Removed 3.1.x
+- too many users could not handle the power of this release
+- v4.x.x replaces 3.0.55 - 3.1.x with new changes
 
 v3.0.47
 - added attribute weekday name for sensor forecasts, today, tomorrow, D3..7

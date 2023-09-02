@@ -28,18 +28,12 @@ Copy the API Key for use with this integration (See [Configuration](#Configurati
 
 ### HACS *(recommended)*
 
-Using HACS. More info [here](https://hacs.xyz/)
-
-Follow the link [here](https://hacs.xyz/docs/faq/custom_repositories/)
-
-Use the custom repo link `https://github.com/oziee/ha-solcast-solar`
-
-Select the category type integration
-
-Then once it's there (still in HACS) click the INSTALL button
-
-Then go to the HA Devices and Services and add a new Solcast Integration
-
+Using HACS. More info [here](https://hacs.xyz/)  
+Follow the link [here](https://hacs.xyz/docs/faq/custom_repositories/)  
+Use the custom repo link `https://github.com/oziee/ha-solcast-solar`  
+Select the category type integration  
+Then once it's there (still in HACS) click the INSTALL button  
+Then go to the HA Devices and Services and add a new Solcast Integration  
 
 <!--
 or click on:

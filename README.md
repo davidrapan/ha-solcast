@@ -84,8 +84,8 @@ There are 3 services for this integration that you can use in automations ([Conf
 | `solcast_solar.get_forecasts` | returns a list of forecast data in the service (under futher development still) |
 
 ### Basic HA Automation to manual poll Solcast API data
-Create a new HA automation and setup your prefered triggers to manually poll for new data
-This is an example.. create your own to your own needs
+Create a new HA automation and setup your prefered triggers to manually poll for new data  
+These are examples.. alter these or create your own to fit your own needs
 
 
 ```yaml

@@ -188,7 +188,7 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 | `API Limit` | number | N | `integer` | Total times the API can been called in a 24 hour period[^1] |
 | `API used` | number | N | `integer` | Total times the API has been called today (API counter resets to zero at midnight UTC)[^1] |  
 
-[^1]: API information is directly read from Solcast
+[^1]: API usage information is directly read from Solcast
 
 
 </details>

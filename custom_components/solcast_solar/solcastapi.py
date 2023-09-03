@@ -428,7 +428,9 @@ class SolcastApi:
         tz = self._tz
         #today = dt.now(tz).date()
         #yesterday = dt.now(self._tz).date() + timedelta(days=-1)
-        lastday = dt.now(self._tz).date() + timedelta(days=7)
+        lastday = dt.now(self._tz) + timedelta(days=7)
+        lastday = lastday.replace(hour=23,minute=59).astimezone(timezone.utc)
+
         pastdays = dt.now(self._tz).date() + timedelta(days=-730)
         
         _s = {}
@@ -438,7 +440,8 @@ class SolcastApi:
             _data = []
             _data2 = []
             
-            
+            #this is one run once, for a new install or if the solcasft.json file is deleted
+            #this does use up an api call count too
             if dopast:
                 ae = None
                 resp_dict = await self.fetch_data("estimated_actuals", 168, site=site['resource_id'], apikey=site['apikey'], cachedname="actuals")
@@ -466,9 +469,6 @@ class SolcastApi:
                             "pv_estimate90": 0,
                         }
                     )
-                
-                
-                
 
             resp_dict = await self.fetch_data("forecasts", 168, site=site["resource_id"], apikey=site["apikey"], cachedname="forecasts")
             if not isinstance(resp_dict, dict):
@@ -486,19 +486,18 @@ class SolcastApi:
                     raise ValueError(
                         f"Solcast period_start minute is not 0 or 30. {z.minute}"
                     )
-                _data2.append(
-                    {
-                        "period_start": z,
-                        "pv_estimate": x["pv_estimate"],
-                        "pv_estimate10": x["pv_estimate10"],
-                        "pv_estimate90": x["pv_estimate90"],
-                    }
-                )
+                if z < lastday:
+                    _data2.append(
+                        {
+                            "period_start": z,
+                            "pv_estimate": x["pv_estimate"],
+                            "pv_estimate10": x["pv_estimate10"],
+                            "pv_estimate90": x["pv_estimate90"],
+                        }
+                    )
 
 
             _data = sorted(_data2, key=itemgetter("period_start"))
-            
-        
             _forecasts = []
 
             try:
@@ -520,18 +519,17 @@ class SolcastApi:
                                                             "pv_estimate10": x["pv_estimate10"],
                                                             "pv_estimate90": x["pv_estimate90"]})
             
-            #this deletes data that is too far in advance    
+            #_forecasts now contains all data for the rooftop site up to 730 days worth
+            #this deletes data that is older than 730 days (2 years)   
             for x in _forecasts:
                 zz = x['period_start'].astimezone(self._tz) - timedelta(minutes=30)
-                if zz.date() > lastday or zz.date() < pastdays:
-                    #get rid of anything greater than 7 days ahead or older than 2 years
+                if zz.date() < pastdays:
                     _forecasts.remove(x)
-            
         
             _forecasts = sorted(_forecasts, key=itemgetter("period_start"))
             
             self._data['siteinfo'].update({site['resource_id']:{'forecasts': copy.deepcopy(_forecasts)}})
-           
+
         self._data["last_updated"] = dt.now(timezone.utc).isoformat()
         await self.sites_usage()
         self._data['version'] = _JSON_VERSION

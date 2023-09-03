@@ -106,7 +106,7 @@ SENSORS: dict[str, SensorEntityDescription] = {
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         name="Forecast Tomorrow",
         icon="mdi:solar-power",
-        suggested_display_precision=0,
+        suggested_display_precision=2,
     ),
     "peak_w_tomorrow": SensorEntityDescription(
         key="peak_w_tomorrow",

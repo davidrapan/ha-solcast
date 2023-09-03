@@ -1,5 +1,9 @@
 ### Changes
 
+v4.0.2
+- decimal percision changed for forecast tomorrow from 0 to 2
+- fixed 7th day forecast missing data that was being ignored
+
 v4.0.1
 - rebased from 3.0.55
 - keeps the last 730 days (2 years) of forecast data

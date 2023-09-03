@@ -153,7 +153,7 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 <details>
 <summary><h3>Sensors</summary></h3>
 
-| Name | Type | Attributes | Default | Description |
+| Name | Type | Attributes | Unit | Description |
 | ------------------------------ | ----------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
 | `Today` | number | Y | `kWh` | Total forecast solar production for today |
 | `Tomorrow` | number | Y | `kWh` | Total forecast solar production for day + 1 (tomorrow) |
@@ -165,24 +165,24 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 | `This Hour` | number | N | `Wh` | Forecasted solar production current hour |
 | `Next Hour` | number | N | `Wh` | Forecasted solar production next hour |
 | `Remaining Today` | number | N | `kWh` | Predicted remaining solar production today |
-| `Peak Forecast Today` | number | N | `Wh` | Highest predicted production within an hour period today |
+| `Peak Forecast Today` | number | N | `W` | Highest predicted production within an hour period today |
 | `Peak Time Today` | date/time | N |  | Hour of max forecasted production of solar today |
-| `Peak Forecast Tomorrow` | number | N | `Wh` | Highest predicted production within an hour period tomorrow |
+| `Peak Forecast Tomorrow` | number | N | `W` | Highest predicted production within an hour period tomorrow |
 | `Peak Time Tomorrow` | date/time | N |  | Hour of max forecasted production of solar tomorrow |
-| `Power Now` | number | N |  | Power forecast during the current 0-30 / 30-60 min hour period |
-| `Power Next 30 Mins` | number | N |  | Power forecast for the next 0-30 / 30-60 min hour period |
-| `Power Next Hour` | number | N |  | Power forecast for the next whole 0-60 / 30-30 min hour period |
+| `Power Now` | number | N | `W` | Power forecast during the current 0-30 / 30-60 min hour period |
+| `Power Next 30 Mins` | number | N | `W` | Power forecast for the next 0-30 / 30-60 min hour period |
+| `Power Next Hour` | number | N | `W` | Power forecast for the next whole 0-60 / 30-30 min hour period |
 
 
 ### Configuration
 
-| Name | Type | Attributes | Default | Description |
+| Name | Type | Attributes | Unit | Description |
 | ------------------------------ | ----------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
 | `Rooftop name` | number | Y | `kWh` | Total forecast for rooftop today (attributes contain the solcast rooftop setup) |
 
 ### Diagnostic
 
-| Name | Type | Attributes | Default | Description |
+| Name | Type | Attributes | Unit | Description |
 | ------------------------------ | ----------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
 | `API Last Polled` | date/time | N |  | Date/time when the API data was polled |
 | `API Limit` | number | N | `integer` | Total times the API can been called in a 24 hour period[^1] |

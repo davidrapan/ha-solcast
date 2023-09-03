@@ -1,0 +1,107 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "api_key": "Solcast API kulcs"
+        },
+        "description": "Az Ön Solcast API-fiókkulcsa"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "api_key": "Solcast API kulcs"
+        },
+        "description": "Az Ön Solcast API-fiókkulcsa"
+      }
+    }
+  },
+  "system_health": {
+    "info": {
+      "can_reach_server": "Solcast szerver kapcsolat",
+      "used_requests": "Az API kérelmek még hátravannak",
+      "rooftop_site_count": "A tetőtéri telephelyek száma"
+    }
+  },
+  "services": {
+    "update_forecasts": {
+      "name": "Frissítés",
+      "description": "Lekéri a Solcast legfrissebb előrejelzési adatait."
+    },
+    "clear_all_solcast_data": {
+      "name": "Törölje az összes mentett Solcast adatot",
+      "description": "Törli a solcast.json fájlt az összes jelenlegi solcast webhelyadat eltávolításához."
+    },
+    "get_forecasts": {
+      "name": "Szerezzen előrejelzéseket",
+      "description": "Események listája előrejelzésekhez."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "power_now_30m": {
+        "name": "Power Next 30 perc"
+      },
+      "power_now_1hr": {
+        "name": "Power Next Hour"
+      },
+      "total_kwh_forecast_today": {
+        "name": "Előrejelzés ma"
+      },
+      "peak_w_today": {
+        "name": "Csúcselőrejelzés ma"
+      },
+      "peak_w_time_today": {
+        "name": "Ma csúcsidő"
+      },
+      "forecast_this_hour": {
+        "name": "Előrejelzés erre az órára"
+      },
+      "get_remaining_today": {
+        "name": "Előrejelzés még ma"
+      },
+      "forecast_next_hour": {
+        "name": "Előrejelzés a következő órában"
+      },
+      "total_kwh_forecast_tomorrow": {
+        "name": "Előrejelzés holnapra"
+      },
+      "peak_w_tomorrow": {
+        "name": "Csúcselőrejelzés holnap"
+      },
+      "peak_w_time_tomorrow": {
+        "name": "Csúcsidő holnap"
+      },
+      "api_counter": {
+        "name": "API használt"
+      },
+      "api_limit": {
+        "name": "API-korlát"
+      },
+      "lastupdated": {
+        "name": "API utolsó lekérdezése"
+      },
+      "total_kwh_forecast_d3": {
+        "name": "Előrejelzés 3. nap"
+      },
+      "total_kwh_forecast_d4": {
+        "name": "Előrejelzés 4. nap"
+      },
+      "total_kwh_forecast_d5": {
+        "name": "Előrejelzés 5. nap"
+      },
+      "total_kwh_forecast_d6": {
+        "name": "Előrejelzés 6. nap"
+      },
+      "total_kwh_forecast_d7": {
+        "name": "Előrejelzés 7. nap"
+      },
+      "power_now": {
+        "name": "Kapcsolja be most"
+      }
+    }
+  }
+}

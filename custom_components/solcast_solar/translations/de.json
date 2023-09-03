@@ -1,0 +1,107 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "api_key": "Solcast-API-Schlüssel"
+        },
+        "description": "Ihr Solcast-API-Kontoschlüssel"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "api_key": "Solcast-API-Schlüssel"
+        },
+        "description": "Ihr Solcast-API-Kontoschlüssel"
+      }
+    }
+  },
+  "system_health": {
+    "info": {
+      "can_reach_server": "Verbindung zum Solcast-Server",
+      "used_requests": "Verbleibende API-Anfragen",
+      "rooftop_site_count": "Anzahl der Dachflächen"
+    }
+  },
+  "services": {
+    "update_forecasts": {
+      "name": "Aktualisieren",
+      "description": "Ruft die neuesten Prognosedaten von Solcast ab."
+    },
+    "clear_all_solcast_data": {
+      "name": "Löschen Sie alle gespeicherten Solcast-Daten",
+      "description": "Löscht die Datei solcast.json, um alle aktuellen Solcast-Site-Daten zu entfernen."
+    },
+    "get_forecasts": {
+      "name": "Erhalten Sie Prognosen",
+      "description": "Ereignislisten für Prognosen."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "power_now_30m": {
+        "name": "Power Next 30 Min"
+      },
+      "power_now_1hr": {
+        "name": "Power nächste Stunde"
+      },
+      "total_kwh_forecast_today": {
+        "name": "Prognose heute"
+      },
+      "peak_w_today": {
+        "name": "Spitzenprognose heute"
+      },
+      "peak_w_time_today": {
+        "name": "Heute ist Spitzenzeit"
+      },
+      "forecast_this_hour": {
+        "name": "Prognose für diese Stunde"
+      },
+      "get_remaining_today": {
+        "name": "Vorhersage für heute"
+      },
+      "forecast_next_hour": {
+        "name": "Vorhersage für die nächste Stunde"
+      },
+      "total_kwh_forecast_tomorrow": {
+        "name": "Prognose für morgen"
+      },
+      "peak_w_tomorrow": {
+        "name": "Spitzenprognose für morgen"
+      },
+      "peak_w_time_tomorrow": {
+        "name": "Morgen ist Spitzenzeit"
+      },
+      "api_counter": {
+        "name": "Verwendete API"
+      },
+      "api_limit": {
+        "name": "API-Limit"
+      },
+      "lastupdated": {
+        "name": "Zuletzt abgefragte API"
+      },
+      "total_kwh_forecast_d3": {
+        "name": "Vorhersage Tag 3"
+      },
+      "total_kwh_forecast_d4": {
+        "name": "Vorhersage Tag 4"
+      },
+      "total_kwh_forecast_d5": {
+        "name": "Prognosetag 5"
+      },
+      "total_kwh_forecast_d6": {
+        "name": "Vorhersage Tag 6"
+      },
+      "total_kwh_forecast_d7": {
+        "name": "Vorhersage Tag 7"
+      },
+      "power_now": {
+        "name": "Power Now"
+      }
+    }
+  }
+}

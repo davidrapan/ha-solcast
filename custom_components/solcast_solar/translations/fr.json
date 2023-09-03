@@ -1,0 +1,107 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "api_key": "Clé API Solcast"
+        },
+        "description": "Votre clé de compte API Solcast"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "api_key": "Clé API Solcast"
+        },
+        "description": "Votre clé de compte API Solcast"
+      }
+    }
+  },
+  "system_health": {
+    "info": {
+      "can_reach_server": "Connexion au serveur Solcast",
+      "used_requests": "Requêtes API restantes",
+      "rooftop_site_count": "Nombre de sites sur le toit"
+    }
+  },
+  "services": {
+    "update_forecasts": {
+      "name": "Mise à jour",
+      "description": "Récupère les dernières données de prévisions de Solcast."
+    },
+    "clear_all_solcast_data": {
+      "name": "Effacer toutes les données Solcast enregistrées",
+      "description": "Supprime le fichier solcast.json pour supprimer toutes les données actuelles du site solcast."
+    },
+    "get_forecasts": {
+      "name": "Obtenez des prévisions",
+      "description": "Listes d'événements pour les prévisions."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "power_now_30m": {
+        "name": "Alimentation 30 minutes suivantes"
+      },
+      "power_now_1hr": {
+        "name": "Alimentation l'heure suivante"
+      },
+      "total_kwh_forecast_today": {
+        "name": "Prévisions aujourd'hui"
+      },
+      "peak_w_today": {
+        "name": "Prévisions de pointe aujourd'hui"
+      },
+      "peak_w_time_today": {
+        "name": "Heure de pointe aujourd'hui"
+      },
+      "forecast_this_hour": {
+        "name": "Prévoir cette heure"
+      },
+      "get_remaining_today": {
+        "name": "Prévisions restantes aujourd'hui"
+      },
+      "forecast_next_hour": {
+        "name": "Prévisions pour l'heure suivante"
+      },
+      "total_kwh_forecast_tomorrow": {
+        "name": "Prévisions demain"
+      },
+      "peak_w_tomorrow": {
+        "name": "Prévisions de pointe demain"
+      },
+      "peak_w_time_tomorrow": {
+        "name": "Heure de pointe demain"
+      },
+      "api_counter": {
+        "name": "API utilisée"
+      },
+      "api_limit": {
+        "name": "Limite de l'API"
+      },
+      "lastupdated": {
+        "name": "API interrogée pour la dernière fois"
+      },
+      "total_kwh_forecast_d3": {
+        "name": "Jour 3 des prévisions"
+      },
+      "total_kwh_forecast_d4": {
+        "name": "Jour de prévision 4"
+      },
+      "total_kwh_forecast_d5": {
+        "name": "Jour de prévision 5"
+      },
+      "total_kwh_forecast_d6": {
+        "name": "Jour de prévision 6"
+      },
+      "total_kwh_forecast_d7": {
+        "name": "Jour de prévision 7"
+      },
+      "power_now": {
+        "name": "Alimentez maintenant"
+      }
+    }
+  }
+}

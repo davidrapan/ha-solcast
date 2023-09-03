@@ -1,0 +1,107 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "api_key": "Solcast API-sleutel"
+        },
+        "description": "Uw Solcast API-accountsleutel"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "api_key": "Solcast API-sleutel"
+        },
+        "description": "Uw Solcast API-accountsleutel"
+      }
+    }
+  },
+  "system_health": {
+    "info": {
+      "can_reach_server": "Solcast-serververbinding",
+      "used_requests": "Resterende API-verzoeken",
+      "rooftop_site_count": "Aantal daklocaties"
+    }
+  },
+  "services": {
+    "update_forecasts": {
+      "name": "Update",
+      "description": "Haalt de nieuwste voorspellingsgegevens op van Solcast."
+    },
+    "clear_all_solcast_data": {
+      "name": "Wis alle opgeslagen Solcast-gegevens",
+      "description": "Verwijdert het bestand solcast.json om alle huidige solcast-sitegegevens te verwijderen."
+    },
+    "get_forecasts": {
+      "name": "Ontvang prognoses",
+      "description": "Lijsten met gebeurtenissen voor prognoses."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "power_now_30m": {
+        "name": "Vermogen Volgende 30 minuten"
+      },
+      "power_now_1hr": {
+        "name": "Stroom volgend uur"
+      },
+      "total_kwh_forecast_today": {
+        "name": "Voorspelling vandaag"
+      },
+      "peak_w_today": {
+        "name": "Piekvoorspelling vandaag"
+      },
+      "peak_w_time_today": {
+        "name": "Piektijd vandaag"
+      },
+      "forecast_this_hour": {
+        "name": "Voorspelling dit uur"
+      },
+      "get_remaining_today": {
+        "name": "Voorspelling voor vandaag"
+      },
+      "forecast_next_hour": {
+        "name": "Voorspelling volgend uur"
+      },
+      "total_kwh_forecast_tomorrow": {
+        "name": "Voorspelling morgen"
+      },
+      "peak_w_tomorrow": {
+        "name": "Piekvoorspelling morgen"
+      },
+      "peak_w_time_tomorrow": {
+        "name": "Piektijd morgen"
+      },
+      "api_counter": {
+        "name": "API gebruikt"
+      },
+      "api_limit": {
+        "name": "API-limiet"
+      },
+      "lastupdated": {
+        "name": "API laatst geraadpleegd"
+      },
+      "total_kwh_forecast_d3": {
+        "name": "Voorspelling Dag 3"
+      },
+      "total_kwh_forecast_d4": {
+        "name": "Voorspelling Dag 4"
+      },
+      "total_kwh_forecast_d5": {
+        "name": "Voorspelling Dag 5"
+      },
+      "total_kwh_forecast_d6": {
+        "name": "Voorspelling Dag 6"
+      },
+      "total_kwh_forecast_d7": {
+        "name": "Voorspelling Dag 7"
+      },
+      "power_now": {
+        "name": "Stroom nu"
+      }
+    }
+  }
+}

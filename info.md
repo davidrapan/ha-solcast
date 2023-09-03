@@ -1,8 +1,13 @@
 ### Changes
 
 v4.0.2
+- sensor names **have** changed!! this is due to locali(s/z)ation strings of the integration
 - decimal percision changed for forecast tomorrow from 0 to 2
 - fixed 7th day forecast missing data that was being ignored
+- added new sensor `Power Now`
+- added new sensor `Power Next 30 Mins`
+- added new sensor `Power Next Hour`
+- added locali(s/z)ation for all objects in the integation.. thanks to @ViPeR5000 for getting me started on thinking about this (google translate used, if you find anything wrong PR and i can update the translations)
 
 v4.0.1
 - rebased from 3.0.55

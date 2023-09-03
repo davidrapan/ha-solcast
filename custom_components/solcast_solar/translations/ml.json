@@ -1,0 +1,107 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "api_key": "സോൾകാസ്റ്റ് API കീ"
+        },
+        "description": "നിങ്ങളുടെ Solcast API അക്കൗണ്ട് കീ"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "api_key": "സോൾകാസ്റ്റ് API കീ"
+        },
+        "description": "നിങ്ങളുടെ Solcast API അക്കൗണ്ട് കീ"
+      }
+    }
+  },
+  "system_health": {
+    "info": {
+      "can_reach_server": "സോൾകാസ്റ്റ് സെർവർ കണക്ഷൻ",
+      "used_requests": "API അഭ്യർത്ഥനകൾ ശേഷിക്കുന്നു",
+      "rooftop_site_count": "മേൽക്കൂര സൈറ്റിന്റെ എണ്ണം"
+    }
+  },
+  "services": {
+    "update_forecasts": {
+      "name": "അപ്ഡേറ്റ് ചെയ്യുക",
+      "description": "Solcast-ൽ നിന്ന് ഏറ്റവും പുതിയ പ്രവചന ഡാറ്റ ലഭ്യമാക്കുന്നു."
+    },
+    "clear_all_solcast_data": {
+      "name": "സംരക്ഷിച്ച എല്ലാ Solcast ഡാറ്റയും മായ്‌ക്കുക",
+      "description": "നിലവിലുള്ള എല്ലാ സോൾകാസ്റ്റ് സൈറ്റ് ഡാറ്റയും നീക്കം ചെയ്യാൻ solcast.json ഫയൽ ഇല്ലാതാക്കുന്നു."
+    },
+    "get_forecasts": {
+      "name": "പ്രവചനങ്ങൾ നേടുക",
+      "description": "പ്രവചനങ്ങൾക്കായുള്ള ഇവന്റുകളുടെ പട്ടിക."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "power_now_30m": {
+        "name": "പവർ അടുത്ത 30 മിനിറ്റ്"
+      },
+      "power_now_1hr": {
+        "name": "അടുത്ത മണിക്കൂർ പവർ"
+      },
+      "total_kwh_forecast_today": {
+        "name": "ഇന്നത്തെ പ്രവചനം"
+      },
+      "peak_w_today": {
+        "name": "ഇന്നത്തെ ഏറ്റവും ഉയർന്ന പ്രവചനം"
+      },
+      "peak_w_time_today": {
+        "name": "ഇന്നത്തെ പീക്ക് ടൈം"
+      },
+      "forecast_this_hour": {
+        "name": "ഈ മണിക്കൂർ പ്രവചനം"
+      },
+      "get_remaining_today": {
+        "name": "ഇന്ന് ശേഷിക്കുന്ന പ്രവചനം"
+      },
+      "forecast_next_hour": {
+        "name": "അടുത്ത മണിക്കൂർ പ്രവചനം"
+      },
+      "total_kwh_forecast_tomorrow": {
+        "name": "നാളെ പ്രവചനം"
+      },
+      "peak_w_tomorrow": {
+        "name": "നാളത്തെ ഏറ്റവും ഉയർന്ന പ്രവചനം"
+      },
+      "peak_w_time_tomorrow": {
+        "name": "പീക്ക് ടൈം നാളെ"
+      },
+      "api_counter": {
+        "name": "API ഉപയോഗിച്ചു"
+      },
+      "api_limit": {
+        "name": "API പരിധി"
+      },
+      "lastupdated": {
+        "name": "API അവസാനം പോൾ ചെയ്തത്"
+      },
+      "total_kwh_forecast_d3": {
+        "name": "പ്രവചന ദിവസം 3"
+      },
+      "total_kwh_forecast_d4": {
+        "name": "പ്രവചന ദിവസം 4"
+      },
+      "total_kwh_forecast_d5": {
+        "name": "പ്രവചന ദിവസം 5"
+      },
+      "total_kwh_forecast_d6": {
+        "name": "പ്രവചനം ദിവസം 6"
+      },
+      "total_kwh_forecast_d7": {
+        "name": "പ്രവചനം ദിവസം 7"
+      },
+      "power_now": {
+        "name": "ഇപ്പോൾ പവർ ചെയ്യുക"
+      }
+    }
+  }
+}

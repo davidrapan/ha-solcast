@@ -1,0 +1,107 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "api_key": "Solcast API nøgle"
+        },
+        "description": "Din Solcast API-kontonøgle"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "api_key": "Solcast API nøgle"
+        },
+        "description": "Din Solcast API-kontonøgle"
+      }
+    }
+  },
+  "system_health": {
+    "info": {
+      "can_reach_server": "Solcast-serverforbindelse",
+      "used_requests": "API-anmodninger tilbage",
+      "rooftop_site_count": "Antal tagpladser"
+    }
+  },
+  "services": {
+    "update_forecasts": {
+      "name": "Opdatering",
+      "description": "Henter de seneste prognosedata fra Solcast."
+    },
+    "clear_all_solcast_data": {
+      "name": "Ryd alle gemte Solcast-data",
+      "description": "Sletter filen solcast.json for at fjerne alle aktuelle solcast-webstedsdata."
+    },
+    "get_forecasts": {
+      "name": "Få prognoser",
+      "description": "Lister over begivenheder til prognoser."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "power_now_30m": {
+        "name": "Power Næste 30 min"
+      },
+      "power_now_1hr": {
+        "name": "Strøm næste time"
+      },
+      "total_kwh_forecast_today": {
+        "name": "Prognose i dag"
+      },
+      "peak_w_today": {
+        "name": "Højeste vejrudsigt i dag"
+      },
+      "peak_w_time_today": {
+        "name": "Spidsetid i dag"
+      },
+      "forecast_this_hour": {
+        "name": "Prognose i denne time"
+      },
+      "get_remaining_today": {
+        "name": "Resterende vejrudsigt i dag"
+      },
+      "forecast_next_hour": {
+        "name": "Prognose næste time"
+      },
+      "total_kwh_forecast_tomorrow": {
+        "name": "Prognose i morgen"
+      },
+      "peak_w_tomorrow": {
+        "name": "Højeste vejrudsigt i morgen"
+      },
+      "peak_w_time_tomorrow": {
+        "name": "Toptid i morgen"
+      },
+      "api_counter": {
+        "name": "API brugt"
+      },
+      "api_limit": {
+        "name": "API-grænse"
+      },
+      "lastupdated": {
+        "name": "API sidst pollet"
+      },
+      "total_kwh_forecast_d3": {
+        "name": "Prognose dag 3"
+      },
+      "total_kwh_forecast_d4": {
+        "name": "Prognose dag 4"
+      },
+      "total_kwh_forecast_d5": {
+        "name": "Vejrudsigt dag 5"
+      },
+      "total_kwh_forecast_d6": {
+        "name": "Vejrudsigt dag 6"
+      },
+      "total_kwh_forecast_d7": {
+        "name": "Vejrudsigt dag 7"
+      },
+      "power_now": {
+        "name": "Strøm nu"
+      }
+    }
+  }
+}

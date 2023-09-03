@@ -1,0 +1,107 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "api_key": "ソルキャスト API キー"
+        },
+        "description": "Solcast API アカウント キー"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "api_key": "ソルキャスト API キー"
+        },
+        "description": "Solcast API アカウント キー"
+      }
+    }
+  },
+  "system_health": {
+    "info": {
+      "can_reach_server": "ソルキャストサーバー接続",
+      "used_requests": "残りの API リクエスト",
+      "rooftop_site_count": "屋上サイト数"
+    }
+  },
+  "services": {
+    "update_forecasts": {
+      "name": "アップデート",
+      "description": "Solcast から最新の予測データを取得します。"
+    },
+    "clear_all_solcast_data": {
+      "name": "保存されているすべての Solcast データをクリアする",
+      "description": "solcast.json ファイルを削除して、現在の solcast サイト データをすべて削除します。"
+    },
+    "get_forecasts": {
+      "name": "予測を取得する",
+      "description": "予測用のイベントのリスト。"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "power_now_30m": {
+        "name": "次の 30 分間パワーアップ"
+      },
+      "power_now_1hr": {
+        "name": "次の時間をパワーアップ"
+      },
+      "total_kwh_forecast_today": {
+        "name": "今日の天気予報"
+      },
+      "peak_w_today": {
+        "name": "今日のピーク予想"
+      },
+      "peak_w_time_today": {
+        "name": "今日のピーク時間"
+      },
+      "forecast_this_hour": {
+        "name": "この時間の予報"
+      },
+      "get_remaining_today": {
+        "name": "今日の残りの予測"
+      },
+      "forecast_next_hour": {
+        "name": "次の時間の予測"
+      },
+      "total_kwh_forecast_tomorrow": {
+        "name": "明日の予報"
+      },
+      "peak_w_tomorrow": {
+        "name": "明日のピーク予想"
+      },
+      "peak_w_time_tomorrow": {
+        "name": "明日のピークタイム"
+      },
+      "api_counter": {
+        "name": "使用するAPI"
+      },
+      "api_limit": {
+        "name": "API制限"
+      },
+      "lastupdated": {
+        "name": "APIの最終ポーリング"
+      },
+      "total_kwh_forecast_d3": {
+        "name": "予報3日目"
+      },
+      "total_kwh_forecast_d4": {
+        "name": "予報4日目"
+      },
+      "total_kwh_forecast_d5": {
+        "name": "予報5日目"
+      },
+      "total_kwh_forecast_d6": {
+        "name": "予報6日目"
+      },
+      "total_kwh_forecast_d7": {
+        "name": "予報7日目"
+      },
+      "power_now": {
+        "name": "今すぐパワーアップ"
+      }
+    }
+  }
+}

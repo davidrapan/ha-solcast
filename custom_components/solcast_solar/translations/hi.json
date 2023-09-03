@@ -1,0 +1,107 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "api_key": "सोलकास्ट एपीआई कुंजी"
+        },
+        "description": "आपकी सोलकास्ट एपीआई खाता कुंजी"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "api_key": "सोलकास्ट एपीआई कुंजी"
+        },
+        "description": "आपकी सोलकास्ट एपीआई खाता कुंजी"
+      }
+    }
+  },
+  "system_health": {
+    "info": {
+      "can_reach_server": "सोलकास्ट सर्वर कनेक्शन",
+      "used_requests": "एपीआई अनुरोध शेष हैं",
+      "rooftop_site_count": "छत स्थल की गिनती"
+    }
+  },
+  "services": {
+    "update_forecasts": {
+      "name": "अद्यतन",
+      "description": "सोलकास्ट से नवीनतम पूर्वानुमान डेटा प्राप्त करता है।"
+    },
+    "clear_all_solcast_data": {
+      "name": "सभी सहेजे गए सोलकास्ट डेटा को साफ़ करें",
+      "description": "सभी मौजूदा सोलकास्ट साइट डेटा को हटाने के लिए solcast.json फ़ाइल को हटा देता है।"
+    },
+    "get_forecasts": {
+      "name": "पूर्वानुमान प्राप्त करें",
+      "description": "पूर्वानुमानों के लिए घटनाओं की सूची."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "power_now_30m": {
+        "name": "पावर अगले 30 मिनट"
+      },
+      "power_now_1hr": {
+        "name": "अगले घंटे बिजली"
+      },
+      "total_kwh_forecast_today": {
+        "name": "आज का पूर्वानुमान"
+      },
+      "peak_w_today": {
+        "name": "आज चरम पूर्वानुमान"
+      },
+      "peak_w_time_today": {
+        "name": "आज का पीक टाइम"
+      },
+      "forecast_this_hour": {
+        "name": "इस घंटे का पूर्वानुमान"
+      },
+      "get_remaining_today": {
+        "name": "आज का पूर्वानुमान शेष"
+      },
+      "forecast_next_hour": {
+        "name": "अगले घंटे का पूर्वानुमान"
+      },
+      "total_kwh_forecast_tomorrow": {
+        "name": "कल का पूर्वानुमान"
+      },
+      "peak_w_tomorrow": {
+        "name": "कल चरम पूर्वानुमान"
+      },
+      "peak_w_time_tomorrow": {
+        "name": "पीक टाइम कल"
+      },
+      "api_counter": {
+        "name": "एपीआई का उपयोग किया गया"
+      },
+      "api_limit": {
+        "name": "एपीआई सीमा"
+      },
+      "lastupdated": {
+        "name": "एपीआई अंतिम मतदान"
+      },
+      "total_kwh_forecast_d3": {
+        "name": "पूर्वानुमान दिन 3"
+      },
+      "total_kwh_forecast_d4": {
+        "name": "पूर्वानुमान दिन 4"
+      },
+      "total_kwh_forecast_d5": {
+        "name": "पूर्वानुमान दिन 5"
+      },
+      "total_kwh_forecast_d6": {
+        "name": "पूर्वानुमान दिन 6"
+      },
+      "total_kwh_forecast_d7": {
+        "name": "पूर्वानुमान दिन 7"
+      },
+      "power_now": {
+        "name": "अभी शक्ति"
+      }
+    }
+  }
+}

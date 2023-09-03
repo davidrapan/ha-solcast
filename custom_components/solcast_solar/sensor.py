@@ -41,6 +41,7 @@ _LOGGER = logging.getLogger(__name__)
 SENSORS: dict[str, SensorEntityDescription] = {
     "total_kwh_forecast_today": SensorEntityDescription(
         key="total_kwh_forecast_today",
+        translation_key="total_kwh_forecast_today",
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         name="Forecast Today",
@@ -49,6 +50,7 @@ SENSORS: dict[str, SensorEntityDescription] = {
     ),
     "peak_w_today": SensorEntityDescription(
         key="peak_w_today",
+        translation_key="peak_w_today",
         device_class=SensorDeviceClass.POWER,
         native_unit_of_measurement=UnitOfPower.WATT,
         name="Peak Forecast Today",
@@ -57,6 +59,7 @@ SENSORS: dict[str, SensorEntityDescription] = {
     ),
     "peak_w_time_today": SensorEntityDescription(
         key="peak_w_time_today",
+        translation_key="peak_w_time_today",
         name="Peak Time Today",
         icon="mdi:clock",
         device_class=SensorDeviceClass.TIMESTAMP,
@@ -66,6 +69,7 @@ SENSORS: dict[str, SensorEntityDescription] = {
         key="forecast_this_hour",
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        translation_key="forecast_this_hour",
         name="Forecast This Hour",
         icon="mdi:solar-power",
         suggested_display_precision=0,
@@ -74,6 +78,7 @@ SENSORS: dict[str, SensorEntityDescription] = {
         key="get_remaining_today",
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        translation_key="get_remaining_today",
         name="Forecast Remaining Today",
         icon="mdi:solar-power",
         suggested_display_precision=2,
@@ -82,6 +87,7 @@ SENSORS: dict[str, SensorEntityDescription] = {
         key="forecast_next_hour",
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        translation_key="forecast_next_hour",
         name="Forecast Next Hour",
         icon="mdi:solar-power",
         suggested_display_precision=0,
@@ -104,6 +110,7 @@ SENSORS: dict[str, SensorEntityDescription] = {
         key="total_kwh_forecast_tomorrow",
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        translation_key="total_kwh_forecast_tomorrow",
         name="Forecast Tomorrow",
         icon="mdi:solar-power",
         suggested_display_precision=2,
@@ -112,12 +119,14 @@ SENSORS: dict[str, SensorEntityDescription] = {
         key="peak_w_tomorrow",
         device_class=SensorDeviceClass.POWER,
         native_unit_of_measurement=UnitOfPower.WATT,
+        translation_key="peak_w_tomorrow",
         name="Peak Forecast Tomorrow",
         icon="mdi:solar-power",
         suggested_display_precision=0,
     ),
     "peak_w_time_tomorrow": SensorEntityDescription(
         key="peak_w_time_tomorrow",
+        translation_key="peak_w_time_tomorrow",
         name="Peak Time Tomorrow",
         icon="mdi:clock",
         device_class=SensorDeviceClass.TIMESTAMP,
@@ -125,12 +134,14 @@ SENSORS: dict[str, SensorEntityDescription] = {
     ),
     "api_counter": SensorEntityDescription(
         key="api_counter",
+        translation_key="api_counter",
         name="API Used",
         icon="mdi:web-check",
         entity_category=EntityCategory.DIAGNOSTIC,
     ),
     "api_limit": SensorEntityDescription(
         key="api_limit",
+        translation_key="api_limit",
         name="API Limit",
         icon="mdi:web-check",
         entity_category=EntityCategory.DIAGNOSTIC,
@@ -138,6 +149,7 @@ SENSORS: dict[str, SensorEntityDescription] = {
     "lastupdated": SensorEntityDescription(
         key="lastupdated",
         device_class=SensorDeviceClass.TIMESTAMP,
+        translation_key="lastupdated",
         name="API Last Polled",
         icon="mdi:clock",
         entity_category=EntityCategory.DIAGNOSTIC,
@@ -146,6 +158,7 @@ SENSORS: dict[str, SensorEntityDescription] = {
         key="total_kwh_forecast_d3",
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        translation_key="total_kwh_forecast_d3",
         name="Forecast D3",
         icon="mdi:solar-power",
         suggested_display_precision=2,
@@ -154,6 +167,7 @@ SENSORS: dict[str, SensorEntityDescription] = {
         key="total_kwh_forecast_d4",
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        translation_key="total_kwh_forecast_d4",
         name="Forecast D4",
         icon="mdi:solar-power",
         suggested_display_precision=2,
@@ -162,6 +176,7 @@ SENSORS: dict[str, SensorEntityDescription] = {
         key="total_kwh_forecast_d5",
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        translation_key="total_kwh_forecast_d5",
         name="Forecast D5",
         icon="mdi:solar-power",
         suggested_display_precision=2,
@@ -170,6 +185,7 @@ SENSORS: dict[str, SensorEntityDescription] = {
         key="total_kwh_forecast_d6",
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        translation_key="total_kwh_forecast_d6",
         name="Forecast D6",
         icon="mdi:solar-power",
         suggested_display_precision=2,
@@ -178,31 +194,35 @@ SENSORS: dict[str, SensorEntityDescription] = {
         key="total_kwh_forecast_d7",
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        translation_key="total_kwh_forecast_d7",
         name="Forecast D7",
         icon="mdi:solar-power",
         suggested_display_precision=2,
     ),
-    # "power_now": SensorEntityDescription(
-    #     key="power_now",
-    #     device_class=SensorDeviceClass.POWER,
-    #     native_unit_of_measurement=UnitOfPower.WATT,
-    #     name="Power Now",
-    #     suggested_display_precision=0,
-    # ),
-    # "power_now_30m": SensorEntityDescription(
-    #     key="power_now_30m",
-    #     device_class=SensorDeviceClass.POWER,
-    #     native_unit_of_measurement=UnitOfPower.WATT,
-    #     name="Power Next 30 Mins",
-    #     suggested_display_precision=0,
-    # ),
-    # "power_now_1hr": SensorEntityDescription(
-    #     key="power_now_1hr",
-    #     device_class=SensorDeviceClass.POWER,
-    #     native_unit_of_measurement=UnitOfPower.WATT,
-    #     name="Power Next Hour",
-    #     suggested_display_precision=0,
-    # ),
+    "power_now": SensorEntityDescription(
+        key="power_now",
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        translation_key="power_now",
+        name="Power Now",
+        suggested_display_precision=0,
+    ),
+    "power_now_30m": SensorEntityDescription(
+        key="power_now_30m",
+        translation_key="power_now_30m",
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        #name="Power Next 30 Mins",
+        suggested_display_precision=0,
+    ),
+    "power_now_1hr": SensorEntityDescription(
+        key="power_now_1hr",
+        translation_key="power_now_1hr",
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        #name="Power Next Hour",
+        suggested_display_precision=0,
+    ),
     # "power_now_12hr": SensorEntityDescription(
     #     key="power_now_12hr",
     #     device_class=SensorDeviceClass.POWER,
@@ -262,6 +282,7 @@ class SolcastSensor(CoordinatorEntity, SensorEntity):
     """Representation of a Solcast Sensor device."""
 
     _attr_attribution = ATTRIBUTION
+    _attr_has_entity_name = True
 
     def __init__(
         self,
@@ -274,6 +295,8 @@ class SolcastSensor(CoordinatorEntity, SensorEntity):
 
         self.entity_description = entity_description
         self.coordinator = coordinator
+        #self.entity_id = f"{entity_description.key}"
+        self._attr_unique_id = f"{entity_description.key}"
 
         self._attributes = {}
         self._attr_extra_state_attributes = {}
@@ -296,22 +319,23 @@ class SolcastSensor(CoordinatorEntity, SensorEntity):
             ATTR_CONFIGURATION_URL: "https://toolkit.solcast.com.au/live-forecast",
         }
 
-        self._unique_id = f"solcast_api_{entity_description.name}"
+        # self._unique_id = f"solcast_api_{entity_description.name}"
 
-    @property
-    def name(self):
-        """Return the name of the device."""
-        return f"{self.entity_description.name}"
+    # @property
+    # def name(self):
+    #     """Return the name of the device."""
+    #     return f"{self.entity_description.name}"
 
-    @property
-    def friendly_name(self):
-        """Return the name of the device."""
-        return self.entity_description.name
+    # @property
+    # def friendly_name(self):
+    #     """Return the name of the device."""
+    #     return self.entity_description.name
 
-    @property
-    def unique_id(self):
-        """Return the unique ID of the binary sensor."""
-        return f"solcast_{self._unique_id}"
+    # @property
+    # def unique_id(self):
+    #     """Return the unique ID of the binary sensor."""
+    #     #return f"solcast_{self._unique_id}"
+    #     return f"{self.entity_description.key}"
 
     @property
     def extra_state_attributes(self):

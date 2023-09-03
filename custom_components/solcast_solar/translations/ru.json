@@ -1,0 +1,107 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "api_key": "API-ключ Solcast"
+        },
+        "description": "Ключ вашей учетной записи API Solcast"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "api_key": "API-ключ Solcast"
+        },
+        "description": "Ключ вашей учетной записи API Solcast"
+      }
+    }
+  },
+  "system_health": {
+    "info": {
+      "can_reach_server": "Подключение к серверу Solcast",
+      "used_requests": "Осталось API-запросов",
+      "rooftop_site_count": "Количество площадок на крыше"
+    }
+  },
+  "services": {
+    "update_forecasts": {
+      "name": "Обновлять",
+      "description": "Получает последние данные прогнозов от Solcast."
+    },
+    "clear_all_solcast_data": {
+      "name": "Очистить все сохраненные данные Solcast",
+      "description": "Удаляет файл solcast.json, чтобы удалить все текущие данные сайта solcast."
+    },
+    "get_forecasts": {
+      "name": "Получайте прогнозы",
+      "description": "Списки событий для прогнозов."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "power_now_30m": {
+        "name": "Мощность Следующие 30 минут"
+      },
+      "power_now_1hr": {
+        "name": "Мощность в следующий час"
+      },
+      "total_kwh_forecast_today": {
+        "name": "Прогноз на сегодня"
+      },
+      "peak_w_today": {
+        "name": "Пиковый прогноз сегодня"
+      },
+      "peak_w_time_today": {
+        "name": "Пиковое время сегодня"
+      },
+      "forecast_this_hour": {
+        "name": "Прогноз на этот час"
+      },
+      "get_remaining_today": {
+        "name": "Прогноз на сегодня"
+      },
+      "forecast_next_hour": {
+        "name": "Прогноз на следующий час"
+      },
+      "total_kwh_forecast_tomorrow": {
+        "name": "Прогноз на завтра"
+      },
+      "peak_w_tomorrow": {
+        "name": "Пик прогноза на завтра"
+      },
+      "peak_w_time_tomorrow": {
+        "name": "Пиковое время завтра"
+      },
+      "api_counter": {
+        "name": "Используемый API"
+      },
+      "api_limit": {
+        "name": "Лимит API"
+      },
+      "lastupdated": {
+        "name": "Последний опрос API"
+      },
+      "total_kwh_forecast_d3": {
+        "name": "Прогноз на 3 день"
+      },
+      "total_kwh_forecast_d4": {
+        "name": "Прогноз на 4-й день"
+      },
+      "total_kwh_forecast_d5": {
+        "name": "Прогноз на 5 день"
+      },
+      "total_kwh_forecast_d6": {
+        "name": "Прогноз на 6 день"
+      },
+      "total_kwh_forecast_d7": {
+        "name": "Прогноз на 7 день"
+      },
+      "power_now": {
+        "name": "Власть сейчас"
+      }
+    }
+  }
+}

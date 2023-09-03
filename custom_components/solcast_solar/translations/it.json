@@ -1,0 +1,107 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "api_key": "Chiave API Solcast"
+        },
+        "description": "La chiave del tuo account API Solcast"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "api_key": "Chiave API Solcast"
+        },
+        "description": "La chiave del tuo account API Solcast"
+      }
+    }
+  },
+  "system_health": {
+    "info": {
+      "can_reach_server": "Connessione al server Solcast",
+      "used_requests": "Richieste API rimanenti",
+      "rooftop_site_count": "Conteggio dei siti sul tetto"
+    }
+  },
+  "services": {
+    "update_forecasts": {
+      "name": "Aggiornamento",
+      "description": "Recupera i dati delle previsioni più recenti da Solcast."
+    },
+    "clear_all_solcast_data": {
+      "name": "Cancella tutti i dati Solcast salvati",
+      "description": "Elimina il file solcast.json per rimuovere tutti i dati correnti del sito solcast."
+    },
+    "get_forecasts": {
+      "name": "Ottieni previsioni",
+      "description": "Elenchi di eventi per le previsioni."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "power_now_30m": {
+        "name": "Alimentazione successivi 30 minuti"
+      },
+      "power_now_1hr": {
+        "name": "Potenza la prossima ora"
+      },
+      "total_kwh_forecast_today": {
+        "name": "Previsioni oggi"
+      },
+      "peak_w_today": {
+        "name": "Previsioni di picco oggi"
+      },
+      "peak_w_time_today": {
+        "name": "Orario di punta oggi"
+      },
+      "forecast_this_hour": {
+        "name": "Previsioni quest'ora"
+      },
+      "get_remaining_today": {
+        "name": "Previsioni rimanenti per oggi"
+      },
+      "forecast_next_hour": {
+        "name": "Previsioni per la prossima ora"
+      },
+      "total_kwh_forecast_tomorrow": {
+        "name": "Previsioni domani"
+      },
+      "peak_w_tomorrow": {
+        "name": "Previsioni di picco domani"
+      },
+      "peak_w_time_tomorrow": {
+        "name": "Domani l'ora di punta"
+      },
+      "api_counter": {
+        "name": "API utilizzata"
+      },
+      "api_limit": {
+        "name": "Limite dell'API"
+      },
+      "lastupdated": {
+        "name": "Ultimo polling dell'API"
+      },
+      "total_kwh_forecast_d3": {
+        "name": "Previsioni giorno 3"
+      },
+      "total_kwh_forecast_d4": {
+        "name": "Previsioni giorno 4"
+      },
+      "total_kwh_forecast_d5": {
+        "name": "Previsioni giorno 5"
+      },
+      "total_kwh_forecast_d6": {
+        "name": "Previsioni giorno 6"
+      },
+      "total_kwh_forecast_d7": {
+        "name": "Previsioni giorno 7"
+      },
+      "power_now": {
+        "name": "Potenza adesso"
+      }
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "api_key": "مفتاح Solcast API"
+        },
+        "description": "مفتاح حساب Solcast API الخاص بك"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "api_key": "مفتاح Solcast API"
+        },
+        "description": "مفتاح حساب Solcast API الخاص بك"
+      }
+    }
+  },
+  "system_health": {
+    "info": {
+      "can_reach_server": "اتصال خادم Solcast",
+      "used_requests": "طلبات واجهة برمجة التطبيقات (API) المتبقية",
+      "rooftop_site_count": "عدد المواقع على السطح"
+    }
+  },
+  "services": {
+    "update_forecasts": {
+      "name": "تحديث",
+      "description": "جلب أحدث بيانات التوقعات من Solcast."
+    },
+    "clear_all_solcast_data": {
+      "name": "مسح جميع بيانات Solcast المحفوظة",
+      "description": "يحذف ملف solcast.json لإزالة جميع بيانات موقع solcast الحالية."
+    },
+    "get_forecasts": {
+      "name": "احصل على توقعات",
+      "description": "قوائم الأحداث للتنبؤات."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "power_now_30m": {
+        "name": "الطاقة التالية 30 دقيقة"
+      },
+      "power_now_1hr": {
+        "name": "قوة الساعة القادمة"
+      },
+      "total_kwh_forecast_today": {
+        "name": "توقعات اليوم"
+      },
+      "peak_w_today": {
+        "name": "توقعات الذروة اليوم"
+      },
+      "peak_w_time_today": {
+        "name": "وقت الذروة اليوم"
+      },
+      "forecast_this_hour": {
+        "name": "توقعات هذه الساعة"
+      },
+      "get_remaining_today": {
+        "name": "التوقعات المتبقية اليوم"
+      },
+      "forecast_next_hour": {
+        "name": "توقعات الساعة القادمة"
+      },
+      "total_kwh_forecast_tomorrow": {
+        "name": "توقعات غدا"
+      },
+      "peak_w_tomorrow": {
+        "name": "توقعات الذروة غدا"
+      },
+      "peak_w_time_tomorrow": {
+        "name": "وقت الذروة غدا"
+      },
+      "api_counter": {
+        "name": "واجهة برمجة التطبيقات المستخدمة"
+      },
+      "api_limit": {
+        "name": "حد واجهة برمجة التطبيقات"
+      },
+      "lastupdated": {
+        "name": "آخر استطلاع لواجهة برمجة التطبيقات (API)."
+      },
+      "total_kwh_forecast_d3": {
+        "name": "توقعات اليوم الثالث"
+      },
+      "total_kwh_forecast_d4": {
+        "name": "توقعات اليوم الرابع"
+      },
+      "total_kwh_forecast_d5": {
+        "name": "توقعات اليوم الخامس"
+      },
+      "total_kwh_forecast_d6": {
+        "name": "توقعات اليوم السادس"
+      },
+      "total_kwh_forecast_d7": {
+        "name": "توقعات اليوم السابع"
+      },
+      "power_now": {
+        "name": "القوة الآن"
+      }
+    }
+  }
+}

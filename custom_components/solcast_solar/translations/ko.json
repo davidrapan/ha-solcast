@@ -1,0 +1,107 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "api_key": "솔캐스트 API 키"
+        },
+        "description": "귀하의 Solcast API 계정 키"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "api_key": "솔캐스트 API 키"
+        },
+        "description": "귀하의 Solcast API 계정 키"
+      }
+    }
+  },
+  "system_health": {
+    "info": {
+      "can_reach_server": "솔캐스트 서버 연결",
+      "used_requests": "남은 API 요청",
+      "rooftop_site_count": "옥상 사이트 수"
+    }
+  },
+  "services": {
+    "update_forecasts": {
+      "name": "업데이트",
+      "description": "Solcast에서 최신 예측 데이터를 가져옵니다."
+    },
+    "clear_all_solcast_data": {
+      "name": "저장된 Solcast 데이터 모두 삭제",
+      "description": "현재 solcast 사이트 데이터를 모두 제거하려면 solcast.json 파일을 삭제합니다."
+    },
+    "get_forecasts": {
+      "name": "예측 받기",
+      "description": "예측에 대한 이벤트 목록입니다."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "power_now_30m": {
+        "name": "다음 30분 동안 전원 공급"
+      },
+      "power_now_1hr": {
+        "name": "다음 시간 전력 공급"
+      },
+      "total_kwh_forecast_today": {
+        "name": "오늘 예측"
+      },
+      "peak_w_today": {
+        "name": "오늘의 피크 예측"
+      },
+      "peak_w_time_today": {
+        "name": "오늘 피크타임"
+      },
+      "forecast_this_hour": {
+        "name": "이번 시간 예측"
+      },
+      "get_remaining_today": {
+        "name": "오늘 남은 일기예보"
+      },
+      "forecast_next_hour": {
+        "name": "다음 시간 예측"
+      },
+      "total_kwh_forecast_tomorrow": {
+        "name": "내일 예측"
+      },
+      "peak_w_tomorrow": {
+        "name": "내일 피크 예보"
+      },
+      "peak_w_time_tomorrow": {
+        "name": "내일 피크타임"
+      },
+      "api_counter": {
+        "name": "사용된 API"
+      },
+      "api_limit": {
+        "name": "API 한도"
+      },
+      "lastupdated": {
+        "name": "마지막으로 폴링된 API"
+      },
+      "total_kwh_forecast_d3": {
+        "name": "3일차 예측"
+      },
+      "total_kwh_forecast_d4": {
+        "name": "4일차 예측"
+      },
+      "total_kwh_forecast_d5": {
+        "name": "5일차 예측"
+      },
+      "total_kwh_forecast_d6": {
+        "name": "6일차 예측"
+      },
+      "total_kwh_forecast_d7": {
+        "name": "7일차 예측"
+      },
+      "power_now": {
+        "name": "지금 전원을 공급하세요"
+      }
+    }
+  }
+}

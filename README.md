@@ -169,6 +169,10 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 | `Peak Time Today` | date/time | N |  | Hour of max forecasted production of solar today |
 | `Peak Forecast Tomorrow` | number | N | `Wh` | Highest predicted production within an hour period tomorrow |
 | `Peak Time Tomorrow` | date/time | N |  | Hour of max forecasted production of solar tomorrow |
+| `Power Now` | number | N |  | Power forecast during the current 0-30 / 30-60 min hour period |
+| `Power Next 30 Mins` | number | N |  | Power forecast for the next 0-30 / 30-60 min hour period |
+| `Power Next Hour` | number | N |  | Power forecast for the next whole 0-60 / 30-30 min hour period |
+
 
 ### Configuration
 
@@ -182,7 +186,8 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 | ------------------------------ | ----------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
 | `API Last Polled` | date/time | N |  | Date/time when the API data was polled |
 | `API Limit` | number | N | `integer` | Total times the API can been called in a 24 hour period |
-| `API used` | number | N | `integer` | Total times the API has been called today (API counter resets to zero at midnight UTC) |
+| `API used` | number | N | `integer` | Total times the API has been called today (API counter resets to zero at midnight UTC) |  
+API information is directly read from Solcast
 
 
 </details>

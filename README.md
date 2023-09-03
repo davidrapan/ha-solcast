@@ -185,9 +185,10 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 | Name | Type | Attributes | Default | Description |
 | ------------------------------ | ----------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
 | `API Last Polled` | date/time | N |  | Date/time when the API data was polled |
-| `API Limit` | number | N | `integer` | Total times the API can been called in a 24 hour period |
-| `API used` | number | N | `integer` | Total times the API has been called today (API counter resets to zero at midnight UTC) |  
-API information is directly read from Solcast
+| `API Limit` | number | N | `integer` | Total times the API can been called in a 24 hour period[^1] |
+| `API used` | number | N | `integer` | Total times the API has been called today (API counter resets to zero at midnight UTC)[^1] |  
+
+[^1]: API information is directly read from Solcast
 
 
 </details>

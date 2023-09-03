@@ -5,7 +5,7 @@
         "data": {
           "api_key": "Solcast-API-Schlüssel"
         },
-        "description": "Ihr Solcast-API-Kontoschlüssel"
+        "description": "Trage deinen Solcast-API-Kontoschlüssel ein."
       }
     }
   },
@@ -15,92 +15,92 @@
         "data": {
           "api_key": "Solcast-API-Schlüssel"
         },
-        "description": "Ihr Solcast-API-Kontoschlüssel"
+        "description": "Dein Solcast-API-Kontoschlüssel"
       }
     }
   },
   "system_health": {
     "info": {
       "can_reach_server": "Verbindung zum Solcast-Server",
-      "used_requests": "Verbleibende API-Anfragen",
+      "used_requests": "Verbrauchte API-Anfragen",
       "rooftop_site_count": "Anzahl der Dachflächen"
     }
   },
   "services": {
     "update_forecasts": {
       "name": "Aktualisieren",
-      "description": "Ruft die neuesten Prognosedaten von Solcast ab."
+      "description": "Lade die neusten Prognosedaten von Solcast herunter."
     },
     "clear_all_solcast_data": {
-      "name": "Löschen Sie alle gespeicherten Solcast-Daten",
-      "description": "Löscht die Datei solcast.json, um alle aktuellen Solcast-Site-Daten zu entfernen."
+      "name": "Solcast-Daten zurücksetzen",
+      "description": "Alle gespeicherten Solcast-Daten werden  entfernt. Die Datei solcast.json wird dadurch gelöscht."
     },
     "get_forecasts": {
-      "name": "Erhalten Sie Prognosen",
-      "description": "Ereignislisten für Prognosen."
+      "name": "Prognosedaten herunterladen",
+      "description": "Es werden die aktuellen Prognosedaten heruntergeladen."
     }
   },
   "entity": {
     "sensor": {
       "power_now_30m": {
-        "name": "Power Next 30 Min"
+        "name": "Leistung kommende 30 Minuten"
       },
       "power_now_1hr": {
-        "name": "Power nächste Stunde"
+        "name": "Leistung kommende 60 Minuten"
       },
       "total_kwh_forecast_today": {
         "name": "Prognose heute"
       },
       "peak_w_today": {
-        "name": "Spitzenprognose heute"
+        "name": "Prognose Spitzenleistung heute"
       },
       "peak_w_time_today": {
-        "name": "Heute ist Spitzenzeit"
+        "name": "Zeitpunkt Spitzenleistung heute"
       },
       "forecast_this_hour": {
-        "name": "Prognose für diese Stunde"
+        "name": "Prognose aktuelle Stunde"
       },
       "get_remaining_today": {
-        "name": "Vorhersage für heute"
+        "name": "Prognose verbleibende Leistung heute"
       },
       "forecast_next_hour": {
-        "name": "Vorhersage für die nächste Stunde"
+        "name": "Prognose nächste Stunde"
       },
       "total_kwh_forecast_tomorrow": {
-        "name": "Prognose für morgen"
+        "name": "Prognose morgen"
       },
       "peak_w_tomorrow": {
-        "name": "Spitzenprognose für morgen"
+        "name": "Prognose Spitzenleistung morgen"
       },
       "peak_w_time_tomorrow": {
-        "name": "Morgen ist Spitzenzeit"
+        "name": "Zeitpunkt Spitzenleistung morgen"
       },
       "api_counter": {
-        "name": "Verwendete API"
+        "name": "Verwendete API-Abrufe"
       },
       "api_limit": {
-        "name": "API-Limit"
+        "name": "max. API-Abrufe"
       },
       "lastupdated": {
-        "name": "Zuletzt abgefragte API"
+        "name": "Zeitpunkt letzter API-Abruf"
       },
       "total_kwh_forecast_d3": {
-        "name": "Vorhersage Tag 3"
+        "name": "Prognose Tag 3"
       },
       "total_kwh_forecast_d4": {
-        "name": "Vorhersage Tag 4"
+        "name": "Prognose Tag 4"
       },
       "total_kwh_forecast_d5": {
-        "name": "Prognosetag 5"
+        "name": "Prognose Tag 5"
       },
       "total_kwh_forecast_d6": {
-        "name": "Vorhersage Tag 6"
+        "name": "Prognose Tag 6"
       },
       "total_kwh_forecast_d7": {
-        "name": "Vorhersage Tag 7"
+        "name": "Prognose Tag 7"
       },
       "power_now": {
-        "name": "Power Now"
+        "name": "aktuelle Leistung"
       }
     }
   }

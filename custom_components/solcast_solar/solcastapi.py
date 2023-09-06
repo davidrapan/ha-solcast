@@ -156,10 +156,9 @@ class SolcastApi:
 
                 resp_json = await resp.json(content_type=None)
                 status = resp.status
-
                         
-                _LOGGER.debug(f"SOLCAST - sites_usage code http_session returned data type is {type(resp_json)}")
-                _LOGGER.debug(f"SOLCAST - sites_usage code http_session returned status {status}")
+                # _LOGGER.debug(f"SOLCAST - sites_usage code http_session returned data type is {type(resp_json)}")
+                # _LOGGER.debug(f"SOLCAST - sites_usage code http_session returned status {status}")
 
             if status == 200:
                 d = cast(dict, resp_json)
@@ -171,7 +170,7 @@ class SolcastApi:
                     raise Exception(f"SOLCAST - HTTP sites_usage error: Solcast Error gathering usage data.")
             else:
                 _LOGGER.warning(
-                    f"SOLCAST - sites_usage Solcast.com http status Error {status} - Gathering usage data."
+                    f"SOLCAST - sites_usage Solcast.com error gathering usage data. Status code: {status} - Responce: {resp_json}."
                 )
                 raise Exception(f"SOLCAST - HTTP sites_usage error: Solcast Error gathering usage data.")
         except json.decoder.JSONDecodeError:
@@ -294,11 +293,23 @@ class SolcastApi:
             if d["period_start"].astimezone(tz).date() == da
         )
         if len(h) != 24 * 2:
-            raise ValueError(f"Incorrect number of forecasts returned. {len(h)}")
-        return {
-            "detailedForecast": tuple(
+            _LOGGER.debug(f"get_forecast_day day {futureday+1} missing data from solcast. should be 48 records but the data only has {len(h)}. This can happen mostly for D6 forecast due to polling times")
+            # raise ValueError(f"Incorrect number of forecasts returned. {len(h)}")
+        
+        tup = tuple(
                 {**d, "period_start": d["period_start"].astimezone(tz)} for d in h
-            ),
+            )
+        
+        hourlyturp = []
+        for index in range(0,len(tup),2):
+            x1 = round((tup[index]["pv_estimate"] + tup[index+1]["pv_estimate"]) /2, 4)
+            x2 = round((tup[index]["pv_estimate10"] + tup[index+1]["pv_estimate10"]) /2, 4)
+            x3 = round((tup[index]["pv_estimate90"] + tup[index+1]["pv_estimate90"]) /2, 4)
+            hourlyturp.append({"period_start":tup[index]["period_start"], "pv_estimate":x1, "pv_estimate10":x2, "pv_estimate90":x3})
+
+        return {
+            "detailedForecast": tup,
+            "detailedHourly": hourlyturp,
             "dayname": da.strftime("%A"),
         }
 
@@ -326,9 +337,10 @@ class SolcastApi:
             (z for z in self._data_forecasts), key=lambda x: abs(x["period_start"] - da)
         )
         if abs(m["period_start"] - da) > timedelta(minutes=30):
-            raise ValueError(
-                f"Solcast data didn't return anything within 30 minutes of {da}"
-            )
+            _LOGGER.debug(f"get_power_production_n_mins {minuteincrement} is missing data from solcast. Any data found was used to show something at least")
+            # raise ValueError(
+            #     f"Solcast data didn't return anything within 30 minutes of {da}"
+            # )
         return int(m["pv_estimate"] * 1000)
 
     def get_peak_w_day(self, dayincrement) -> int:
@@ -380,9 +392,10 @@ class SolcastApi:
             needed_delta -= delta
 
         if needed_delta > permitted_error:
-            raise ValueError(
-                f"Solcast data didn't return anything within {permitted_error} (needed_delta={needed_delta})"
-            )
+            _LOGGER.debug(f"get_remaining_today is missing data from solcast. Any data found was used to show something at least")
+            # raise ValueError(
+            #     f"Solcast data didn't return anything within {permitted_error} (needed_delta={needed_delta})"
+            # )
 
         return ret
 
@@ -410,9 +423,10 @@ class SolcastApi:
             needed_delta -= delta
 
         if needed_delta > permitted_error:
-            raise ValueError(
-                f"Solcast data didn't return anything within {permitted_error} (needed_delta={needed_delta})"
-            )
+            _LOGGER.debug(f"forecast day {dayincrement+1} is missing data from solcast. Any data found was used to show something at least")
+            # raise ValueError(
+            #     f"Solcast data didn't return anything within {permitted_error} (needed_delta={needed_delta})"
+            # )
 
         return ret
     
@@ -453,7 +467,9 @@ class SolcastApi:
                 if not isinstance(ae, list):
                     raise TypeError(f"estimated actuals must be a list, not {type(ae)}")
 
-                _data2 = []
+                oldest = dt.now(self._tz).replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=6)
+                oldest = oldest.astimezone(timezone.utc)
+
                 for x in ae:
                     z = parse_datetime(x["period_end"]).astimezone(timezone.utc)
                     z = z.replace(second=0, microsecond=0) - timedelta(minutes=30)
@@ -461,14 +477,15 @@ class SolcastApi:
                         raise ValueError(
                             f"Solcast period_start minute is not 0 or 30. {z.minute}"
                         )
-                    _data2.append(
-                        {
-                            "period_start": z,
-                            "pv_estimate": x["pv_estimate"],
-                            "pv_estimate10": 0,
-                            "pv_estimate90": 0,
-                        }
-                    )
+                    if z > oldest:
+                        _data2.append(
+                            {
+                                "period_start": z,
+                                "pv_estimate": x["pv_estimate"],
+                                "pv_estimate10": 0,
+                                "pv_estimate90": 0,
+                            }
+                        )
 
             resp_dict = await self.fetch_data("forecasts", 168, site=site["resource_id"], apikey=site["apikey"], cachedname="forecasts")
             if not isinstance(resp_dict, dict):
@@ -650,15 +667,15 @@ class SolcastApi:
                             
                         itm = next((item for item in _forecasts if item["period_start"] == z), None)
                         if itm:
-                            itm["pv_estimate"] = itm["pv_estimate"] + x["pv_estimate"]
-                            itm["pv_estimate10"] = itm["pv_estimate10"] + x["pv_estimate10"]
-                            itm["pv_estimate90"] = itm["pv_estimate90"] + x["pv_estimate90"]
+                            itm["pv_estimate"] = round(itm["pv_estimate"] + x["pv_estimate"],4)
+                            itm["pv_estimate10"] = round(itm["pv_estimate10"] + x["pv_estimate10"],4)
+                            itm["pv_estimate90"] = round(itm["pv_estimate90"] + x["pv_estimate90"],4)
                         else:    
-                            _forecasts.append({"period_start": z,"pv_estimate": x["pv_estimate"],
-                                                                "pv_estimate10": x["pv_estimate10"],
-                                                                "pv_estimate90": x["pv_estimate90"]})
+                            _forecasts.append({"period_start": z,"pv_estimate": round(x["pv_estimate"],4),
+                                                                "pv_estimate10": round(x["pv_estimate10"],4),
+                                                                "pv_estimate90": round(x["pv_estimate90"],4)})
                         
-                self._data['siteinfo'][s]['tally'] = tally #round(tally, 2)
+                self._data['siteinfo'][s]['tally'] = round(tally, 4)
                         
             _forecasts = sorted(_forecasts, key=itemgetter("period_start"))     
             

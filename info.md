@@ -1,5 +1,11 @@
 ### Changes
 
+v4.0.3
+- updated German thanks to @florie1706 PR#179 and removed all other localisation files
+- added new attribute `detailedHourly` to each daily forecast sensor listing hourly forecasts in kWh
+- if there is data missing, sensors will still show something but a debug log will outpout that the sensor is missing data
+
+
 v4.0.2
 - sensor names **have** changed!! this is due to locali(s/z)ation strings of the integration
 - decimal percision changed for forecast tomorrow from 0 to 2

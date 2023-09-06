@@ -316,7 +316,7 @@ class SolcastSensor(CoordinatorEntity, SensorEntity):
             ATTR_MODEL: "Solcast PV Forecast",
             ATTR_ENTRY_TYPE: DeviceEntryType.SERVICE,
             ATTR_SW_VERSION: coordinator._version,
-            ATTR_CONFIGURATION_URL: "https://toolkit.solcast.com.au/live-forecast",
+            ATTR_CONFIGURATION_URL: "https://toolkit.solcast.com.au/",
         }
 
         # self._unique_id = f"solcast_api_{entity_description.name}"
@@ -424,7 +424,7 @@ class RooftopSensor(CoordinatorEntity, SensorEntity):
             ATTR_MODEL: "Solcast PV Forecast",
             ATTR_ENTRY_TYPE: DeviceEntryType.SERVICE,
             ATTR_SW_VERSION: coordinator._version,
-            ATTR_CONFIGURATION_URL: "https://toolkit.solcast.com.au/live-forecast",
+            ATTR_CONFIGURATION_URL: "https://toolkit.solcast.com.au/",
         }
 
         self._unique_id = f"solcast_api_{entity_description.name}"

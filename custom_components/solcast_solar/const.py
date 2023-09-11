@@ -1,4 +1,5 @@
 """Constants for the Solcast Solar integration."""
+
 from __future__ import annotations
 
 from typing import Final
@@ -14,4 +15,4 @@ ATTRIBUTION: Final = "Data retrieved from Solcast"
 
 SERVICE_UPDATE = "update_forecasts"
 SERVICE_CLEAR_DATA = "clear_all_solcast_data"
-SERVICE_GET_FORECAST = "get_forecasts"
+SERVICE_QUERY_FORECAST_DATA = "query_forecast_data"

@@ -1,5 +1,9 @@
 ### Changes
 
+v4.0.4
+- finished off the service call `query_forecast_data` to query the forecast data. Returns a list of forecast data using a datetime range start - end
+- and thats all.. unless HA makes breaking changes or there is a major bug in v4.0.4, this is the last update
+
 v4.0.3
 - updated German thanks to @florie1706 PR#179 and removed all other localisation files
 - added new attribute `detailedHourly` to each daily forecast sensor listing hourly forecasts in kWh

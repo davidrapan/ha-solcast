@@ -12,7 +12,7 @@ from datetime import datetime as dt
 from datetime import timedelta, timezone
 from operator import itemgetter
 from os.path import exists as file_exists
-from typing import Any, Dict, Optional, cast
+from typing import Any, Dict, cast
 
 import async_timeout
 from aiohttp import ClientConnectionError, ClientSession
@@ -153,12 +153,8 @@ class SolcastApi:
                 resp: ClientResponse = await self.aiohttp_session.get(
                     url=f"https://api.solcast.com.au/json/reply/GetUserUsageAllowance", params=params, ssl=False
                 )
-
                 resp_json = await resp.json(content_type=None)
                 status = resp.status
-                        
-                # _LOGGER.debug(f"SOLCAST - sites_usage code http_session returned data type is {type(resp_json)}")
-                # _LOGGER.debug(f"SOLCAST - sites_usage code http_session returned status {status}")
 
             if status == 200:
                 d = cast(dict, resp_json)
@@ -227,16 +223,18 @@ class SolcastApi:
             _LOGGER.error(f"SOLCAST - service event to delete old solcast.json file failed")
             
     async def get_forecast_list(self, *args):
-        _LOGGER.debug(f"SOLCAST - service event to get forecasts list")
         try:
             tz = self._tz
+            
             return tuple(
                 {
                     **d,
                     "period_start": d["period_start"].astimezone(tz),
                 }
                 for d in self._data_forecasts
+                if d["period_start"] >= args[0] and d["period_start"] < args[1]
             )
+
         except Exception:
             _LOGGER.error(f"SOLCAST - service event to get list of forecasts failed")
 
@@ -293,7 +291,9 @@ class SolcastApi:
             if d["period_start"].astimezone(tz).date() == da
         )
         if len(h) != 24 * 2:
-            _LOGGER.debug(f"get_forecast_day day {futureday+1} missing data from solcast. should be 48 records but the data only has {len(h)}. This can happen mostly for D6 forecast due to polling times")
+            _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
+            _LOGGER.debug(f"get_forecast_day day {futureday+1} missing data from solcast. should be 48 records but the data only has {len(h)}. This can happen sometimes")
+            _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
             # raise ValueError(f"Incorrect number of forecasts returned. {len(h)}")
         
         tup = tuple(
@@ -337,7 +337,9 @@ class SolcastApi:
             (z for z in self._data_forecasts), key=lambda x: abs(x["period_start"] - da)
         )
         if abs(m["period_start"] - da) > timedelta(minutes=30):
+            _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
             _LOGGER.debug(f"get_power_production_n_mins {minuteincrement} is missing data from solcast. Any data found was used to show something at least")
+            _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
             # raise ValueError(
             #     f"Solcast data didn't return anything within 30 minutes of {da}"
             # )
@@ -392,7 +394,9 @@ class SolcastApi:
             needed_delta -= delta
 
         if needed_delta > permitted_error:
+            _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
             _LOGGER.debug(f"get_remaining_today is missing data from solcast. Any data found was used to show something at least")
+            
             # raise ValueError(
             #     f"Solcast data didn't return anything within {permitted_error} (needed_delta={needed_delta})"
             # )
@@ -423,7 +427,9 @@ class SolcastApi:
             needed_delta -= delta
 
         if needed_delta > permitted_error:
+            _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
             _LOGGER.debug(f"forecast day {dayincrement+1} is missing data from solcast. Any data found was used to show something at least")
+            
             # raise ValueError(
             #     f"Solcast data didn't return anything within {permitted_error} (needed_delta={needed_delta})"
             # )
@@ -439,9 +445,6 @@ class SolcastApi:
 
     async def http_data(self, dopast = False):
         """Request forecast data via the Solcast API."""
-        tz = self._tz
-        #today = dt.now(tz).date()
-        #yesterday = dt.now(self._tz).date() + timedelta(days=-1)
         lastday = dt.now(self._tz) + timedelta(days=7)
         lastday = lastday.replace(hour=23,minute=59).astimezone(timezone.utc)
 
@@ -625,10 +628,11 @@ class SolcastApi:
             lastv = -1
             lastk = -1
             for v in self._data_forecasts:
-                d = v['period_start'].isoformat() #.isoformat()
+                d = v['period_start'].isoformat()
                 if v['pv_estimate'] == 0.0:
                     if lastv > 0.0:
                         wh_hours[d] = round(v['pv_estimate'] * 500,0)
+                        wh_hours[lastk] = 0.0
                     lastk = d
                     lastv = v['pv_estimate']
                 else:
@@ -681,10 +685,8 @@ class SolcastApi:
             
             self._data_forecasts = _forecasts 
                     
-
             self._dataenergy = {"wh_hours": self.makeenergydict()}
                 
         except Exception as e:
             _LOGGER.error("SOLCAST - http_data error: %s", traceback.format_exc())
         
-    

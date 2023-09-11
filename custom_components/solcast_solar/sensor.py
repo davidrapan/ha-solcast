@@ -5,7 +5,6 @@ from __future__ import annotations
 import logging
 import traceback
 from dataclasses import dataclass
-from typing import Dict
 
 from datetime import datetime as dt
 from datetime import timedelta, timezone
@@ -92,20 +91,6 @@ SENSORS: dict[str, SensorEntityDescription] = {
         icon="mdi:solar-power",
         suggested_display_precision=0,
     ),
-    # "forecast_next_12hour": SensorEntityDescription(
-    #     key="forecast_next_12hour",
-    #     device_class=SensorDeviceClass.ENERGY,
-    #     native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
-    #     name="Energy Next 12 Hours",
-    #     suggested_display_precision=0,
-    # ),
-    # "forecast_next_24hour": SensorEntityDescription(
-    #     key="forecast_next_24hour",
-    #     device_class=SensorDeviceClass.ENERGY,
-    #     native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
-    #     name="Energy Next 24 Hours",
-    #     suggested_display_precision=0,
-    # ),
     "total_kwh_forecast_tomorrow": SensorEntityDescription(
         key="total_kwh_forecast_tomorrow",
         device_class=SensorDeviceClass.ENERGY,
@@ -223,20 +208,6 @@ SENSORS: dict[str, SensorEntityDescription] = {
         #name="Power Next Hour",
         suggested_display_precision=0,
     ),
-    # "power_now_12hr": SensorEntityDescription(
-    #     key="power_now_12hr",
-    #     device_class=SensorDeviceClass.POWER,
-    #     native_unit_of_measurement=UnitOfPower.WATT,
-    #     name="Power Next 12 Hours",
-    #     suggested_display_precision=0,
-    # ),
-    # "power_now_24hr": SensorEntityDescription(
-    #     key="power_now_24hr",
-    #     device_class=SensorDeviceClass.POWER,
-    #     native_unit_of_measurement=UnitOfPower.WATT,
-    #     name="Power Next 24 Hours",
-    #     suggested_display_precision=0,
-    # ),
 }
 
 
@@ -266,7 +237,6 @@ async def async_setup_entry(
                 rooftop_id=site["resource_id"],
             )
         
-        #sen = RooftopSensor(coordinator, k,entry, coordinator._version)
         sen = RooftopSensor(
             key="site_data",
             coordinator=coordinator,
@@ -295,7 +265,6 @@ class SolcastSensor(CoordinatorEntity, SensorEntity):
 
         self.entity_description = entity_description
         self.coordinator = coordinator
-        #self.entity_id = f"{entity_description.key}"
         self._attr_unique_id = f"{entity_description.key}"
 
         self._attributes = {}
@@ -319,23 +288,6 @@ class SolcastSensor(CoordinatorEntity, SensorEntity):
             ATTR_CONFIGURATION_URL: "https://toolkit.solcast.com.au/",
         }
 
-        # self._unique_id = f"solcast_api_{entity_description.name}"
-
-    # @property
-    # def name(self):
-    #     """Return the name of the device."""
-    #     return f"{self.entity_description.name}"
-
-    # @property
-    # def friendly_name(self):
-    #     """Return the name of the device."""
-    #     return self.entity_description.name
-
-    # @property
-    # def unique_id(self):
-    #     """Return the unique ID of the binary sensor."""
-    #     #return f"solcast_{self._unique_id}"
-    #     return f"{self.entity_description.key}"
 
     @property
     def extra_state_attributes(self):
@@ -359,13 +311,6 @@ class SolcastSensor(CoordinatorEntity, SensorEntity):
     def should_poll(self) -> bool:
         """Return if the sensor should poll."""
         return False
-
-    # async def async_added_to_hass(self) -> None:
-    #     """When entity is added to hass."""
-    #     await super().async_added_to_hass()
-    #     self.async_on_remove(
-    #         self.coordinator.async_add_listener(self._handle_coordinator_update)
-    #     )
 
     @callback
     def _handle_coordinator_update(self) -> None:

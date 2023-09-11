@@ -6,22 +6,36 @@ from homeassistant import loader
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_API_KEY, Platform
 from homeassistant.core import (HomeAssistant,
+                                ServiceCall,
                                 ServiceResponse,
                                 SupportsResponse,)
-from homeassistant.exceptions import ConfigEntryNotReady
-from homeassistant.helpers import aiohttp_client
+from homeassistant.exceptions import ConfigEntryNotReady, HomeAssistantError
+from homeassistant.helpers import config_validation as cv
+from homeassistant.helpers import aiohttp_client, intent
 from homeassistant.helpers.device_registry import async_get as device_registry
 from homeassistant.util import dt as dt_util
 
-
-from .const import (DOMAIN,
-                    SERVICE_CLEAR_DATA, SERVICE_UPDATE, SERVICE_GET_FORECAST, SOLCAST_URL)
+from .const import (DOMAIN, SERVICE_CLEAR_DATA, SERVICE_UPDATE, SERVICE_QUERY_FORECAST_DATA, SOLCAST_URL)
 from .coordinator import SolcastUpdateCoordinator
 from .solcastapi import ConnectionOptions, SolcastApi
+
+from typing import Final
+
+import voluptuous as vol
 
 PLATFORMS = [Platform.SENSOR]
 
 _LOGGER = logging.getLogger(__name__)
+
+
+EVENT_START_DATETIME = "start_date_time"
+EVENT_END_DATETIME = "end_date_time"
+SERVICE_QUERY_SCHEMA: Final = vol.All(
+        {
+            vol.Required(EVENT_START_DATETIME): cv.datetime,
+            vol.Required(EVENT_END_DATETIME): cv.datetime,
+        }
+)
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
@@ -67,21 +81,33 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     _LOGGER.info(f"SOLCAST - Solcast API data UTC times are converted to {hass.config.time_zone}")
 
-    async def handle_service_update_forecast(call):
+    async def handle_service_update_forecast(call: ServiceCall):
         """Handle service call"""
         _LOGGER.info(f"SOLCAST - Service call: {SERVICE_UPDATE}")
         await coordinator.service_event_update()
 
-    async def handle_service_clear_solcast_data(call):
+    async def handle_service_clear_solcast_data(call: ServiceCall):
         """Handle service call"""
         _LOGGER.info(f"SOLCAST - Service call: {SERVICE_CLEAR_DATA}")
         await coordinator.service_event_delete_old_solcast_json_file()
 
-    async def handle_service_get_solcast_data(call) -> ServiceResponse:
+    async def handle_service_get_solcast_data(call: ServiceCall) -> ServiceResponse:
         """Handle service call"""
-        _LOGGER.info(f"SOLCAST - Service call: {SERVICE_GET_FORECAST}")
-        d = await coordinator.service_get_forecasts()
-        return {"data": [d]}
+        try:
+            _LOGGER.info(f"SOLCAST - Service call: {SERVICE_QUERY_FORECAST_DATA}")
+
+            start = call.data.get(EVENT_START_DATETIME, dt_util.now())
+            end = call.data.get(EVENT_END_DATETIME, dt_util.now())
+
+            d = await coordinator.service_query_forecast_data(dt_util.as_utc(start), dt_util.as_utc(end))
+        except intent.IntentHandleError as err:
+            raise HomeAssistantError(f"Error processing {SERVICE_QUERY_FORECAST_DATA}: {err}") from err
+
+        if call.return_response:
+            return {"data": d}
+
+        return None
+    
 
     hass.services.async_register(DOMAIN, SERVICE_UPDATE, handle_service_update_forecast)
 
@@ -90,7 +116,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     )
 
     hass.services.async_register(
-        DOMAIN, SERVICE_GET_FORECAST, handle_service_get_solcast_data, None, SupportsResponse.ONLY,
+        DOMAIN, SERVICE_QUERY_FORECAST_DATA, handle_service_get_solcast_data, SERVICE_QUERY_SCHEMA, SupportsResponse.ONLY,
     )
 
     return True
@@ -103,7 +129,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     hass.services.async_remove(DOMAIN, SERVICE_UPDATE)
     hass.services.async_remove(DOMAIN, SERVICE_CLEAR_DATA)
-    hass.services.async_remove(DOMAIN, SERVICE_GET_FORECAST)
+    hass.services.async_remove(DOMAIN, SERVICE_QUERY_FORECAST_DATA)
 
     return unload_ok
 

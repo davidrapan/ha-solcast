@@ -36,10 +36,20 @@
             "name": "Clear all saved Solcast data",
             "description": "Deletes the solcast.json file to remove all current solcast site data."
             },
-        "get_forecasts": {
-            "name": "Get forecasts",
-            "description": "Lists of events for forecasts."
+        "query_forecast_data": {
+            "name": "Query forecast data",
+            "description": "Return a data set for a given query.",
+            "fields": {
+                "start_date_time": {
+                    "name": "Start date time",
+                    "description": "Query forecast data events from date time."
+                },
+                "end_date_time": {
+                    "name": "End date time",
+                    "description": "Query forecast data events up to date time."
+                }
             }
+        }
     },
     "entity": {
         "sensor": {

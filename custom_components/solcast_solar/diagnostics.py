@@ -27,7 +27,6 @@ async def async_get_config_entry_diagnostics(
         "api_request_limit": coordinator.solcast.get_api_limit(),
         "rooftop_site_count": len(coordinator.solcast._sites),
         "data": (coordinator.data, TO_REDACT),
-        "converted_data": coordinator.solcast._tzdataconverted,
         "energy_history_graph": coordinator._previousenergy,
         "energy_forecasts_graph": coordinator.solcast._dataenergy["wh_hours"],
     }

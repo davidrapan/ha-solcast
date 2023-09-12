@@ -1,5 +1,10 @@
 ### Changes
 
+v4.0.5
+- PR#192 - updated German translation.. thanks @florie1706
+- fixed `Remaining Today` forecast.. it now also uses the 30min interval data
+- fixed `Download diagnostic` data throwing an error when clicked
+
 v4.0.4
 - finished off the service call `query_forecast_data` to query the forecast data. Returns a list of forecast data using a datetime range start - end
 - and thats all.. unless HA makes breaking changes or there is a major bug in v4.0.4, this is the last update

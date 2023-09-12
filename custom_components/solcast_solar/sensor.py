@@ -331,7 +331,7 @@ class RooftopSensorEntityDescription(SensorEntityDescription):
     rooftop_id: str | None = None
     
 class RooftopSensor(CoordinatorEntity, SensorEntity):
-    """Representation of a Seplos Sensor device."""
+    """Representation of a Solcast Sensor device."""
 
     _attr_attribution = ATTRIBUTION
 

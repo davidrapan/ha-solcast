@@ -133,20 +133,20 @@ class SolcastApi:
         except json.decoder.JSONDecodeError:
             _LOGGER.error("SOLCAST - sites_data JSONDecodeError.. The data returned from Solcast is unknown, Solcast site could be having problems")
         except ConnectionRefusedError as err:
-            _LOGGER.error("SOLCAST - sites_data Error.. %s",err)
+            _LOGGER.error("SOLCAST - sites_data ConnectionRefusedError Error.. %s",err)
         except ClientConnectionError as e:
             _LOGGER.error('SOLCAST - sites_data Connection Error', str(e))
         except asyncio.TimeoutError:
-            _LOGGER.error("SOLCAST - sites_data Connection Error - Timed out connection to solcast server")
+            _LOGGER.error("SOLCAST - sites_data TimeoutError Error - Timed out connection to solcast server")
         except Exception as e:
-            _LOGGER.error("SOLCAST - sites_data error: %s", traceback.format_exc())
+            _LOGGER.error("SOLCAST - sites_data Exception error: %s", traceback.format_exc())
             
     async def sites_usage(self):
         """Request api usage via the Solcast API."""
         
         try:
             sp = self.options.api_key.split(",")
- 
+
             params = {"api_key": sp[0]}
             _LOGGER.debug(f"SOLCAST - getting usage data from solcast")
             async with async_timeout.timeout(60):
@@ -159,16 +159,16 @@ class SolcastApi:
             if status == 200:
                 d = cast(dict, resp_json)
                 _LOGGER.debug(f"SOLCAST - sites_usage returned data: {d}")
-                if "daily_limit" in d:
-                    self._api_limit = d["daily_limit"]
-                    self._api_used = d["daily_limit_consumed"]
-                else:
-                    raise Exception(f"SOLCAST - HTTP sites_usage error: Solcast Error gathering usage data.")
+                self._api_limit = d.get("daily_limit", None)
+                self._api_used = d.get("daily_limit_consumed", None)
+                # if "daily_limit" in d:
+                #     self._api_limit = d["daily_limit"]
+                #     self._api_used = d["daily_limit_consumed"]
+                # else:
+                #     raise Exception(f"SOLCAST - sites_usage: gathering site data failed. request returned Status code: {status} - Responce: {resp_json}.")
             else:
-                _LOGGER.warning(
-                    f"SOLCAST - sites_usage Solcast.com error gathering usage data. Status code: {status} - Responce: {resp_json}."
-                )
-                raise Exception(f"SOLCAST - HTTP sites_usage error: Solcast Error gathering usage data.")
+                raise Exception(f"SOLCAST - sites_usage: gathering site data failed. request returned Status code: {status} - Responce: {resp_json}.")
+            
         except json.decoder.JSONDecodeError:
             _LOGGER.error("SOLCAST - sites_usage JSONDecodeError.. The data returned from Solcast is unknown, Solcast site could be having problems")
         except ConnectionRefusedError as err:
@@ -290,10 +290,10 @@ class SolcastApi:
             for d in self._data_forecasts
             if d["period_start"].astimezone(tz).date() == da
         )
-        if len(h) != 24 * 2:
-            _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
-            _LOGGER.debug(f"get_forecast_day day {futureday+1} missing data from solcast. should be 48 records but the data only has {len(h)}. This can happen sometimes")
-            _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
+        # if len(h) != 24 * 2:
+        #     _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
+        #     _LOGGER.debug(f"get_forecast_day day {futureday+1} missing data from solcast. should be 48 records but the data only has {len(h)}. This can happen sometimes")
+        #     _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
             # raise ValueError(f"Incorrect number of forecasts returned. {len(h)}")
         
         tup = tuple(
@@ -336,13 +336,13 @@ class SolcastApi:
         m = min(
             (z for z in self._data_forecasts), key=lambda x: abs(x["period_start"] - da)
         )
-        if abs(m["period_start"] - da) > timedelta(minutes=30):
-            _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
-            _LOGGER.debug(f"get_power_production_n_mins {minuteincrement} is missing data from solcast. Any data found was used to show something at least")
-            _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
-            # raise ValueError(
-            #     f"Solcast data didn't return anything within 30 minutes of {da}"
-            # )
+        # if abs(m["period_start"] - da) > timedelta(minutes=30):
+        #     _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
+        #     _LOGGER.debug(f"get_power_production_n_mins {minuteincrement} is missing data from solcast. Any data found was used to show something at least")
+        #     _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
+        #     # raise ValueError(
+        #     #     f"Solcast data didn't return anything within 30 minutes of {da}"
+        #     # )
         return int(m["pv_estimate"] * 1000)
 
     def get_peak_w_day(self, dayincrement) -> int:
@@ -372,36 +372,50 @@ class SolcastApi:
         """Return Remaining Forecasts data for today"""
         tz = self._tz
         d = dt.now(tz)
-        needed_delta = d.replace(hour=23, minute=59, second=59, microsecond=0) - d
-        permitted_error = timedelta(hours=1)
+        #needed_delta = d.replace(hour=23, minute=59, second=59, microsecond=0) - d
+        #permitted_error = timedelta(hours=1)
 
-        ret = 0.0
-        for idx in range(1, len(self._data_forecasts)):
-            prev = self._data_forecasts[idx - 1]
-            curr = self._data_forecasts[idx]
+        da = dt.now(tz).replace(second=0, microsecond=0) 
+        if da.minute < 30:
+            da.minute = 0
+        else:
+            da.minute = 30
+        
+        g = tuple(
+            d
+            for d in self._data_forecasts
+            if d["period_start"].astimezone(tz).date() == da.date() and d["period_start"].astimezone(tz) >= da
+        )
+        m = sum(z["pv_estimate"] for z in g) / 2
+        return m
+    
+        # ret = 0.0
+        # for idx in range(1, len(self._data_forecasts)):
+        #     prev = self._data_forecasts[idx - 1]
+        #     curr = self._data_forecasts[idx]
 
-            prev_date = prev["period_start"].astimezone(tz).date()
-            cur_date = curr["period_start"].astimezone(tz).date()
-            if prev_date != cur_date or cur_date != d.date():
-                continue
+        #     prev_date = prev["period_start"].astimezone(tz).date()
+        #     cur_date = curr["period_start"].astimezone(tz).date()
+        #     if prev_date != cur_date or cur_date != d.date():
+        #         continue
 
-            if not (curr["period_start"] > d and prev["period_start"] > d):
-                continue
+        #     if not (curr["period_start"] > d and prev["period_start"] > d):
+        #         continue
 
-            delta: timedelta = curr["period_start"] - prev["period_start"]
-            diff_hours = delta.total_seconds() / 3600
-            ret += (prev["pv_estimate"] + curr["pv_estimate"]) / 2 * diff_hours
-            needed_delta -= delta
+        #     delta: timedelta = curr["period_start"] - prev["period_start"]
+        #     diff_hours = delta.total_seconds() / 3600
+        #     ret += (prev["pv_estimate"] + curr["pv_estimate"]) / 2 * diff_hours
+        #     needed_delta -= delta
 
-        if needed_delta > permitted_error:
-            _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
-            _LOGGER.debug(f"get_remaining_today is missing data from solcast. Any data found was used to show something at least")
+        # if needed_delta > permitted_error:
+        #     _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
+        #     _LOGGER.debug(f"get_remaining_today is missing data from solcast. Any data found was used to show something at least")
             
-            # raise ValueError(
-            #     f"Solcast data didn't return anything within {permitted_error} (needed_delta={needed_delta})"
-            # )
+        #     # raise ValueError(
+        #     #     f"Solcast data didn't return anything within {permitted_error} (needed_delta={needed_delta})"
+        #     # )
 
-        return ret
+        # return ret
 
     def get_total_kwh_forecast_day(self, dayincrement) -> float:
         """Return total kwh total for rooftop site N days ahead"""
@@ -426,12 +440,12 @@ class SolcastApi:
             ret += (prev["pv_estimate"] + curr["pv_estimate"]) / 2 * diff_hours
             needed_delta -= delta
 
-        if needed_delta > permitted_error:
-            _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
-            _LOGGER.debug(f"forecast day {dayincrement+1} is missing data from solcast. Any data found was used to show something at least")
+        # if needed_delta > permitted_error:
+        #     _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
+        #     _LOGGER.debug(f"forecast day {dayincrement+1} is missing data from solcast. Any data found was used to show something at least")
             
-            # raise ValueError(
-            #     f"Solcast data didn't return anything within {permitted_error} (needed_delta={needed_delta})"
+        #     # raise ValueError(
+        #     #     f"Solcast data didn't return anything within {permitted_error} (needed_delta={needed_delta})"
             # )
 
         return ret

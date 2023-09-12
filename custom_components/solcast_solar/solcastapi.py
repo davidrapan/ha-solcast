@@ -377,9 +377,9 @@ class SolcastApi:
 
         da = dt.now(tz).replace(second=0, microsecond=0) 
         if da.minute < 30:
-            da.minute = 0
+            da.replace(minute=0)
         else:
-            da.minute = 30
+            da.replace(minute=30)
         
         g = tuple(
             d

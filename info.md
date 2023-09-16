@@ -1,7 +1,11 @@
 ### Changes
 
+v4.0.6
+- fixed divide by zero errors if there is no returned data
+- fixed renaining today forecast value. now includes current 30min block forecast in the calculation
+
 v4.0.5
-- PR#192 - updated German translation.. thanks @florie1706
+- PR #192 - updated German translation.. thanks @florie1706
 - fixed `Remaining Today` forecast.. it now also uses the 30min interval data
 - fixed `Download diagnostic` data throwing an error when clicked
 

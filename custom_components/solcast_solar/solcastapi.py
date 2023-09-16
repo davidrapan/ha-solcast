@@ -237,6 +237,7 @@ class SolcastApi:
 
         except Exception:
             _LOGGER.error(f"SOLCAST - service event to get list of forecasts failed")
+            return None
 
     def get_api_used_count(self):
         """Return API polling count for this UTC 24hr period"""
@@ -257,7 +258,7 @@ class SolcastApi:
         """Return a rooftop sites total kw for today"""
         return self._data["siteinfo"][rooftopid]["tally"]
 
-    def get_rooftop_site_extra_data(self, rooftopid = "") -> float:
+    def get_rooftop_site_extra_data(self, rooftopid = ""):
         """Return a rooftop sites information"""
         g = tuple(d for d in self._sites if d["resource_id"] == rooftopid)
         if len(g) != 1:
@@ -290,11 +291,6 @@ class SolcastApi:
             for d in self._data_forecasts
             if d["period_start"].astimezone(tz).date() == da
         )
-        # if len(h) != 24 * 2:
-        #     _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
-        #     _LOGGER.debug(f"get_forecast_day day {futureday+1} missing data from solcast. should be 48 records but the data only has {len(h)}. This can happen sometimes")
-        #     _LOGGER.debug("DO NOT BOTHER REPORTING THIS AS AN ISSUE!!!!!")
-            # raise ValueError(f"Incorrect number of forecasts returned. {len(h)}")
         
         tup = tuple(
                 {**d, "period_start": d["period_start"].astimezone(tz)} for d in h
@@ -343,7 +339,7 @@ class SolcastApi:
             )
             return int(m["pv_estimate"] * 1000)
         except Exception as ex:
-            return 0
+            return 0.0
 
     def get_peak_w_day(self, dayincrement) -> int:
         """Return hour of max kw for rooftop site N days ahead"""
@@ -372,9 +368,9 @@ class SolcastApi:
             )
             return max((z for z in g), key=lambda x: x["pv_estimate"])["period_start"]
         except Exception as ex:
-            return 0
+            return None
 
-    def get_remaining_today(self):
+    def get_remaining_today(self) -> float:
         """Return Remaining Forecasts data for today"""
         try:
             tz = self._tz
@@ -393,7 +389,7 @@ class SolcastApi:
 
             return sum(z["pv_estimate"] for z in g) / 2
         except Exception as ex:
-            return 0
+            return 0.0
 
     def get_total_kwh_forecast_day(self, dayincrement) -> float:
         """Return total kwh total for rooftop site N days ahead"""
@@ -560,7 +556,7 @@ class SolcastApi:
                         status = 200
                         _LOGGER.debug(f"SOLCAST - Got cached file data for site {site}")
                 else:
-                    _LOGGER.debug(f"SOLCAST - OK REAL API CALL HAPPENING RIGHT NOW")
+                    #_LOGGER.debug(f"SOLCAST - OK REAL API CALL HAPPENING RIGHT NOW")
                     resp: ClientResponse = await self.aiohttp_session.get(
                         url=url, params=params, ssl=False
                     )
@@ -568,6 +564,9 @@ class SolcastApi:
 
                     if status == 200:
                         _LOGGER.debug(f"SOLCAST - API returned data. API Counter incremented from {self._api_used} to {self._api_used + 1}")
+                    else:
+                        _LOGGER.warning(f"SOLCAST - API returned status {status}. API data  {self._api_used} to {self._api_used + 1}")
+                        _LOGGER.warning("This is an error with the data returned from Solcast, not the integration!")
     
                     resp_json = await resp.json(content_type=None)
 

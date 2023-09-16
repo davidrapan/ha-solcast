@@ -1,5 +1,8 @@
 ### Changes
 
+v4.0.7
+- better handling when Solcast site does not return API data correctly
+
 v4.0.6
 - fixed divide by zero errors if there is no returned data
 - fixed renaining today forecast value. now includes current 30min block forecast in the calculation

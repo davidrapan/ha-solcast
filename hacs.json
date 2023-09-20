@@ -1,5 +1,5 @@
 {
     "name": "Solcast PV Solar",
     "render_readme": false,
-    "homeassistant": "2022.11"
+    "homeassistant": "2023.7"
 }

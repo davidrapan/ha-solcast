@@ -1,5 +1,9 @@
 ### Changes
 
+v4.0.8
+- added Polish translation thanks to @home409ca
+- added new `Dampening` to the Solcast Integration configuration
+
 v4.0.7
 - better handling when Solcast site does not return API data correctly
 

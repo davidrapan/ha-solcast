@@ -49,6 +49,7 @@ class ConnectionOptions:
     host: str
     file_path: str
     tz: timezone
+    dampening: dict
 
 
 class SolcastApi:
@@ -75,6 +76,7 @@ class SolcastApi:
         self._detailedForecasts = []
         self._loaded_data = False
         self._serialize_lock = asyncio.Lock()
+        self._damp =options.dampening
         
     async def serialize_data(self):
         """Serialize data to file."""
@@ -648,18 +650,19 @@ class SolcastApi:
                     zz = z.astimezone(self._tz) #- timedelta(minutes=30)
                     
                     if zz.date() < lastday and zz.date() > yesterday:
+                        h = f"{zz.hour}"
                         if zz.date() == today:
-                            tally += x["pv_estimate"] * 0.5
+                            tally += x["pv_estimate"] * 0.5 * self._damp[h]
                             
                         itm = next((item for item in _forecasts if item["period_start"] == z), None)
                         if itm:
-                            itm["pv_estimate"] = round(itm["pv_estimate"] + x["pv_estimate"],4)
-                            itm["pv_estimate10"] = round(itm["pv_estimate10"] + x["pv_estimate10"],4)
-                            itm["pv_estimate90"] = round(itm["pv_estimate90"] + x["pv_estimate90"],4)
+                            itm["pv_estimate"] = round(itm["pv_estimate"] + (x["pv_estimate"] * self._damp[h]),4)
+                            itm["pv_estimate10"] = round(itm["pv_estimate10"] + (x["pv_estimate10"] * self._damp[h]),4)
+                            itm["pv_estimate90"] = round(itm["pv_estimate90"] + (x["pv_estimate90"] * self._damp[h]),4)
                         else:    
-                            _forecasts.append({"period_start": z,"pv_estimate": round(x["pv_estimate"],4),
-                                                                "pv_estimate10": round(x["pv_estimate10"],4),
-                                                                "pv_estimate90": round(x["pv_estimate90"],4)})
+                            _forecasts.append({"period_start": z,"pv_estimate": round((x["pv_estimate"]* self._damp[h]),4),
+                                                                "pv_estimate10": round((x["pv_estimate10"]* self._damp[h]),4),
+                                                                "pv_estimate90": round((x["pv_estimate90"]* self._damp[h]),4)})
                         
                 self._data['siteinfo'][s]['tally'] = round(tally, 4)
                         

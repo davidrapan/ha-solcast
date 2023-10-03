@@ -29,16 +29,15 @@ Copy the API Key for use with this integration (See [Configuration](#Configurati
 ### HACS *(recommended)*
 
 Using HACS. More info [here](https://hacs.xyz/)  
+
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=oziee&repository=ha-solcast-solar&category=plugin)
+
+Manually in HACS  
 Follow the link [here](https://hacs.xyz/docs/faq/custom_repositories/)  
 Use the custom repo link `https://github.com/oziee/ha-solcast-solar`  
 Select the category type `integration`  
 Then once it's there (still in HACS) click the INSTALL button  
 Then go to the HA Devices and Services and add a new Solcast Integration  
-
-<!--
-or click on:
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=oziee&repository=ha-solcast-solar&category=plugin)
--->
 
 
 <details>

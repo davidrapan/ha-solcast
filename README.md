@@ -133,7 +133,39 @@ action:
     data: {}
 mode: single
 ```
+To make the most of the available API calls, you can call the API in an interval calculated by the number of daytime hours by the number of total API calls a day:
 
+```yaml
+alias: Solcast update
+description:
+trigger:
+  - platform: template
+    value_template: >-
+      {% set nr = as_datetime(state_attr('sun.sun','next_rising')) | as_local %}
+      {% set ns = as_datetime(state_attr('sun.sun','next_setting')) | as_local %}
+      {% set api_request_limit = 10 %}
+      {% if nr > ns %}
+        {% set nr = nr - timedelta(hours = 24) %} 
+      {% endif %}
+      {% set hours_difference = (ns - nr) %}
+      {% set interval_hours = hours_difference / api_request_limit %}
+      {% set ns = namespace(match = false) %}
+      {% for i in range(api_request_limit) %}
+        {% set start_time = nr + (i * interval_hours) %}
+        {% if ((start_time - timedelta(seconds=30)) <= now()) and (now() <= (start_time + timedelta(seconds=30))) %}
+          {% set ns.match = true %}
+        {% endif %}
+      {% endfor %}
+      {{ ns.match }}
+condition:
+  - condition: sun
+    before: sunset
+    after: sunrise
+action:
+  - service: solcast_solar.update_forecasts
+    data: {}
+mode: single
+```
 
 <details>
 <summary><h3>Set up HA Energy Dashboard settings</summary></h3>

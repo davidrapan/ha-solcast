@@ -15,7 +15,15 @@ from homeassistant.helpers import aiohttp_client, intent
 from homeassistant.helpers.device_registry import async_get as device_registry
 from homeassistant.util import dt as dt_util
 
-from .const import (DOMAIN, SERVICE_CLEAR_DATA, SERVICE_UPDATE, SERVICE_QUERY_FORECAST_DATA, SOLCAST_URL)
+from .const import (
+    DOMAIN, 
+    SERVICE_CLEAR_DATA, 
+    SERVICE_UPDATE, 
+    SERVICE_QUERY_FORECAST_DATA, 
+    SERVICE_SET_DAMPENING, 
+    SOLCAST_URL
+)
+
 from .coordinator import SolcastUpdateCoordinator
 from .solcastapi import ConnectionOptions, SolcastApi
 
@@ -27,6 +35,12 @@ PLATFORMS = [Platform.SENSOR]
 
 _LOGGER = logging.getLogger(__name__)
 
+DAMP_FACTOR = "damp_factor"
+SERVICE_DAMP_SCHEMA: Final = vol.All(
+        {
+            vol.Required(DAMP_FACTOR): cv.string,
+        }
+)
 
 EVENT_START_DATETIME = "start_date_time"
 EVENT_END_DATETIME = "end_date_time"
@@ -136,8 +150,44 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
         return None
     
+    async def handle_service_set_dampening(call: ServiceCall):
+        """Handle service call"""
+        try:
+            _LOGGER.info(f"SOLCAST - Service call: {SERVICE_SET_DAMPENING}")
 
-    hass.services.async_register(DOMAIN, SERVICE_UPDATE, handle_service_update_forecast)
+            factors = call.data.get(DAMP_FACTOR, None)
+
+            if factors == None:
+                raise HomeAssistantError(f"Error processing {SERVICE_SET_DAMPENING}: Empty factor string")
+            else:
+                factors = factors.strip().replace(" ","")
+                if len(factors) == 0:
+                    raise HomeAssistantError(f"Error processing {SERVICE_SET_DAMPENING}: Empty factor string")
+                else:
+                    sp = factors.split(",")
+                    if (len(sp)) != 24:
+                        raise HomeAssistantError(f"Error processing {SERVICE_SET_DAMPENING}: Not 24 hourly factor items")
+                    else:
+                        for i in sp:
+                            #this will fail is its not a number
+                            if float(i) < 0 or float(i) > 1:
+                                raise HomeAssistantError(f"Error processing {SERVICE_SET_DAMPENING}: Factor value outside 0.0 to 1.0")
+                        d= {}
+                        opt = {**entry.options}
+                        for i in range(0,24):
+                            d.update({f"{i}": float(sp[i])})
+                            opt[f"damp{i:02}"] = float(sp[i])
+
+                        solcast._damp = d
+                        hass.config_entries.async_update_entry(entry, options=opt)
+
+            await coordinator.service_event_delete_old_solcast_json_file()
+        except intent.IntentHandleError as err:
+            raise HomeAssistantError(f"Error processing {SERVICE_SET_DAMPENING}: {err}") from err
+
+    hass.services.async_register(
+        DOMAIN, SERVICE_UPDATE, handle_service_update_forecast
+    )
 
     hass.services.async_register(
         DOMAIN, SERVICE_CLEAR_DATA, handle_service_clear_solcast_data
@@ -145,6 +195,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     hass.services.async_register(
         DOMAIN, SERVICE_QUERY_FORECAST_DATA, handle_service_get_solcast_data, SERVICE_QUERY_SCHEMA, SupportsResponse.ONLY,
+    )
+
+    hass.services.async_register(
+        DOMAIN, SERVICE_SET_DAMPENING, handle_service_set_dampening, SERVICE_DAMP_SCHEMA
     )
 
     return True
@@ -158,6 +212,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     hass.services.async_remove(DOMAIN, SERVICE_UPDATE)
     hass.services.async_remove(DOMAIN, SERVICE_CLEAR_DATA)
     hass.services.async_remove(DOMAIN, SERVICE_QUERY_FORECAST_DATA)
+    hass.services.async_remove(DOMAIN, SERVICE_SET_DAMPENING)
 
     return unload_ok
 

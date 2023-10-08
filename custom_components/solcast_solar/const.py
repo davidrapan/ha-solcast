@@ -18,6 +18,7 @@ ATTRIBUTION: Final = "Data retrieved from Solcast"
 SERVICE_UPDATE = "update_forecasts"
 SERVICE_CLEAR_DATA = "clear_all_solcast_data"
 SERVICE_QUERY_FORECAST_DATA = "query_forecast_data"
+SERVICE_SET_DAMPENING = "set_dampening"
 
 #new 4.0.8 - integration config options menu
 CONFIG_OPTIONS = [

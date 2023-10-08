@@ -93,6 +93,7 @@ There are 3 services for this integration that you can use in automations ([Conf
 | `solcast_solar.update_forecasts` | Updates the future forecast data only |
 | `solcast_solar.clear_all_solcast_data` | Deletes the `solcast.json` cached file |
 | `solcast_solar.query_forecast_data` | Returns a list of forecast data using a datetime range start - end |
+| `solcast_solar.set_dampening` | Updates the hourly dampening factors |
 
 ### Basic HA Automation to manual poll Solcast API data
 Create a new HA automation and setup your prefered triggers to manually poll for new data  

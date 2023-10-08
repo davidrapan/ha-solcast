@@ -1,5 +1,8 @@
 ### Changes
 
+v4.0.9
+- new service to update forecast hourly dampening factors
+
 v4.0.8
 - added Polish translation thanks to @home409ca
 - added new `Dampening` to the Solcast Integration configuration

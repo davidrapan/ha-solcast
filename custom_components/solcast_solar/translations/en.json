@@ -98,6 +98,16 @@
                     "description": "Query forecast data events up to date time."
                 }
             }
+        },
+        "set_dampening": {
+            "name": "Set forecasts dampening",
+            "description": "Set forecast dampening hourly factor.",
+            "fields": {
+                "damp_factor": {
+                    "name": "Dampening string",
+                    "description": "String of hourly dampening factor values comma seperated."
+                }
+            }
         }
     },
     "entity": {

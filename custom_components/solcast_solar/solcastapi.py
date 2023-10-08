@@ -368,7 +368,8 @@ class SolcastApi:
                 for d in self._data_forecasts
                 if d["period_start"].astimezone(tz).date() == da
             )
-            return max((z for z in g), key=lambda x: x["pv_estimate"])["period_start"]
+            d = max((z for z in g), key=lambda x: x["pv_estimate"])["period_start"]
+            return dt.astimezone(d,tz)
         except Exception as ex:
             return None
 
@@ -648,6 +649,8 @@ class SolcastApi:
                     #loop each rooftop site and its forecasts
                     z = x["period_start"]
                     zz = z.astimezone(self._tz) #- timedelta(minutes=30)
+
+                    #v4.0.8 added code to dampen the forecast data.. (* self._damp[h])
                     
                     if zz.date() < lastday and zz.date() > yesterday:
                         h = f"{zz.hour}"

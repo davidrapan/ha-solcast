@@ -152,7 +152,7 @@ trigger:
       {% set interval_hours = hours_difference / api_request_limit %}
       {% set ns = namespace(match = false) %}
       {% for i in range(api_request_limit) %}
-        {% set start_time = nr + (i * interval_hours) %}
+        {% set start_time = nr + (i - 1 ) * interval_hours %}
         {% if ((start_time - timedelta(seconds=30)) <= now()) and (now() <= (start_time + timedelta(seconds=30))) %}
           {% set ns.match = true %}
         {% endif %}
@@ -167,6 +167,8 @@ action:
     data: {}
 mode: single
 ```
+
+NOTE: If you have two arrays on your roof then 2 api calls will be made for each update, effectively reducing the number of updates to 5 per day. For this case, change to: `api_request_limit = 5`
 
 <details>
 <summary><h3>Set up HA Energy Dashboard settings</summary></h3>

@@ -152,7 +152,7 @@ trigger:
       {% set interval_hours = hours_difference / api_request_limit %}
       {% set ns = namespace(match = false) %}
       {% for i in range(api_request_limit) %}
-        {% set start_time = nr + (i - 1 ) * interval_hours %}
+        {% set start_time = nr + (i * interval_hours) %}
         {% if ((start_time - timedelta(seconds=30)) <= now()) and (now() <= (start_time + timedelta(seconds=30))) %}
           {% set ns.match = true %}
         {% endif %}

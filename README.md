@@ -168,7 +168,8 @@ action:
 mode: single
 ```
 
-NOTE: If you have two arrays on your roof then 2 api calls will be made for each update, effectively reducing the number of updates to 5 per day. For this case, change to: `api_request_limit = 5`
+> **Note**
+> _If you have two arrays on your roof then 2 api calls will be made for each update, effectively reducing the number of updates to 5 per day. For this case, change to: `api_request_limit = 5`_
 
 <details>
 <summary><h3>Set up HA Energy Dashboard settings</summary></h3>

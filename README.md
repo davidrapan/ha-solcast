@@ -1,3 +1,21 @@
+
+# ⚠️ Attention:  
+This is just a hobby for me, I work 12hr shifts in a hospital theatre and do not always get a lot of time to work on this.
+This has far extended beyond what I first created and wanted, and that was to just graph a "forecast" of what my solar production might be using Solcast data inside the HA Energy dashboard.  
+
+I have opened the discussion area for anyone to ask or put forward ideas.. if enough users vote it may happen.  
+
+If you have make any changes that make this better create a PR for review
+
+Use te issues to create ACTUAL issues only when these points fail: (also search the issues as it might have been asked and answered already
+- make sure the API key you enter is teh API and not the rooftop id
+- make sure the solcast toolkit area is working
+- READ THE LOG OUTPUT, this gives some good info as to whats happening or a problem
+- make sure your not out of API calls
+- if all that fails run the service to delete the solcast data file (or manually delete it from HA/config/solcast.json and restart HA)
+
+Any issues created that are just asking for ideas or how to create an automation etc (basically anything that is not a bug fault will be just closed
+
 # HA Solcast PV Solar Forecast Integration
 
 Home Assistant(https://www.home-assistant.io) Integration Component

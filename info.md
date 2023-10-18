@@ -1,5 +1,8 @@
 ### Changes
 
+v4.0.10
+- fixes for changing API key once one has previously been set
+
 v4.0.9
 - new service to update forecast hourly dampening factors
 

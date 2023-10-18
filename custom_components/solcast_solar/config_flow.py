@@ -1,6 +1,5 @@
 """Config flow for Solcast Solar integration."""
 from __future__ import annotations
-
 from typing import Any
 
 import voluptuous as vol
@@ -119,7 +118,17 @@ class SolcastSolarOptionFlowHandler(OptionsFlow):
     async def async_step_api(self, user_input: dict[str, Any] | None = None) -> FlowResult:
         """Manage the options."""
         if user_input is not None:
-            return self.async_create_entry(title="Solcast Solar", data=user_input)
+            allConfigData = {**self.config_entry.options}
+            k = user_input["api_key"].replace(" ","").strip()
+            k = ','.join([s for s in k.split(',') if s])
+            allConfigData["api_key"] = k
+
+            self.hass.config_entries.async_update_entry(
+                self.config_entry,
+                title="Solcast Solar",
+                options=allConfigData,
+            )
+            return self.async_create_entry(title="Solcast Solar", data=None)
 
         return self.async_show_form(
             step_id="api",
@@ -133,7 +142,7 @@ class SolcastSolarOptionFlowHandler(OptionsFlow):
             ),
         )
 
-    async def async_step_dampen(self, user_input=None):
+    async def async_step_dampen(self, user_input: dict[str, Any] | None = None) -> FlowResult: #user_input=None):
         """Manage the hourly factor options."""
 
         errors = {}

@@ -213,7 +213,7 @@ class SolcastApi:
                                 if not any(d.get('resource_id', '') == s for d in self._sites):
                                     _LOGGER.info(f"Solcast rooftop resource id {s} no longer part of your system.. removing saved data from cached file")
                                     l.append(s)
-                                    
+
                             for ll in l:
                                 del jsonData['siteinfo'][ll]
 
@@ -316,12 +316,24 @@ class SolcastApi:
                 {**d, "period_start": d["period_start"].astimezone(tz)} for d in h
             )
         
+        _LOGGER.debug(f"SOLCAST - Data records contained {len(tup)} of 48 for {da}")
+        if len(tup) < 48:
+            _LOGGER.info("SOLCAST - Data records not complete - Values therefor maybe inaccurate nor complete")
+        
         hourlyturp = []
         for index in range(0,len(tup),2):
-            x1 = round((tup[index]["pv_estimate"] + tup[index+1]["pv_estimate"]) /2, 4)
-            x2 = round((tup[index]["pv_estimate10"] + tup[index+1]["pv_estimate10"]) /2, 4)
-            x3 = round((tup[index]["pv_estimate90"] + tup[index+1]["pv_estimate90"]) /2, 4)
-            hourlyturp.append({"period_start":tup[index]["period_start"], "pv_estimate":x1, "pv_estimate10":x2, "pv_estimate90":x3})
+            if len(tup)>0:
+                try:
+                    x1 = round((tup[index]["pv_estimate"] + tup[index+1]["pv_estimate"]) /2, 4)
+                    x2 = round((tup[index]["pv_estimate10"] + tup[index+1]["pv_estimate10"]) /2, 4)
+                    x3 = round((tup[index]["pv_estimate90"] + tup[index+1]["pv_estimate90"]) /2, 4)
+                    hourlyturp.append({"period_start":tup[index]["period_start"], "pv_estimate":x1, "pv_estimate10":x2, "pv_estimate90":x3})
+                except IndexError:
+                    x1 = round((tup[index]["pv_estimate"]), 4)
+                    x2 = round((tup[index]["pv_estimate10"]), 4)
+                    x3 = round((tup[index]["pv_estimate90"]), 4)
+                    hourlyturp.append({"period_start":tup[index]["period_start"], "pv_estimate":x1, "pv_estimate10":x2, "pv_estimate90":x3})  
+            
 
         return {
             "detailedForecast": tup,

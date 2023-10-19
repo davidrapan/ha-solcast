@@ -1,5 +1,8 @@
 ### Changes
 
+v4.0.11
+- better handling when data is missing pieces for some sensors
+
 v4.0.10
 - fixes for changing API key once one has previously been set
 

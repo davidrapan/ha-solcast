@@ -1,5 +1,8 @@
 ### Changes
 
+v4.0.12
+- HA 2023.11 beta forces sensors not to be listed under `Configuration`. The rooftop sensors have been moved to `Diagnostic`
+
 v4.0.11
 - better handling when data is missing pieces for some sensors
 
@@ -252,4 +255,4 @@ Integration contains
 
 ### Polling Imformation
 Solcast has a 50 API poll limit per day.
-
+Resently new solcast accounts only get a limit of 10

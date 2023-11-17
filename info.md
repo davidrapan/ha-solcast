@@ -1,5 +1,12 @@
 ### Changes
 
+v4.0.13
+- added Slovak translation thanks to @misa1515
+- extended polling connection timeout from 60s to 120s
+- added some more debug output points for data checking
+- new forecast data attribute `dataCorrect` returns True of False if the data is complete for that day.
+- removed `0 of 48` debug message for the 7th day forecast because if the api is not polled at midnight then the data is not complete for the 7th day (limitation of the max records Solcast returns)
+
 v4.0.12
 - HA 2023.11 beta forces sensors not to be listed under `Configuration`. The rooftop sensors have been moved to `Diagnostic`
 

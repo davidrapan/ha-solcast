@@ -58,7 +58,7 @@ Then once it's there (still in HACS) click the INSTALL button
 Then go to the HA Devices and Services and add a new Solcast Integration  
 
 
-<details>
+
 <summary><h3>Manualy</summary></h3>
 
 You probably **do not** want to do this! Use the HACS method above unless you know what you are doing and have a good reason as to why you are installing manually
@@ -71,7 +71,7 @@ You probably **do not** want to do this! Use the HACS method above unless you kn
 1. *Restart HA to load the new integration*
 1. See [Configuration](#configuration) below
 
-</details>
+
 
 ## Configuration
 
@@ -189,7 +189,7 @@ mode: single
 > **Note**
 > _If you have two arrays on your roof then 2 api calls will be made for each update, effectively reducing the number of updates to 5 per day. For this case, change to: `api_request_limit = 5`_
 
-<details>
+
 <summary><h3>Set up HA Energy Dashboard settings</summary></h3>
 
 Go to the `HA>Settings>Dashboards>Energy`
@@ -206,16 +206,16 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 
 [<img src="https://user-images.githubusercontent.com/1471841/174471543-0833b141-0c97-4b90-a058-cf986e89bbce.png" width="200">](https://user-images.githubusercontent.com/1471841/174471543-0833b141-0c97-4b90-a058-cf986e89bbce.png)
 
-</details>
+
 
 ## HA Views:
-<details>
+
 <summary><h3>HA Energy Tab</summary></h3>
 
 [<img src="https://user-images.githubusercontent.com/1471841/135556872-ff5b51ac-699e-4ea5-869c-f9b0d0c5b815.png" width="200">](https://user-images.githubusercontent.com/1471841/135556872-ff5b51ac-699e-4ea5-869c-f9b0d0c5b815.png)
 
-</details>
-<details>
+
+
 <summary><h3>Sensors</summary></h3>
 
 | Name | Type | Attributes | Unit | Description |
@@ -256,7 +256,7 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 [^1]: API usage information is directly read from Solcast
 
 
-</details>
+
 
 <summary><h3>Credits</summary></h3>
 

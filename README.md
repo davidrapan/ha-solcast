@@ -1,13 +1,9 @@
 
-# ⚠️ Attention:  
-This is just a hobby for me, and do not always get a lot of time to work on this.
-This has far extended beyond what I first created and wanted, and that was to just graph a "forecast" of what my solar production might be using Solcast data inside the HA Energy dashboard.  
-
 I have opened the discussion area for anyone to ask or put forward ideas.. if enough users vote it may happen.  
 
 If you make any changes that make this better create a PR for review
 
-Use te issues to create ACTUAL issues only when these points fail: (also search the issues and discussions as it might have been asked and answered already)
+ONLY use issues to create ACTUAL issues when these points fail: (also search the issues and discussions as it might have been asked and answered already)
 - make sure the API key you enter is teh API and not the rooftop id
 - make sure the solcast toolkit area is working
 - READ THE LOG OUTPUT, this gives some good info as to whats happening or a problem

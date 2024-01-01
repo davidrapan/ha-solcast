@@ -1,5 +1,9 @@
 ### Changes
 
+v4.0.14
+- changed attrib values from rooftop sites so pins are not added to maps (HA auto adds item to the map if attributes contain lat/long values)
+- added Urdu thanks to @yousaf465
+
 v4.0.13
 - added Slovak translation thanks to @misa1515
 - extended polling connection timeout from 60s to 120s

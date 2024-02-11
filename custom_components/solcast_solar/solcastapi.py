@@ -50,6 +50,7 @@ class ConnectionOptions:
     file_path: str
     tz: timezone
     dampening: dict
+    customhoursensor: int
 
 
 class SolcastApi:
@@ -77,6 +78,7 @@ class SolcastApi:
         self._loaded_data = False
         self._serialize_lock = asyncio.Lock()
         self._damp =options.dampening
+        self._customhoursensor = options.customhoursensor
         
     async def serialize_data(self):
         """Serialize data to file."""
@@ -364,6 +366,26 @@ class SolcastApi:
             m = sum(z["pv_estimate"] for z in g) / len(g)
 
             return int(m * 1000)
+        except Exception as ex:
+            return 0
+        
+    def get_forecast_custom_hour(self, hourincrement) -> int:
+        """Return Custom Sensor Hours forecast for N hours ahead"""
+        try:
+            danow = dt.now(timezone.utc).replace(
+                minute=0, second=0, microsecond=0
+            )
+            da = dt.now(timezone.utc).replace(
+                minute=0, second=0, microsecond=0
+            ) + timedelta(hours=hourincrement)
+            g=[]
+            for d in self._data_forecasts:
+                if d["period_start"] >= danow and d["period_start"] < da:
+                    g.append(d)
+            
+            m = sum(z["pv_estimate"] for z in g)
+
+            return int(m * 500)
         except Exception as ex:
             return 0
 

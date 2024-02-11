@@ -1,5 +1,9 @@
 ### Changes
 
+v4.0.15
+- added custom 'Next X hours' sensor
+- added French translation thats to @Dackara
+
 v4.0.14
 - changed attrib values from rooftop sites so pins are not added to maps (HA auto adds item to the map if attributes contain lat/long values)
 - added Urdu thanks to @yousaf465

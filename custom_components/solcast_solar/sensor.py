@@ -28,7 +28,7 @@ from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN, ATTR_ENTRY_TYPE, ATTRIBUTION
+from .const import DOMAIN, ATTR_ENTRY_TYPE, ATTRIBUTION, CUSTOM_HOUR_SENSOR
 from .coordinator import SolcastUpdateCoordinator
 
 _LOGGER = logging.getLogger(__name__)
@@ -85,6 +85,15 @@ SENSORS: dict[str, SensorEntityDescription] = {
         native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
         translation_key="forecast_next_hour",
         name="Forecast Next Hour",
+        icon="mdi:solar-power",
+        suggested_display_precision=0,
+    ),
+    "forecast_custom_hour": SensorEntityDescription(
+        key="forecast_custom_hour",
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        translation_key="forecast_custom_hour",
+        name="Forecast Custom Hours",
         icon="mdi:solar-power",
         suggested_display_precision=0,
     ),
@@ -259,6 +268,10 @@ class SolcastSensor(CoordinatorEntity, SensorEntity):
         """Initialize the sensor."""
         super().__init__(coordinator)
 
+        #doesnt work :()
+        # if entity_description.key == "forecast_custom_hour":
+        #     self._attr_translation_placeholders = {"customhour": "5"}
+
         self.entity_description = entity_description
         self.coordinator = coordinator
         self._attr_unique_id = f"{entity_description.key}"
@@ -431,4 +444,3 @@ class RooftopSensor(CoordinatorEntity, SensorEntity):
             )
             self._sensor_data = None
         self.async_write_ha_state()
-        

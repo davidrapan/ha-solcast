@@ -21,7 +21,8 @@ from .const import (
     SERVICE_UPDATE, 
     SERVICE_QUERY_FORECAST_DATA, 
     SERVICE_SET_DAMPENING, 
-    SOLCAST_URL
+    SOLCAST_URL,
+    CUSTOM_HOUR_SENSOR
 )
 
 from .coordinator import SolcastUpdateCoordinator
@@ -74,6 +75,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         hass.config.path('solcast.json'),
         dt_util.get_time_zone(hass.config.time_zone),
         optdamp,
+        entry.options[CUSTOM_HOUR_SENSOR],
     )
 
     solcast = SolcastApi(aiohttp_client.async_get_clientsession(hass), options)
@@ -230,6 +232,16 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) ->
         config_entry.options = {**new}
 
         config_entry.version = 5
+
+    #new 4.0.15
+    #custom sensor for 'next x hours'
+    if config_entry.version == 5:
+        new = {**config_entry.options}
+        new[CUSTOM_HOUR_SENSOR] = 1
+
+        config_entry.options = {**new}
+
+        config_entry.version = 6
 
     _LOGGER.debug("Solcast Migration to version %s successful", config_entry.version)
 

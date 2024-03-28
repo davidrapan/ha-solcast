@@ -1,16 +1,10 @@
-
-I have opened the discussion area for anyone to ask or put forward ideas.. if enough users vote it may happen.  
-
-If you make any changes that make this better create a PR for review
-
-ONLY use issues to create ACTUAL issues when these points fail: (also search the issues and discussions as it might have been asked and answered already)
-- make sure the API key you enter is teh API and not the rooftop id
+Before submitting an issue, search the issues and discussion forum to see if this has already been ask and answered in the past. The following usually fixes most users problems...
+- make sure the API key you enter is the API key and not the rooftop id
 - make sure the solcast toolkit area is working
 - READ THE LOG OUTPUT, this gives some good info as to whats happening or a problem
 - make sure your not out of API calls
 - if all that fails run the service to delete the solcast data file (or manually delete it from HA/config/solcast.json and restart HA)
 
-Any issues created that are just asking for ideas or how to create an automation etc (basically anything that is not a bug fault will be just closed)
 
 # HA Solcast PV Solar Forecast Integration
 

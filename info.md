@@ -1,8 +1,9 @@
 ### Changes
 
 v4.0.15
-- added custom 'Next X hours' sensor
+- added custom 'Next X hours' sensor. You select the number of hours to be calculated as the sensor
 - added French translation thats to @Dackara
+- added some sensors to be included in HA statistics data
 
 v4.0.14
 - changed attrib values from rooftop sites so pins are not added to maps (HA auto adds item to the map if attributes contain lat/long values)

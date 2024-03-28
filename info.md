@@ -2,7 +2,7 @@
 
 v4.0.15
 - added custom 'Next X hours' sensor. You select the number of hours to be calculated as the sensor
-- added French translation thats to @Dackara
+- added French translation thanks to @Dackara
 - added some sensors to be included in HA statistics data
 
 v4.0.14

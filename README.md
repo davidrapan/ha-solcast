@@ -1,3 +1,4 @@
+
 Before submitting an issue, search the issues and discussion forum to see if this has already been ask and answered in the past. The following usually fixes most users problems...
 - make sure the API key you enter is the API key and not the rooftop id
 - make sure the solcast toolkit area is working

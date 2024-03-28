@@ -152,7 +152,7 @@ To make the most of the available API calls, you can call the API in an interval
 
 ```yaml
 alias: Solcast update
-description:
+description: ""
 trigger:
   - platform: template
     value_template: >-

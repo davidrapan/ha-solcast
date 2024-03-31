@@ -16,6 +16,7 @@ ENTRY_TYPE_SERVICE: Final = "service"
 ATTRIBUTION: Final = "Data retrieved from Solcast"
 
 CUSTOM_HOUR_SENSOR = "customhoursensor"
+KEY_ESTIMATE = "key_estimate"
 
 SERVICE_UPDATE = "update_forecasts"
 SERVICE_CLEAR_DATA = "clear_all_solcast_data"

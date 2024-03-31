@@ -29,7 +29,7 @@ from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN, ATTR_ENTRY_TYPE, ATTRIBUTION, CUSTOM_HOUR_SENSOR
+from .const import DOMAIN, ATTR_ENTRY_TYPE, ATTRIBUTION
 from .coordinator import SolcastUpdateCoordinator
 
 _LOGGER = logging.getLogger(__name__)

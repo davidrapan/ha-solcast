@@ -1,5 +1,11 @@
 ### Changes
 
+v4.0.16
+- added @Zachoz idea of adding a setting to select which solcast estimate field value for the forecast calculations, either estimate, estimate10 or estimate90
+    ESTIMATE - Default forecasts  
+    ESTIMATE10 = Forecasts 10 - cloudier than expected scenario  
+    ESTIMATE90 = Forecasts 90 - less cloudy than expected scenario  
+
 v4.0.15
 - added custom 'Next X hours' sensor. You select the number of hours to be calculated as the sensor
 - added French translation thanks to @Dackara

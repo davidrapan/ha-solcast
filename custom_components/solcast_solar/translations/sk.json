@@ -13,7 +13,7 @@
         }
     },
     "options": {
-        "step	": {
+        "step": {
             "init": {
                 "data": {
                     "solcast_config_action": "Akcia"

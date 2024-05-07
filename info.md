@@ -1,5 +1,9 @@
 ### Changes
 
+v4.0.17
+- updated Slovak translation thanks @misa1515
+- added sensor for Solcast weather description
+
 v4.0.16
 - added @Zachoz idea of adding a setting to select which solcast estimate field value for the forecast calculations, either estimate, estimate10 or estimate90
     ESTIMATE - Default forecasts  

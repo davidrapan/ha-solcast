@@ -1,12 +1,4 @@
 
-Before submitting an issue, search the issues and discussion forum to see if this has already been ask and answered in the past. The following usually fixes most users problems...
-- make sure the API key you enter is the API key and not the rooftop id
-- make sure the solcast toolkit area is working
-- READ THE LOG OUTPUT, this gives some good info as to whats happening or a problem
-- make sure your not out of API calls
-- if all that fails run the service to delete the solcast data file (or manually delete it from HA/config/solcast.json and restart HA)
-
-
 # HA Solcast PV Solar Forecast Integration
 
 Home Assistant(https://www.home-assistant.io) Integration Component
@@ -220,6 +212,7 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 | `D7` | number | Y | `kWh` | Total forecast solar production for day + 6 (day 7) |
 | `This Hour` | number | N | `Wh` | Forecasted solar production current hour |
 | `Next Hour` | number | N | `Wh` | Forecasted solar production next hour |
+| `Forecast Next X Hours` | number | N | `kWh` | Custom user defined X hour forecast |
 | `Remaining Today` | number | N | `kWh` | Predicted remaining solar production today |
 | `Peak Forecast Today` | number | N | `W` | Highest predicted production within an hour period today |
 | `Peak Time Today` | date/time | N |  | Hour of max forecasted production of solar today |
@@ -228,13 +221,14 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 | `Power Now` | number | N | `W` | Power forecast during the current 0-30 / 30-59 min hour period |
 | `Power Next 30 Mins` | number | N | `W` | Power forecast for the next 30 min block period |
 | `Power Next Hour` | number | N | `W` | Power forecast for the next block 60 min from now |
+| `Weather` | string | N |  | Solcast weather description |
 
 
 ### Configuration
 
 | Name | Type | Attributes | Unit | Description |
 | ------------------------------ | ----------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
-| `Rooftop name` | number | Y | `kWh` | Total forecast for rooftop today (attributes contain the solcast rooftop setup) |
+| `Forecast Field` | selector | N |  | selector to select the Solcast value field for calculations either 'estimate', 'estimate10' or 'estimate90' |
 
 ### Diagnostic
 
@@ -243,8 +237,10 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 | `API Last Polled` | date/time | N |  | Date/time when the API data was polled |
 | `API Limit` | number | N | `integer` | Total times the API can been called in a 24 hour period[^1] |
 | `API used` | number | N | `integer` | Total times the API has been called today (API counter resets to zero at midnight UTC)[^1] |  
+| `Rooftop(s) name` | number | Y | `kWh` | Total forecast for rooftop today (attributes contain the solcast rooftop setup)[^2] |
 
 [^1]: API usage information is directly read from Solcast
+[^2]: Each rooftop created in Solcast will be listed seperately
 
 
 

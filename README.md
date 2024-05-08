@@ -42,7 +42,7 @@ Then go to the HA Devices and Services and add a new Solcast Integration
 
 
 
-<summary><h3>Manualy</summary></h3>
+<summary><h3>Manually</summary></h3>
 
 You probably **do not** want to do this! Use the HACS method above unless you know what you are doing and have a good reason as to why you are installing manually
 
@@ -66,11 +66,11 @@ You probably **do not** want to do this! Use the HACS method above unless you kn
 
 * Create your own [automation](#services) to call the service `solcast_solar.update_forecasts` when you like it to call
 
-* Options can be changed for existing `Solcast PV Forecast` integration in Home Assistant Integrations by selecting `Configure` (cog wheel)
+* Change the configuration options for an existing `Solcast PV Forecast` integration in the Home Assistant Integrations by selecting Solcast then `Configure` (cog wheel)
 
-* If you have more than one Solcast account because you have more than 2 rooftop setups, enter both account API keys seperated by a comma `xxxxxxxx-xxxxx-xxxx,yyyyyyyy-yyyyy-yyyy` (this does go against Solcast T&C's having more than one account)
+* If you have more than one Solcast account because you have more than 2 rooftop setups, enter both account API keys separated by a comma `xxxxxxxx-xxxxx-xxxx,yyyyyyyy-yyyyy-yyyy` (NB: this goes against Solcast T&C's by having more than one account)
 
-* This is your `API Key` not your rooftop id created in Solcast. You can find your API key here [api key](https://toolkit.solcast.com.au/account)
+* Make sure you enter your `API Key` not your rooftop id created in Solcast. You can find your API key here [api key](https://toolkit.solcast.com.au/account)
 
 [<img src="https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png" width="200">](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png)
 
@@ -82,7 +82,7 @@ New in v4.0.8 is the option to configure hourly dampening values
 
 [<img src="https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/damp.png" width="200">](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/damp.png)
 
-Here you can change the dampening factor value for any hour. Values from 0.0 - 1.0 are valid. Setting 0.95 will dampen each Solcast forecast data value by 5%. This is reflected in the sensor values and attributes and also in the graphical energy dash board
+Here you can change the dampening factor value for any hour. Values from 0.0 - 1.0 are valid. Setting 0.95 will dampen each Solcast forecast data value by 5%. This is reflected in the sensor values and attributes and also in the graphical Home Assistant Energy dashboard.
 
 [<img src="https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/dampopt.png" width="200">](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/dampopt.png)
 
@@ -97,7 +97,7 @@ There are 3 services for this integration that you can use in automations ([Conf
 | `solcast_solar.set_dampening` | Updates the hourly dampening factors |
 
 ### Basic HA Automation to manual poll Solcast API data
-Create a new HA automation and setup your prefered triggers to manually poll for new data  
+Create a new HA automation and setup your prefered trigger times to manually poll for new Solcast forecast data.  
 These are examples.. alter these or create your own to fit your own needs
 
 
@@ -135,7 +135,7 @@ action:
     data: {}
 mode: single
 ```
-To make the most of the available API calls, you can call the API in an interval calculated by the number of daytime hours by the number of total API calls a day:
+To make the most of the available API calls, you can call the API in an interval calculated by the number of daytime hours divided by the number of total API calls a day you can make:
 
 ```yaml
 alias: Solcast update
@@ -176,28 +176,24 @@ mode: single
 <summary><h3>Set up HA Energy Dashboard settings</summary></h3>
 
 Go to the `HA>Settings>Dashboards>Energy`
-Click the edit the Solar Production item you have created. 
+
+Click the 'edit the Solar Production' item you have previously created in the Energy dashboard. 
 
 
 > **Note**
-> _If you do not have a solar sensor in your system then this integration will not work. The graph, and adding the forecast integration rely on there being a sensor setup to be added here_
+> _If you do not have a solar generation sensor in your system then this integration will not work in the Energy dashboard. The graph, and adding the forecast integration rely on there being a generation sensor setup_
 
 [<img src="https://user-images.githubusercontent.com/1471841/149643349-d776f1ad-530c-46aa-91dc-8b9e7c7f3123.png" width="200">](https://user-images.githubusercontent.com/1471841/149643349-d776f1ad-530c-46aa-91dc-8b9e7c7f3123.png)
-
 
 Click the Forecast option button and select the Solcast Solar option.. Click SAVE.. HA will do all the rest for you
 
 [<img src="https://user-images.githubusercontent.com/1471841/174471543-0833b141-0c97-4b90-a058-cf986e89bbce.png" width="200">](https://user-images.githubusercontent.com/1471841/174471543-0833b141-0c97-4b90-a058-cf986e89bbce.png)
-
-
 
 ## HA Views:
 
 <summary><h3>HA Energy Tab</summary></h3>
 
 [<img src="https://user-images.githubusercontent.com/1471841/135556872-ff5b51ac-699e-4ea5-869c-f9b0d0c5b815.png" width="200">](https://user-images.githubusercontent.com/1471841/135556872-ff5b51ac-699e-4ea5-869c-f9b0d0c5b815.png)
-
-
 
 <summary><h3>Sensors</summary></h3>
 
@@ -223,7 +219,6 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 | `Power Next Hour` | number | N | `W` | Power forecast for the next block 60 min from now |
 | `Weather` | string | N |  | Solcast weather description |
 
-
 ### Configuration
 
 | Name | Type | Attributes | Unit | Description |
@@ -240,10 +235,7 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 | `Rooftop(s) name` | number | Y | `kWh` | Total forecast for rooftop today (attributes contain the solcast rooftop setup)[^2] |
 
 [^1]: API usage information is directly read from Solcast
-[^2]: Each rooftop created in Solcast will be listed seperately
-
-
-
+[^2]: Each rooftop created in Solcast will be listed separately
 
 <summary><h3>Credits</summary></h3>
 

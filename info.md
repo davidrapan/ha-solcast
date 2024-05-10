@@ -1,5 +1,9 @@
 ### Changes
 
+v4.0.18
+- fixed weather sensor value not persisting 
+- reset the api limit and usage sensors at UTC midnight (reset usage)
+
 v4.0.17
 - updated Slovak translation thanks @misa1515
 - added sensor for Solcast weather description

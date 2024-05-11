@@ -1,5 +1,8 @@
 ### Changes
 
+v4.0.19
+- fix resetting api limit/usage not updating HA UI
+
 v4.0.18
 - fixed weather sensor value not persisting 
 - reset the api limit and usage sensors at UTC midnight (reset usage)

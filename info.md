@@ -1,5 +1,10 @@
 ### Changes
 
+v4.0.20
+- fixed the info error for `solcast_pv_forecast_forecast_today (<class 'custom_components.solcast_solar.sensor.SolcastSensor'>) is using state class 'measurement' which is impossible considering device class ('energy')`
+- removed the midnight UTC fetch and replaced with set to zero to reduce the polling on Solcast system
+⚠️ To help reduce impact on the Solcast backend, Solcast have asked that users set their automations for polling with a random min and sec timing.. if you are polling at say 10:00 set it to 10:04:10 for instance so that everyone is not polling the services at the same time
+
 v4.0.19
 - fix resetting api limit/usage not updating HA UI
 

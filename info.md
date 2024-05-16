@@ -1,5 +1,8 @@
 ### Changes
 
+v4.0.21
+- removed weather sensor as it keeps failing with errors
+
 v4.0.20
 - fixed the info error for `solcast_pv_forecast_forecast_today (<class 'custom_components.solcast_solar.sensor.SolcastSensor'>) is using state class 'measurement' which is impossible considering device class ('energy')`
 - removed the midnight UTC fetch and replaced with set to zero to reduce the polling on Solcast system

@@ -87,7 +87,7 @@ Here you can change the dampening factor value for any hour. Values from 0.0 - 1
 [<img src="https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/dampopt.png" width="200">](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/dampopt.png)
 
 ## Services
-There are 3 services for this integration that you can use in automations ([Configuration](#configuration))
+These are the services for this integration ([Configuration](#configuration))
 
 | Service | Action |
 | --- | --- |
@@ -95,6 +95,8 @@ There are 3 services for this integration that you can use in automations ([Conf
 | `solcast_solar.clear_all_solcast_data` | Deletes the `solcast.json` cached file |
 | `solcast_solar.query_forecast_data` | Returns a list of forecast data using a datetime range start - end |
 | `solcast_solar.set_dampening` | Updates the hourly dampening factors |
+| `solcast_solar.set_hard_limit` | Set inverter forecast hard limit |
+| `solcast_solar.remove_hard_limit` | Remove inverter forecast hard limit |
 
 ### Basic HA Automation to manual poll Solcast API data
 Create a new HA automation and setup your prefered trigger times to manually poll for new Solcast forecast data.  

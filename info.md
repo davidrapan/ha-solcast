@@ -1,5 +1,10 @@
 ### Changes
 
+v4.0.22
+- this time weather sensor is gone.. and midnight UTC reset works
+- (*)added a config for setting a hard limit for inverters with over sized solar arrays 
+   *99.9999999% of users will not need to ever user and set this (0.00000001% is @CarrapiettM)
+
 v4.0.21
 - removed weather sensor as it keeps failing with errors
 

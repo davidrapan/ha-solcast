@@ -223,7 +223,7 @@ Click the Forecast option button and select the Solcast Solar option.. Click SAV
 | `Power Now` | number | N | `W` | Power forecast during the current 0-30 / 30-59 min hour period |
 | `Power Next 30 Mins` | number | N | `W` | Power forecast for the next 30 min block period |
 | `Power Next Hour` | number | N | `W` | Power forecast for the next block 60 min from now |
-| `Weather` | string | N |  | Solcast weather description |
+
 
 ### Configuration
 

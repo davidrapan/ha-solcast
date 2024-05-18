@@ -112,6 +112,8 @@ condition:
    before: sunset
    after: sunrise
 action:
+ - delay:
+     seconds: "{{ range(30, 360)|random|int }}"
  - service: solcast_solar.update_forecasts
    data: {}
 mode: single
@@ -131,6 +133,8 @@ trigger:
     at: "16:00:00"
 condition: []
 action:
+  - delay:
+      seconds: "{{ range(30, 360)|random|int }}"
   - service: solcast_solar.update_forecasts
     data: {}
 mode: single
@@ -164,6 +168,8 @@ condition:
     before: sunset
     after: sunrise
 action:
+  - delay:
+      seconds: "{{ range(30, 360)|random|int }}"
   - service: solcast_solar.update_forecasts
     data: {}
 mode: single

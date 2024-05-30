@@ -107,11 +107,10 @@ class SolcastApi:
                 params = {"format": "json", "api_key": spl.strip()}
                 _LOGGER.debug(f"SOLCAST - trying to connect to - {self.options.host}/rooftop_sites?format=json&api_key=REDACTED")
                 async with async_timeout.timeout(60):
-                    apiCacheFileName = "sites.json"
-                    if file_exists(apiCacheFileName):
+                    if file_exists(self._filename.replace('solcast','sites')):
                         status = 404
-                        with open(apiCacheFileName) as f:
-                            resp_json = json.load(f)
+                        with open(self._filename.replace('solcast','sites')) as f:
+                            resp_json = json.load(f, cls=JSONDecoder)
                             status = 200
                     else:
                         resp: ClientResponse = await self.aiohttp_session.get(
@@ -121,8 +120,9 @@ class SolcastApi:
                         resp_json = await resp.json(content_type=None)
                         status = resp.status
                         if status == 200:
-                            with open(apiCacheFileName, 'w') as f:
-                                json.dump(resp_json, f, ensure_ascii=False)
+                            async with self._serialize_lock:
+                                with open(self._filename.replace('solcast','sites'), "w") as f:
+                                    json.dump(resp_json, f, ensure_ascii=False, cls=DateTimeEncoder)
                             
                 if status == 200:
                     d = cast(dict, resp_json)

@@ -44,7 +44,7 @@ SENSORS: dict[str, SensorEntityDescription] = {
         name="Forecast Today",
         icon="mdi:solar-power",
         suggested_display_precision=2,
-        #state_class= SensorStateClass.MEASUREMENT,
+        state_class= SensorStateClass.TOTAL,
     ),
     "peak_w_today": SensorEntityDescription(
         key="peak_w_today",
@@ -126,20 +126,20 @@ SENSORS: dict[str, SensorEntityDescription] = {
         device_class=SensorDeviceClass.TIMESTAMP,
         # suggested_display_precision=0,
     ),
-    "api_counter": SensorEntityDescription(
-        key="api_counter",
-        translation_key="api_counter",
-        name="API Used",
-        icon="mdi:web-check",
-        entity_category=EntityCategory.DIAGNOSTIC,
-    ),
-    "api_limit": SensorEntityDescription(
-        key="api_limit",
-        translation_key="api_limit",
-        name="API Limit",
-        icon="mdi:web-check",
-        entity_category=EntityCategory.DIAGNOSTIC,
-    ),
+    # "api_counter": SensorEntityDescription(
+    #     key="api_counter",
+    #     translation_key="api_counter",
+    #     name="API Used",
+    #     icon="mdi:web-check",
+    #     entity_category=EntityCategory.DIAGNOSTIC,
+    # ),
+    # "api_limit": SensorEntityDescription(
+    #     key="api_limit",
+    #     translation_key="api_limit",
+    #     name="API Limit",
+    #     icon="mdi:web-check",
+    #     entity_category=EntityCategory.DIAGNOSTIC,
+    # ),
     "lastupdated": SensorEntityDescription(
         key="lastupdated",
         device_class=SensorDeviceClass.TIMESTAMP,
@@ -302,6 +302,11 @@ class SolcastSensor(CoordinatorEntity, SensorEntity):
                 f"SOLCAST - unable to get sensor value {ex} %s", traceback.format_exc()
             )
             self._sensor_data = None
+
+        if self._sensor_data is None:
+            self._attr_available = False
+        else:
+            self._attr_available = True
         
         self._attr_device_info = {
             ATTR_IDENTIFIERS: {(DOMAIN, entry.entry_id)},
@@ -349,6 +354,12 @@ class SolcastSensor(CoordinatorEntity, SensorEntity):
                 f"SOLCAST - unable to get sensor value {ex} %s", traceback.format_exc()
             )
             self._sensor_data = None
+
+        if self._sensor_data is None:
+            self._attr_available = False
+        else:
+            self._attr_available = True
+
         self.async_write_ha_state()
 
 @dataclass

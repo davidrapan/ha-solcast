@@ -1,5 +1,13 @@
 ### Changes
 
+v4.0.23
+- Changed some log output messages to include more information
+- if polling api fails keep using current data
+- for now removed the api counter sensors.. one less api endpoint that might cuse 429 status
+- changed the `total_kwh_forecast_today` sensor class from 'measurement' to 'total' for statistics
+- hopefully sensors when things go really wrong will show `unknown` and not just 0
+
+
 v4.0.22
 - this time weather sensor is gone.. and midnight UTC reset works
 - (*)added a config for setting a hard limit for inverters with over sized solar arrays 

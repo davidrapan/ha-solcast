@@ -690,11 +690,11 @@ class SolcastApi:
                     resp_json = await resp.json(content_type=None)
                     status = resp.status
 
-                    status = 429
-
                     if status == 200:
-                        _LOGGER.debug(f"SOLCAST - Status 200 OK - API returned data. API Counter incremented from {self._api_used} to {self._api_used + 1}")
-                        self._api_used = self._api_used + 1
+                        #_LOGGER.debug(f"SOLCAST - Status 200 OK - API returned data. API Counter incremented from {self._api_used} to {self._api_used + 1}")
+                        #self._api_used = self._api_used + 1
+
+                        _LOGGER.debug("SOLCAST - Status 200 OK - API returned data.")
 
                         if self.apiCacheEnabled:
                             with open(apiCacheFileName, 'w') as f:

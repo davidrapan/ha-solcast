@@ -1,4 +1,4 @@
-"""Config flow for Solcast Solar integration."""
+"""Config flow for Solcast PV Forecast integration."""
 from __future__ import annotations
 from typing import Any
 
@@ -17,7 +17,7 @@ from .const import DOMAIN, CONFIG_OPTIONS, CUSTOM_HOUR_SENSOR
 
 @config_entries.HANDLERS.register(DOMAIN)
 class SolcastSolarFlowHandler(ConfigFlow, domain=DOMAIN):
-    """Handle a config flow for Solcast Solar."""
+    """Handle a config flow for Solcast PV Forecast."""
 
     VERSION = 6 #v5 started in 4.0.8, #6 started 4.0.15
 
@@ -38,7 +38,7 @@ class SolcastSolarFlowHandler(ConfigFlow, domain=DOMAIN):
         
         if user_input is not None:
             return self.async_create_entry(
-                title= "Solcast Solar", 
+                title= "Solcast PV Forecast", 
                 data = {},
                 options={
                     CONF_API_KEY: user_input[CONF_API_KEY],
@@ -128,10 +128,10 @@ class SolcastSolarOptionFlowHandler(OptionsFlow):
 
             self.hass.config_entries.async_update_entry(
                 self.config_entry,
-                title="Solcast Solar",
+                title="Solcast PV Forecast",
                 options=allConfigData,
             )
-            return self.async_create_entry(title="Solcast Solar", data=None)
+            return self.async_create_entry(title="Solcast PV Forecast", data=None)
 
         return self.async_show_form(
             step_id="api",
@@ -230,11 +230,11 @@ class SolcastSolarOptionFlowHandler(OptionsFlow):
 
                 self.hass.config_entries.async_update_entry(
                     self.config_entry,
-                    title="Solcast Solar",
+                    title="Solcast PV Forecast",
                     options=allConfigData,
                 )
                 
-                return self.async_create_entry(title="Solcast Solar", data=None)
+                return self.async_create_entry(title="Solcast PV Forecast", data=None)
             except Exception as e:
                 errors["base"] = "unknown"
 
@@ -311,11 +311,11 @@ class SolcastSolarOptionFlowHandler(OptionsFlow):
 
                 self.hass.config_entries.async_update_entry(
                     self.config_entry,
-                    title="Solcast Solar",
+                    title="Solcast PV Forecast",
                     options=allConfigData,
                 )
                 
-                return self.async_create_entry(title="Solcast Solar", data=None)
+                return self.async_create_entry(title="Solcast PV Forecast", data=None)
             except Exception as e:
                 errors["base"] = "unknown"
 

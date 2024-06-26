@@ -33,4 +33,4 @@ version-resolver:
 template: |
   $CHANGES
   
-  ![GitHub Releases (by Release)](https://img.shields.io/github/downloads/oziee/ha-solcast-solar/v$NEXT_MINOR_VERSION/total)
+  ![GitHub Releases (by Release)](https://img.shields.io/github/downloads/davidrapan/ha-solcast/v$NEXT_MINOR_VERSION/total)

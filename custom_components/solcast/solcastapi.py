@@ -41,6 +41,10 @@ class JSONDecoder(json.JSONDecoder):
                 ret[key] = value
         return ret
 
+def open_file(filepath, mode, x):
+    with open(filepath, mode) as file:
+        return x(file)
+
 @dataclass
 class ConnectionOptions:
     """Solcast API options for connection."""
@@ -94,8 +98,9 @@ class SolcastApi:
             return
 
         async with self._serialize_lock:
-            with open(self._filename, "w") as f:
-                json.dump(self._data, f, ensure_ascii=False, cls=DateTimeEncoder)
+            loop = asyncio.get_running_loop()
+            await loop.run_in_executor(None, lambda: open_file(self._filename, "w", 
+                lambda file: json.dump(self._data, file, ensure_ascii = False, cls = DateTimeEncoder)))
 
     async def sites_data(self):
         """Request data via the Solcast API."""
@@ -107,23 +112,26 @@ class SolcastApi:
                 params = {"format": "json", "api_key": spl.strip()}
                 _LOGGER.debug(f"SOLCAST - trying to connect to - {self.options.host}/rooftop_sites?format=json&api_key=REDACTED")
                 async with async_timeout.timeout(60):
-                    if file_exists(self._filename.replace('solcast','sites')):
+                    filename = self._filename.replace('solcast','sites')
+                    if file_exists(filename):
                         status = 404
-                        with open(self._filename.replace('solcast','sites')) as f:
-                            resp_json = json.load(f, cls=JSONDecoder)
-                            status = 200
+                        loop = asyncio.get_running_loop()
+                        resp_json = await loop.run_in_executor(None, lambda: open_file(filename, "r",
+                            lambda file: json.load(file, cls = JSONDecoder)))
+                        status = 200
                     else:
                         resp: ClientResponse = await self.aiohttp_session.get(
                             url=f"{self.options.host}/rooftop_sites", params=params, ssl=False
                         )
-        
+
                         resp_json = await resp.json(content_type=None)
                         status = resp.status
                         if status == 200:
                             async with self._serialize_lock:
-                                with open(self._filename.replace('solcast','sites'), "w") as f:
-                                    json.dump(resp_json, f, ensure_ascii=False, cls=DateTimeEncoder)
-                            
+                                loop = asyncio.get_running_loop()
+                                await loop.run_in_executor(None, lambda: open_file(filename, "w", 
+                                    lambda file: json.dump(resp_json, file, ensure_ascii = False, cls = DateTimeEncoder)))
+
                 if status == 200:
                     d = cast(dict, resp_json)
                     _LOGGER.debug(f"SOLCAST - Status 200 OK - sites_data returned data: {d}")
@@ -226,40 +234,41 @@ class SolcastApi:
         try:
             if len(self._sites) > 0:
                 if file_exists(self._filename):
-                    with open(self._filename) as data_file:
-                        jsonData = json.load(data_file, cls=JSONDecoder)
-                        json_version = jsonData.get("version", 1)
-                        #self._weather = jsonData.get("weather", "unknown")
-                        _LOGGER.debug(f"SOLCAST - load_saved_data file exists.. file type is {type(jsonData)}")
-                        if json_version == _JSON_VERSION:
-                            self._loaded_data = True
-                            self._data = jsonData
+                    loop = asyncio.get_running_loop()
+                    jsonData = await loop.run_in_executor(None, lambda: open_file(self._filename, "r",
+                        lambda file: json.load(file, cls = JSONDecoder)))
+                    json_version = jsonData.get("version", 1)
+                    #self._weather = jsonData.get("weather", "unknown")
+                    _LOGGER.debug(f"SOLCAST - load_saved_data file exists.. file type is {type(jsonData)}")
+                    if json_version == _JSON_VERSION:
+                        self._loaded_data = True
+                        self._data = jsonData
 
-                            #any new API keys so no sites data yet for those
-                            ks = {}
-                            for d in self._sites:
-                                if not any(s == d.get('resource_id', '') for s in jsonData['siteinfo']):
-                                    ks[d.get('resource_id')] = d.get('apikey')
+                        #any new API keys so no sites data yet for those
+                        ks = {}
+                        for d in self._sites:
+                            if not any(s == d.get('resource_id', '') for s in jsonData['siteinfo']):
+                                ks[d.get('resource_id')] = d.get('apikey')
 
-                            if len(ks.keys()) > 0:
-                                #some api keys rooftop data does not exist yet so go and get it
-                                _LOGGER.debug("SOLCAST - Must be new API jey added so go and get the data for it")
-                                for a in ks:
-                                    await self.http_data_call(r_id=a, api=ks[a], dopast=True)
-                                await self.serialize_data()
+                        if len(ks.keys()) > 0:
+                            #some api keys rooftop data does not exist yet so go and get it
+                            _LOGGER.debug("SOLCAST - Must be new API jey added so go and get the data for it")
+                            for a in ks:
+                                await self.http_data_call(r_id=a, api=ks[a], dopast=True)
+                            await self.serialize_data()
 
-                            #any site changes that need to be removed
-                            l = []
-                            for s in jsonData['siteinfo']:
-                                if not any(d.get('resource_id', '') == s for d in self._sites):
-                                    _LOGGER.info(f"Solcast rooftop resource id {s} no longer part of your system.. removing saved data from cached file")
-                                    l.append(s)
+                        #any site changes that need to be removed
+                        l = []
+                        for s in jsonData['siteinfo']:
+                            if not any(d.get('resource_id', '') == s for d in self._sites):
+                                _LOGGER.info(f"Solcast rooftop resource id {s} no longer part of your system.. removing saved data from cached file")
+                                l.append(s)
 
-                            for ll in l:
-                                del jsonData['siteinfo'][ll]
+                        for ll in l:
+                            del jsonData['siteinfo'][ll]
 
-                            #create an up to date forecast and make sure the TZ fits just in case its changed                
-                            await self.buildforcastdata()
+                        #create an up to date forecast and make sure the TZ fits just in case its changed                
+                        await self.buildforcastdata()
                                     
                 if not self._loaded_data:
                     #no file to load
@@ -678,10 +687,11 @@ class SolcastApi:
                 if self.apiCacheEnabled and file_exists(apiCacheFileName):
                     _LOGGER.debug(f"SOLCAST - Getting cached testing data for site {site}")
                     status = 404
-                    with open(apiCacheFileName) as f:
-                        resp_json = json.load(f)
-                        status = 200
-                        _LOGGER.debug(f"SOLCAST - Got cached file data for site {site}")
+                    loop = asyncio.get_running_loop()
+                    resp_json = await loop.run_in_executor(None, lambda: open_file(apiCacheFileName, "r",
+                        lambda file: json.load(file, cls = JSONDecoder)))
+                    status = 200
+                    _LOGGER.debug(f"SOLCAST - Got cached file data for site {site}")
                 else:
                     #_LOGGER.debug(f"SOLCAST - OK REAL API CALL HAPPENING RIGHT NOW")
                     resp: ClientResponse = await self.aiohttp_session.get(
@@ -697,9 +707,11 @@ class SolcastApi:
                         _LOGGER.debug("SOLCAST - Status 200 OK - API returned data.")
 
                         if self.apiCacheEnabled:
-                            with open(apiCacheFileName, 'w') as f:
-                                json.dump(resp_json, f, ensure_ascii=False)
-                        
+                            loop = asyncio.get_running_loop()
+                            # Should it be with: cls = DateTimeEncoder ???
+                            await loop.run_in_executor(None, lambda: open_file(apiCacheFileName, "w", 
+                                lambda file: json.dump(resp_json, file, ensure_ascii = False)))
+
                         d = cast(dict, resp_json)
                         _LOGGER.debug(f"SOLCAST - fetch_data Returned: {d}")
                         return d
@@ -768,37 +780,36 @@ class SolcastApi:
             yesterday = dt.now(self._tz).date() + timedelta(days=-730)
             lastday = dt.now(self._tz).date() + timedelta(days=7)
             
-            _forecasts = []
-        
-            for s in self._data['siteinfo']:
+            _forecasts = {}
+
+            for s, siteinfo in self._data['siteinfo'].items():
                 tally = 0
-                for x in self._data['siteinfo'][s]['forecasts']:   
+                for x in siteinfo['forecasts']:
                     #loop each rooftop site and its forecasts
                     z = x["period_start"]
                     zz = z.astimezone(self._tz) #- timedelta(minutes=30)
 
                     #v4.0.8 added code to dampen the forecast data.. (* self._damp[h])
                     
-                    if zz.date() < lastday and zz.date() > yesterday:
+                    if yesterday < zz.date() < lastday:
                         h = f"{zz.hour}"
                         if zz.date() == today:
                             tally += min(x[self._use_data_field] * 0.5 * self._damp[h], self._hardlimit)
                         
-                        itm = next((item for item in _forecasts if item["period_start"] == z), None)
+                        itm = _forecasts.get(z)
                         if itm:
                             itm["pv_estimate"] = min(round(itm["pv_estimate"] + (x["pv_estimate"] * self._damp[h]),4), self._hardlimit)
                             itm["pv_estimate10"] = min(round(itm["pv_estimate10"] + (x["pv_estimate10"] * self._damp[h]),4), self._hardlimit)
                             itm["pv_estimate90"] = min(round(itm["pv_estimate90"] + (x["pv_estimate90"] * self._damp[h]),4), self._hardlimit)
                         else:    
-                            _forecasts.append({"period_start": z,"pv_estimate": min(round((x["pv_estimate"]* self._damp[h]),4), self._hardlimit),
-                                                                "pv_estimate10": min(round((x["pv_estimate10"]* self._damp[h]),4), self._hardlimit),
-                                                                "pv_estimate90": min(round((x["pv_estimate90"]* self._damp[h]),4), self._hardlimit)})
-                        
-                self._data['siteinfo'][s]['tally'] = round(tally, 4)
-                        
-            _forecasts = sorted(_forecasts, key=itemgetter("period_start"))     
-            
-            self._data_forecasts = _forecasts 
+                            _forecasts[z] = {"period_start": z,"pv_estimate": min(round((x["pv_estimate"]* self._damp[h]),4), self._hardlimit),
+                                            "pv_estimate10": min(round((x["pv_estimate10"]* self._damp[h]),4), self._hardlimit),
+                                            "pv_estimate90": min(round((x["pv_estimate90"]* self._damp[h]),4), self._hardlimit)}
+
+                siteinfo['tally'] = round(tally, 4)
+
+            self._data_forecasts = list(_forecasts.values())
+            self._data_forecasts.sort(key=itemgetter("period_start"))
 
             await self.checkDataRecords()
                     
@@ -821,6 +832,3 @@ class SolcastApi:
                 _LOGGER.debug(f"SOLCAST - Data for {da} contains all 48 records")
             else:
                 _LOGGER.debug(f"SOLCAST - Data for {da} contains only {len(h)} of 48 records and may produce inaccurate forecast data")
-            
-            
-    

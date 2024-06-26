@@ -12,7 +12,7 @@ body:
 
         If you have a feature or enhancement request, please use the [discussion forums][fr] section.
 
-        [fr]: https://github.com/oziee/ha-solcast-solar/discussions
+        [fr]: https://github.com/davidrapan/ha-solcast/discussions
   - type: textarea
     validations:
       required: true

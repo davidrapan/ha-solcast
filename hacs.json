@@ -1,7 +1,7 @@
 {
-    "name": "Solcast PV Solar",
+    "name": "Solcast PV Forecast",
     "render_readme": false,
     "homeassistant": "2023.7",
     "zip_release": true,
-    "filename": "solcast_solar.zip"
+    "filename": "solcast.zip"
 }

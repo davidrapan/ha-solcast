@@ -1,4 +1,4 @@
-"""The Solcast Solar integration."""
+"""The Solcast PV Forecast integration."""
 from __future__ import annotations
 
 import logging
@@ -15,7 +15,7 @@ from .solcastapi import SolcastApi
 _LOGGER = logging.getLogger(__name__)
 
 class SolcastUpdateCoordinator(DataUpdateCoordinator):
-    """Class to manage fetching data from Solcast Solar API."""
+    """Class to manage fetching data from Solcast PV Forecast API."""
 
     def __init__(self, hass: HomeAssistant, solcast: SolcastApi, version: str) -> None:
         """Initialize."""

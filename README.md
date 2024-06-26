@@ -31,11 +31,11 @@ Copy the API Key for use with this integration (See [Configuration](#Configurati
 
 Using HACS. More info [here](https://hacs.xyz/)  
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=oziee&repository=ha-solcast-solar&category=plugin)
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=davidrapan&repository=ha-solcast&category=plugin)
 
 Manually in HACS  
 Follow the link [here](https://hacs.xyz/docs/faq/custom_repositories/)  
-Use the custom repo link `https://github.com/oziee/ha-solcast-solar`  
+Use the custom repo link `https://github.com/davidrapan/ha-solcast`  
 Select the category type `integration`  
 Then once it's there (still in HACS) click the INSTALL button  
 Then go to the HA Devices and Services and add a new Solcast Integration  
@@ -72,19 +72,19 @@ You probably **do not** want to do this! Use the HACS method above unless you kn
 
 * Make sure you enter your `API Key` not your rooftop id created in Solcast. You can find your API key here [api key](https://toolkit.solcast.com.au/account)
 
-[<img src="https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png" width="200">](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/install.png)
+[<img src="https://github.com/davidrapan/ha-solcast/blob/v3/.github/SCREENSHOTS/install.png" width="200">](https://github.com/davidrapan/ha-solcast/blob/v3/.github/SCREENSHOTS/install.png)
 
 ## Dampening Configuration
 
 New in v4.0.8 is the option to configure hourly dampening values
 
-[<img src="https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/reconfig.png" width="200">](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/reconfig.png)
+[<img src="https://github.com/davidrapan/ha-solcast/blob/v3/.github/SCREENSHOTS/reconfig.png" width="200">](https://github.com/davidrapan/ha-solcast/blob/v3/.github/SCREENSHOTS/reconfig.png)
 
-[<img src="https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/damp.png" width="200">](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/damp.png)
+[<img src="https://github.com/davidrapan/ha-solcast/blob/v3/.github/SCREENSHOTS/damp.png" width="200">](https://github.com/davidrapan/ha-solcast/blob/v3/.github/SCREENSHOTS/damp.png)
 
 Here you can change the dampening factor value for any hour. Values from 0.0 - 1.0 are valid. Setting 0.95 will dampen each Solcast forecast data value by 5%. This is reflected in the sensor values and attributes and also in the graphical Home Assistant Energy dashboard.
 
-[<img src="https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/dampopt.png" width="200">](https://github.com/oziee/ha-solcast-solar/blob/v3/.github/SCREENSHOTS/dampopt.png)
+[<img src="https://github.com/davidrapan/ha-solcast/blob/v3/.github/SCREENSHOTS/dampopt.png" width="200">](https://github.com/davidrapan/ha-solcast/blob/v3/.github/SCREENSHOTS/dampopt.png)
 
 ## Services
 These are the services for this integration ([Configuration](#configuration))
@@ -253,3 +253,5 @@ Modified from the great works of
 * dannerph/homeassistant-solcast
 * cjtapper/solcast-py
 * home-assistant-libs/forecast_solar
+
+Original author: @oziee
